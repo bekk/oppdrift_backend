@@ -51,8 +51,8 @@ Kall serveren på nytt og se om du finner headeren i responsen (bruk dev tools `
 
 ## HTML Content
 
-For å slippe å starte serveren på nytt manuelt hver gang vi lagrer endringer i js-filen, kan vi starte node i _watch_-modus.
-`node server.js  --watch`
+For å slippe å starte serveren på nytt manuelt hver gang vi lagrer endringer i js-filen, kan vi starte node i _watch_-modus (fra versjon 18 av Node).
+`node  --watch server.js `
 
 For å fortelle klienten at body i meldingen er html, legger vi til en header:
 
