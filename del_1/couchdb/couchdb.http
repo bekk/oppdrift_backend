@@ -1,0 +1,171 @@
+# CouchDB-øvelser
+
+@host = localhost:5984
+@baseUrl = http://{{host}}
+@user = admin
+@password = password
+
+###
+GET http://{{user}}:{{password}}@{{{{host}}}}/_all_dbs
+
+###
+
+POST /_session
+Host: {{host}}
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name": "{{user}}",
+    "password": "{{password}}"
+}
+
+###
+PUT {{baseUrl}}/kardemommeby
+
+###
+
+GET /kardemommeby/
+Host: {{host}}
+
+###
+
+POST /kardemommeby
+Host: {{host}}
+Content-Type: application/json
+
+{
+    "navn": "Kasper",
+    "yrke": "Røver",
+    "eiendeler": [
+        "løve"
+    ],
+    "alder" : 25,
+    "bosted" : "Røverhuset"
+}
+
+###
+
+
+POST /kardemommeby/_bulk_docs
+Host: {{host}}
+Content-Type: application/json
+
+{
+   "docs": [
+      {
+         "navn": "Kasper",
+         "yrke": "Røver",
+         "eiendeler": [
+            "løve"
+         ],
+         "alder": 25,
+         "bosted": "Røverhuset"
+      },
+       {
+         "navn": "Jesper",
+         "yrke": "Røver",
+         "eiendeler": [
+            "løve"
+         ],
+         "alder": 27,
+         "bosted": "Røverhuset"
+      }, {
+         "navn": "Jonatan",
+         "yrke": "Røver",
+         "eiendeler": [
+            "løve"
+         ],
+         "alder": 25,
+         "bosted": "Røverhuset"
+      },
+      {
+         "navn": "Tobias",
+         "alder": 70,
+         "bosted": "Tårnet"
+      },
+      {
+         "navn": "Syvertsen",
+         "alder": 35,
+         "yrke": "Trikkefører"
+      },
+      {
+         "navn": "Sørensen",
+         "alder": 55,
+         "yrke": "Barberer"
+      },
+      {
+         "navn": "Sofie",
+         "alder": 29
+      },
+      {
+         "navn": "Kamomille",
+         "alder": 10,
+         "tante": "Sofie",
+         "eiendeler": [ "piano" ]
+      },
+      {
+         "navn": "Bastian",
+         "yrke": "Politimester"
+      }
+   ]
+}
+
+###
+
+GET /kardemommeby/_all_docs
+Host: {{host}}
+
+###
+
+# Erstatt verdiene med de som er generert av databasen
+@id = a3181f807fff559431e47a99bf000b9e
+@rev = 1-1c261999c283edcb75f0c4201bd67872
+
+GET /kardemommeby/{{id}}
+Host: {{host}}
+
+###
+PUT /kardemommeby/{{id}}
+Host: {{host}}
+Content-Type: application/json
+
+{
+    "_rev": "{{rev}}",
+    "navn": "Kasper",
+    "yrke": "Røver",
+    "eiendeler": [
+    "løve",
+    "tante Sofie"
+    ],
+    "alder": 26,
+    "bosted": "Røverhuset"
+}
+
+
+###
+
+POST /kardemommeby/_find
+Host: {{host}}
+Content-Type: application/json
+
+{
+    "selector": {
+        "yrke": { "$eq": "Røver" },
+        "alder": { "$gt": 18 }
+    },
+    "fields": [ "_id", "_rev", "navn" ]
+}
+
+###
+
+POST /kardemommeby/_index
+Host: {{host}}
+Content-Type: application/json
+
+{
+    "index": {
+        "fields": [ "navn", "yrke", "alder" ]
+    },
+    "name": "person-index"
+}

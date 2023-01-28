@@ -41,7 +41,7 @@ Følg instruksjonene i hvert steg og klikk _Next_ nederst til høyre.
 
 ![Andre skjerm](../img/graph/neo4j_screen_1.png)
 
-Når du er feridig med øvelsen, kan du stoppe containeren igjen:
+Når du er ferdig med øvelsen, kan du stoppe containeren igjen:
 
 ```console
 docker stop neo4j_workshop

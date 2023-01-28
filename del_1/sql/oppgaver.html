@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="no-nb">
+<head>
+    <meta charset="utf-8"/>
+    <title>SQL workshop</title>
+    <link href="oppgaver.css" rel="stylesheet" >
+</head>
+<body>
+<main>
+    <h1>PostgreSQL workshop</h1>
+    <p>
+        Vi jobber med <a href="https://github.com/devrimgunduz/pagila" title="GitHub">
+        eksempeldatabasen <em>Pagila</em>
+        </a>. Den inneholder eksempeldata
+        fra driften av en videoutleiebutikk.
+    </p>
+    <p>
+        Du kan kjøre opp datbasen i docker med:
+        <pre class="brush: cli">
+            docker run --name postgres -p 5432:5432 --env POSTGRES_USER=postgres --env POSTGRES_PASSWORD=123456 -d skaar/postgres-pagila:1.0.0
+        </pre>
+    </p>
+    <img src="diagram.png" alt="Database schema" class="schema-diagram" />
+    <section>
+        <h2>Hente data fra en enkel tabell</h2>
+        <h3>Hent alle rader fra en tabell.</h3>
+        <p class="assignment">
+            Hent ut alle data fra ansatt-tabellen.
+            (Den heter "<span class="variable-name">public.staff</span>".)
+        </p>
+        <details>
+            <summary>Løsningsforslag</summary>
+            <pre class="brush: sql">
+SELECT * FROM staff;
+
+-- * henter alle kolonner fra tabellen.
+-- "public" er default schema, så det er valgfritt å ta med.
+    </pre>
+        </details>
+
+        <h3>Hent enkelte kolonner fra en tabell.</h3>
+        <p class="assignment">
+            Gjør en spørring i tabellen "customer" som henter
+            de ti sist oppdaterte kundene med "fornavn", "etternavn" og "e-post".
+        </p>
+        <pre class="result-table">
+  fornavn  | etternavn |               e-post
+-----------+-----------+-------------------------------------
+ PATRICIA  | JOHNSON   | PATRICIA.JOHNSON@sakilacustomer.org
+ LINDA     | WILLIAMS  | LINDA.WILLIAMS@sakilacustomer.org
+ BARBARA   | JONES     | BARBARA.JONES@sakilacustomer.org
+ ELIZABETH | BROWN     | ELIZABETH.BROWN@sakilacustomer.org
+ JENNIFER  | DAVIS     | JENNIFER.DAVIS@sakilacustomer.org
+ MARIA     | MILLER    | MARIA.MILLER@sakilacustomer.org
+ SUSAN     | WILSON    | SUSAN.WILSON@sakilacustomer.org
+ MARGARET  | MOORE     | MARGARET.MOORE@sakilacustomer.org
+ DOROTHY   | TAYLOR    | DOROTHY.TAYLOR@sakilacustomer.org
+ MARY      | SMITH     | MARY.SMITH@sakilacustomer.org
+(10 rows)
+        </pre>
+        <p>
+            Hver kolonne kan gis nytt navn med <span class="sql-keyword">AS</span> i
+            <span class="sql-keyword">SELECT</span>-uttrykket.
+            Du sorterer på en kolonne med <span class="sql-keyword">ORDER BY</span>
+            "kolonne" [<span class="sql-keyword">ASC</span>|<span class="sql-keyword">DESC</span>].
+
+            Legg <span class="sql-keyword">LIMIT 10</span> på raden under
+            for å begrense antall returnert.
+        </p>
+
+        <details>
+            <summary>Løsningsforslag</summary>
+            <pre class="brush: sql">
+SELECT
+    first_name AS fornavn,
+    last_name AS etternavn,
+    email AS "e-post"
+FROM customer
+ORDER BY last_update DESC
+LIMIT 10;
+    </pre>
+            <p>
+                I stedet for <span class="sql-keyword">LIMIT 10</span> kan man bruke
+                <span class="sql-keyword">OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY</span>.
+                Det kan være nyttig for å implementere paging for en visning.
+            </p>
+        </details>
+        <h3>Filtrere rader med WHERE</h3>
+        <p class="assignment">
+            Finn alle kunder med fornavn som begynner på P.
+        </p>
+        <details>
+            <summary>Løsningsforslag</summary>
+            <pre class="brush: sql">
+SELECT *
+FROM customer
+WHERE last_name LIKE 'P%';
+    </pre>
+        </details>
+        <p class="assignment">
+            Finn alle filmtitler med beskrivelse
+            (fra tabellen "<span class="variable-name">film</span>")
+            som har spilletid ("<span class="variable-name">length</span>")
+            over 100 minutter
+            og rating 'R'.
+            Sorter på "<span class="variable-name">rental_rate</span>".
+        </p>
+        <details>
+            <summary>Løsningsforslag</summary>
+            <pre class="brush: sql">
+SELECT title, description
+FROM film
+WHERE length > 100 AND rating = 'R'
+ORDER BY rental_rate;
+    </pre>
+        </details>
+    </section>
+    <section>
+        <h2>Hente data fra flere tabeller</h2>
+        <h3>Inner JOIN</h3>
+        <p class="assignment">
+            Hent managers e-post, by og land for hver av radene i tabellen
+            "<span class="variable-name">store</span>".
+        <ul>
+            <li>"<span class="variable-name">store</span>" er knyttet til
+                "<span class="variable-name">address</span>" gjennom fremmednøkkel
+                "<span class="variable-name">address_id</span>"
+            </li>
+            <li>"<span class="variable-name">address</span>" er knyttet til
+                "<span class="variable-name">city</span>" gjennom fremmednøkkel
+                "<span class="variable-name">city_id</span>"</li>
+            <li>"<span class="variable-name">city</span>" er knyttet til
+                "<span class="variable-name">country</span>" gjennom fremmednøkkel
+                "<span class="variable-name">country_id</span>"</li>
+            <li>"<span class="variable-name">store</span>" er også knyttet til
+                "<span class="variable-name">staff</span>" gjennom fremmednøkkel
+                "<span class="variable-name">manager_staff_id</span>"</li>
+        </ul>
+        </p>
+        <details>
+            <summary>Løsningsforslag</summary>
+            <pre class="brush: sql">
+SELECT
+    s2.email,
+    c.city,
+    c2.country
+FROM store s
+JOIN address a ON s.address_id = a.address_id
+JOIN city c ON a.city_id = c.city_id
+JOIN country c2 ON c.country_id = c2.country_id
+JOIN staff s2 ON s.manager_staff_id = s2.staff_id;
+
+-- Man kan gi tabellene kortere alias for å forenkle utttrykkene.
+    </pre>
+        </details>
+    </section>
+    <section>
+        <h2>Aggregat-funksjoner</h2>
+        <p>
+            For å aggregere (summere, telle etc) bruker vi <span class="sql-keyword">GROUP BY</span>
+            for å angi alle feltene som definerer en gruppering.
+            Eksempel på aggregatfunksjoner er <span class="sql-keyword">MAX() MIN() AVG() COUNT()</span>.
+        </p>
+        <p class="assignment">
+            Finn ut hvor mange filmer det er i hver kategori.
+            Hver film kan være i flere kategorier, så tabellen "<span class="variable-name">film_category</span>"
+            inneholder en mange-til-mange-kobling.
+        </p>
+        <details>
+            <summary>Løsningsforslag</summary>
+            <pre class="brush: sql">
+SELECT
+    category.name AS kategori, COUNT(film.*) AS "antall filmer"
+FROM film
+JOIN film_category on film.film_id = film_category.film_id
+JOIN category on film_category.category_id = category.category_id
+GROUP BY category.name
+ORDER BY COUNT(film.*) DESC;
+    </pre>
+        </details>
+        <p class="assignment">
+            Vis bare kategorier med mer enn 70 filmer ved å bruke
+            <span class="sql-keyword">HAVING</span>.
+        </p>
+        <details>
+            <summary>Løsningsforslag</summary>
+            <pre class="brush: sql">
+SELECT
+    category.name AS kategori, COUNT(film.*) AS "antall filmer"
+FROM film
+JOIN film_category on film.film_id = film_category.film_id
+JOIN category on film_category.category_id = category.category_id
+GROUP BY category.name
+HAVING COUNT(film.*) > 70
+ORDER BY COUNT(film.*) DESC;
+    </pre>
+        </details>
+        <p class="assignment">
+            Finn total omsetning per butikk/by per film.
+            (Omsetningen er i "<span class="variable-name">payment</span>".)
+        </p>
+        <details>
+            <summary>Løsningsforslag</summary>
+            <pre class="brush: sql">
+SELECT
+    f.title, c.city, SUM(p.amount)
+FROM film f
+JOIN inventory i ON f.film_id = i.film_id
+JOIN store s ON i.store_id = s.store_id
+JOIN rental r ON i.inventory_id = r.inventory_id
+JOIN payment p ON r.rental_id = p.rental_id
+JOIN address a ON s.address_id = a.address_id
+JOIN city c ON a.city_id = c.city_id
+GROUP BY f.title, c.city
+ORDER BY c.city, SUM(p.amount);
+    </pre>
+        </details>
+        <p class="assignment">
+            Finn total omsetning per måned/år per film.
+            (For å hente måned kan du bruke
+            <span class="sql-keyword">DATE_PART(</span>
+            <span class="variable-name">'month', rental.rental_date</span>
+            <span class="sql-keyword">)</span>.)
+        </p>
+        <details>
+            <summary>Løsningsforslag</summary>
+            <pre class="brush: sql">
+SELECT
+    f.title AS tittel,
+    DATE_PART('month', r.rental_date) AS måned,
+    DATE_PART('year', r.rental_date) AS år,
+    SUM(p.amount) AS omsetning
+FROM film f
+JOIN inventory i ON f.film_id = i.film_id
+JOIN rental r ON i.inventory_id = r.inventory_id
+JOIN payment p ON r.rental_id = p.rental_id
+GROUP BY f.title, måned, år
+ORDER BY år, måned, omsetning DESC;
+    </pre>
+        </details>
+    </section>
+    <section>
+        <h2>Subselect</h2>
+        <p>
+            Man kan legge inn en spørring inne i en annen i parenteser
+            på enkelte steder i spørringen.
+        </p>
+        <p class="assignment">
+            Finn alle filmer med "<span class="variable-name">rental_rate</span>"
+            over gjennomsnitt.
+        </p>
+        <details>
+            <summary>Løsningsforslag</summary>
+            <pre class="brush: sql">
+SELECT film_id,
+       title,
+       rental_rate
+FROM film
+WHERE rental_rate > (SELECT AVG(rental_rate) FROM film);
+    </pre>
+        </details>
+    </section>
+    <section>
+        <h2>Window functions</h2>
+        <p>
+            Window function er et alternativ til <span class="sql-keyword">GROUP BY</span>
+            for å finne verdier i et subsett (partisjon) av resultatsettet.
+            Funksjonen <span class="sql-keyword">row_number()</span> er et eksmepel på en slik.
+        </p>
+        <p class="assignment">
+            Finn alle filmers "<span class="variable-name">title</span>", "<span class="variable-name">rating</span>"
+            og "<span class="variable-name">rental_rate</span>" samt plassering etter "<span class="variable-name">rental_rate</span>"
+            per "<span class="variable-name">rating</span>".
+            Sorter på tittel.
+        </p>
+        <details>
+            <summary>Løsningsforslag</summary>
+            <pre class="brush: sql">
+SELECT title,
+       rating,
+       rental_rate,
+       row_number() OVER (PARTITION BY rating ORDER BY rental_rate DESC) AS "rental rate # of rating"
+FROM film
+ORDER BY title;
+    </pre>
+        </details>
+    </section>
+    <section>
+        <h2>Insert</h2>
+        <p>For å legge nye rader til i en tabell brukes <span class="sql-keyword">INSERT INTO</span>.</p>
+        <p class="assignment">Legg deg selv inn i "<span class="variable-name">staff</span>"-tabellen.</p>
+        <details>
+            <summary>Løsningsforslag</summary>
+            <pre class="brush: sql">
+BEGIN TRANSACTION;
+
+-- Legg inn en ny adresse og hold på resulatet i "inserted_address"
+
+WITH inserted_address AS (INSERT INTO address (address, district, city_id, postal_code, phone)
+VALUES(
+       '3734 Elvis Presley Boulevard',
+       'Graceland',
+       (SELECT city_id FROM city WHERE city = 'Memphis'),
+       'TN 38116',
+        '800-238-2010'
+      )
+RETURNING address_id)
+
+-- Legg inn en ny rad i staff og bruk primary key fra "inserted_address" til foreign key i "address_id"
+
+INSERT INTO staff (first_name, last_name, address_id, email, store_id, username, password)
+VALUES(
+       'Elvis',
+       'Presley',
+       (SELECT address_id FROM inserted_address),
+       'elvis@graceland.com',
+       1,
+       'the king',
+       'tcob'
+      );
+
+-- SELECT * FROM staff;
+COMMIT TRANSACTION;
+    </pre>
+        </details>
+    </section>
+    <h2>Update</h2>
+    <h2>Update/Insert from select</h2>
+</main>
+</body>
+</html>

@@ -1,0 +1,44 @@
+pre.sql {
+    border: #d5d5d5 solid 1px;
+    padding: 1em;
+    padding-bottom: 0;
+    color: #003377;
+    font-family: sans-serif;
+}
+
+pre.result-table {
+    padding: 1em 2em;
+    background-color: #dedede;
+    border: #2891ff 2px;
+    font-family: monospace;
+}
+
+.variable-name {
+    color: #0070a3;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+.sql-keyword {
+    color: #770000;
+    font-variant: all-petite-caps;
+    font-family: sans-serif;
+}
+
+.schema-diagram{
+    max-width: 95vw;
+}
+
+.assignment{
+    border: #c7e2ff;
+    padding: .5em;
+    background-color: #efefef;
+}
+
+p{
+    max-width: 60em;
+}
+
+section {
+    padding: 1em 2em;
+}
