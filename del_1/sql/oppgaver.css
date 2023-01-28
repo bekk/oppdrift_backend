@@ -35,10 +35,33 @@ pre.result-table {
     background-color: #efefef;
 }
 
+li .screenshot{
+    display: block;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    max-width: 800px;
+}
+
 p{
     max-width: 60em;
 }
 
 section {
     padding: 1em 2em;
+}
+
+dt {
+    float: left;
+    clear: left;
+    width: 110px;
+    font-weight: bold;
+}
+
+dt::after {
+    content: ": ";
+}
+
+dd {
+    margin: 0 0 0 80px;
+    padding: 0 0 0.5em 3em;
 }

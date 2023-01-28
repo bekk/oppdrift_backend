@@ -14,12 +14,72 @@
         </a>. Den inneholder eksempeldata
         fra driften av en videoutleiebutikk.
     </p>
+    <h2>Starte og koble til databasen</h2>
     <p>
-        Du kan kjøre opp datbasen i docker med:
+        Du kan kjøre opp databasen i docker med:
         <pre class="brush: cli">
-            docker run --name postgres -p 5432:5432 --env POSTGRES_USER=postgres --env POSTGRES_PASSWORD=123456 -d skaar/postgres-pagila:1.0.0
+            docker run \
+            --name sql_workshop -p 5432:5432 \
+            --env POSTGRES_USER=postgres --env POSTGRES_PASSWORD=123456 \
+            -d skaar/postgres-pagila
         </pre>
     </p>
+    <p>
+        Når den er startet og initiert (det kan ta noen sekunder),
+        kan vi koble til den i (for eksempel) IntelliJ:
+    </p>
+    <ol>
+        <li>Åpne "Database"-panelet.</li>
+        <li>
+            Velg <strong>+ > Data Source > PostgresSQL</strong>
+            <img src="../../img/sql/intelliJ_screenshot0.png" alt="Velg data source" class="screenshot" />
+        </li>
+        <li>
+            Legg in konfigurasjon for databasen:
+            <dl>
+                <dt>Name</dt>
+                <dd>sql_workshop</dd>
+                <dt>Host</dt>
+                <dd>localhost</dd>
+                <dt>Port</dt>
+                <dd>5432</dd>
+                <dt>Authentication</dt>
+                <dd>User & Password</dd>
+                <dt>User</dt>
+                <dd>postgres</dd>
+                <dt>Password</dt>
+                <dd>123456</dd>
+                <dt>Database</dt>
+                <dd>pagila</dd>
+            </dl>
+            <img src="../../img/sql/intelliJ_screenshot1.png" alt="Connection settings" class="screenshot"  />
+        </li>
+        <li>
+            Klikk "Test Connection" for å se om koblingen fungerer.
+            <img src="../../img/sql/intelliJ_screenshot2.png" alt="Connection successful" class="screenshot"  />
+            Om du blir bedt om å laste ned driver, er det et godt råd.
+        </li>
+        <li>
+            Under "<strong>Schemas</strong>", velg (minimum) <strong>pagila > Default schema</strong>
+            <img src="../../img/sql/intelliJ_screenshot3.png" alt="Velg schema" class="screenshot"  />
+        </li>
+        <li>
+            Klikk "OK", og ekspander database-noden for å se tabellene.
+            <img src="../../img/sql/intelliJ_screenshot4.png" alt="Se databasen" class="screenshot"  />
+        </li>
+        <li>
+            Høyreklikk på database-noden og velg enten 
+            <strong>Navigation > Jump to Query Console...</strong>
+            eller
+            <strong>+ New > Query Console</strong>
+        </li>
+        <li>
+            Skriv
+            <pre class="sql">SELECT 'Hello world!';</pre>
+            og klikk <strong>▶︎ Execute</strong> (⌘↲)
+        </li>
+    </ol>
+    <h2>Schema</h2>
     <img src="diagram.png" alt="Database schema" class="schema-diagram" />
     <section>
         <h2>Hente data fra en enkel tabell</h2>
