@@ -3,25 +3,32 @@
 <head>
     <meta charset="utf-8"/>
     <title>SQL workshop</title>
-    <link href="oppgaver.css" rel="stylesheet" >
+    <link href="oppgaver.css" rel="stylesheet">
 </head>
 <body>
 <main>
     <h1>PostgreSQL workshop</h1>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="PostgreSQL logo">
     <p>
         Vi jobber med <a href="https://github.com/devrimgunduz/pagila" title="GitHub">
         eksempeldatabasen <em>Pagila</em>
-        </a>. Den inneholder eksempeldata
+    </a>. Den inneholder eksempeldata
         fra driften av en videoutleiebutikk.
+    </p>
+    <p>
+        <a href="https://www.postgresql.org/">Postgres</a> er en poulær relasjonsdatabase.
+        Den er open source. <a href="https://www.postgresql.org/docs/current/sql.html">Dialekten av SQL som brukes</a>
+        ligger nokså tett på <a href="https://en.wikipedia.org/wiki/SQL">standard SQL</a>.
     </p>
     <h2>Starte og koble til databasen</h2>
     <p>
         Du kan kjøre opp databasen i docker med:
-        <pre class="brush: cli">
-            docker run \
-            --name sql_workshop -p 5432:5432 \
-            --env POSTGRES_USER=postgres --env POSTGRES_PASSWORD=123456 \
-            -d skaar/postgres-pagila
+    <pre class="brush: cli">
+docker run \
+--name sql_workshop -p 5432:5432 \
+--env POSTGRES_USER=postgres \
+--env POSTGRES_PASSWORD=123456 \
+-d skaar/postgres-pagila
         </pre>
     </p>
     <p>
@@ -32,7 +39,7 @@
         <li>Åpne "Database"-panelet.</li>
         <li>
             Velg <strong>+ > Data Source > PostgresSQL</strong>
-            <img src="../../img/sql/intelliJ_screenshot0.png" alt="Velg data source" class="screenshot" />
+            <img src="../../img/sql/intelliJ_screenshot0.png" alt="Velg data source" class="screenshot"/>
         </li>
         <li>
             Legg in konfigurasjon for databasen:
@@ -52,23 +59,23 @@
                 <dt>Database</dt>
                 <dd>pagila</dd>
             </dl>
-            <img src="../../img/sql/intelliJ_screenshot1.png" alt="Connection settings" class="screenshot"  />
+            <img src="../../img/sql/intelliJ_screenshot1.png" alt="Connection settings" class="screenshot"/>
         </li>
         <li>
             Klikk "Test Connection" for å se om koblingen fungerer.
-            <img src="../../img/sql/intelliJ_screenshot2.png" alt="Connection successful" class="screenshot"  />
+            <img src="../../img/sql/intelliJ_screenshot2.png" alt="Connection successful" class="screenshot"/>
             Om du blir bedt om å laste ned driver, er det et godt råd.
         </li>
         <li>
             Under "<strong>Schemas</strong>", velg (minimum) <strong>pagila > Default schema</strong>
-            <img src="../../img/sql/intelliJ_screenshot3.png" alt="Velg schema" class="screenshot"  />
+            <img src="../../img/sql/intelliJ_screenshot3.png" alt="Velg schema" class="screenshot"/>
         </li>
         <li>
             Klikk "OK", og ekspander database-noden for å se tabellene.
-            <img src="../../img/sql/intelliJ_screenshot4.png" alt="Se databasen" class="screenshot"  />
+            <img src="../../img/sql/intelliJ_screenshot4.png" alt="Se databasen" class="screenshot"/>
         </li>
         <li>
-            Høyreklikk på database-noden og velg enten 
+            Høyreklikk på database-noden og velg enten
             <strong>Navigation > Jump to Query Console...</strong>
             eller
             <strong>+ New > Query Console</strong>
@@ -80,7 +87,16 @@
         </li>
     </ol>
     <h2>Schema</h2>
-    <img src="diagram.png" alt="Database schema" class="schema-diagram" />
+    <p>
+        Du kan få en visualisering av hvordan tabellene ser ut, og fremmednøkkel-koblingene
+        mellom dem i IntelliJ.
+    </p>
+    <p>
+        Høyreklikk på det i basen du vil ha visualisert og velg
+        <strong>Diagrams > Show Visualization&hellip;</strong>.
+    </p>
+    <img src="../../img/sql/intelliJ_screenshot5.png" alt="Visualiser diagram" class="screenshot">
+    <img src="diagram.png" alt="Database schema" class="schema-diagram"/>
     <section>
         <h2>Hente data fra en enkel tabell</h2>
         <h3>Hent alle rader fra en tabell.</h3>
@@ -149,6 +165,11 @@ LIMIT 10;
         <p class="assignment">
             Finn alle kunder med fornavn som begynner på P.
         </p>
+        <p>
+            For å matche på deler av en string kan du bruke <span class="sql-keyword">LIKE</span>
+            og <span class="sql-keyword">NOT LIKE</span>
+            (i stedet for =) og wildcards % (0 eller flere tegn) og _ (ett tegn).
+        </p>
         <details>
             <summary>Løsningsforslag</summary>
             <pre class="brush: sql">
@@ -174,6 +195,21 @@ WHERE length > 100 AND rating = 'R'
 ORDER BY rental_rate;
     </pre>
         </details>
+        <p class="assignment">
+            Finn alle filmer som har «Behind the Scenes» i "<span class="variable-name">special_features</span>".
+        </p>
+        <p>
+            "<span class="variable-name">special_features</span>" er av typen text array,
+            så man kan bruke funksjonen <span class="sql-keyword">ANY()</span>.
+        </p>
+        <details>
+            <summary>Løsningsforslag</summary>
+            <pre class="brush: sql">
+SELECT *
+FROM film
+WHERE 'Behind the Scenes' = ANY(special_features);
+    </pre>
+        </details>
     </section>
     <section>
         <h2>Hente data fra flere tabeller</h2>
@@ -188,13 +224,16 @@ ORDER BY rental_rate;
             </li>
             <li>"<span class="variable-name">address</span>" er knyttet til
                 "<span class="variable-name">city</span>" gjennom fremmednøkkel
-                "<span class="variable-name">city_id</span>"</li>
+                "<span class="variable-name">city_id</span>"
+            </li>
             <li>"<span class="variable-name">city</span>" er knyttet til
                 "<span class="variable-name">country</span>" gjennom fremmednøkkel
-                "<span class="variable-name">country_id</span>"</li>
+                "<span class="variable-name">country_id</span>"
+            </li>
             <li>"<span class="variable-name">store</span>" er også knyttet til
                 "<span class="variable-name">staff</span>" gjennom fremmednøkkel
-                "<span class="variable-name">manager_staff_id</span>"</li>
+                "<span class="variable-name">manager_staff_id</span>"
+            </li>
         </ul>
         </p>
         <details>
@@ -348,6 +387,16 @@ ORDER BY title;
     <section>
         <h2>Insert</h2>
         <p>For å legge nye rader til i en tabell brukes <span class="sql-keyword">INSERT INTO</span>.</p>
+        <p class="assignment">Legg inn et nytt land i "<span class="variable-name">country</span>"-tabellen.</p>
+        <details>
+            <summary>Løsningsforslag</summary>
+            <pre class="brush: sql">
+INSERT INTO country (country, last_update)
+VALUES('Utopia', NOW());
+
+SELECT * FROM country;
+    </pre>
+        </details>
         <p class="assignment">Legg deg selv inn i "<span class="variable-name">staff</span>"-tabellen.</p>
         <details>
             <summary>Løsningsforslag</summary>
@@ -384,8 +433,41 @@ COMMIT TRANSACTION;
     </pre>
         </details>
     </section>
-    <h2>Update</h2>
-    <h2>Update/Insert from select</h2>
+    <section>
+        <h2>Update</h2>
+        <p>
+            For å endre eksisterende rader bruker vi <span class="sql-keyword">UPDATE</span>.
+            Hva som skal oppdateres defineres i <span class="sql-keyword">FROM</span> fasen.
+        </p>
+        <p class="assignment">
+            Øk <span class="variable-name">replacement_cost</span> med 10% i tabellen
+            <span class="variable-name">film</span> dersom <span class="variable-name">special_features</span>
+            inneholder «Commentaries».
+        </p>
+        <p>
+            Det kan forresten være lurt å legge en <span class="sql-keyword">TRANSACTION</span> rundt koden
+            når man eksperimenterer med ting som muterer data.
+        </p>
+        <details>
+            <summary>Løsningsforslag</summary>
+            <pre class="brush: sql">
+BEGIN TRANSACTION;
+
+UPDATE film
+SET replacement_cost = replacement_cost * 1.1, last_update = NOW()
+WHERE 'Commentaries' = ANY(special_features);
+
+ROLLBACK TRANSACTION; -- <- endre denne til COMMIT TRANSACTION
+    </pre>
+        </details>
+    </section>
+    <h2>Stoppe databasen</h2>
+    <p>
+        Når du er ferdig med øvelsene kan du stoppe databasen med:
+        <pre class="brush: cli">
+docker stop sql_workshop
+        </pre>
+    </p>
 </main>
 </body>
 </html>
