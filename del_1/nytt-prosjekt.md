@@ -186,7 +186,7 @@ fun main() {
 ### Bruk et eksternt API
 
 Vi kan også kalle på eksterne API ved hjelp av Spring. Under er et kodeeksempel på å hente ut pokemons fra pokeAPI. 
-Kombiner denne koden med det som er gjort tidligere å tilgjengeliggjør et egent endepunkt som vi kan nå på f.eks `localhost:8080/poke/{pokemon}`.
+Kombiner denne koden med det som er gjort tidligere og tilgjengeliggjør et egent endepunkt som vi kan nå på f.eks `localhost:8080/poke/{pokemon}`.
 
 ```kotlin
 import org.springframework.web.client.RestTemplate
