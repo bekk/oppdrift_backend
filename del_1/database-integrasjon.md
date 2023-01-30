@@ -138,3 +138,8 @@ H2 kommer med mulighet for å lagre databasen mellom hver kjøring ved å define
 Oppdater `src/main/resources/application.properties` med følgende for å lagre H2 databasen til fil:
 
 `spring.datasource.url=jdbc:h2:file:./testdb`
+
+
+## Videre arbeid
+
+Fortsett med oppgavene fra [del 1 - nytt prosjekt](nytt-prosjekt.md) og bruk det du har lært om databaser.
