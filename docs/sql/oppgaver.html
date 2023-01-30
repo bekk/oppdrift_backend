@@ -4,16 +4,9 @@
     <meta charset="utf-8"/>
     <title>SQL workshop</title>
     <link href="oppgaver.css" rel="stylesheet">
-    <link href="../code-brush/tyrm.css" rel="stylesheet">
-    <script src="../code-brush/cbCore.js"></script>
-    <script src="../code-brush/cBrushSql.js"></script>
-    <script>
-        SyntaxHighlighter.defaults['auto-links'] = false;
-        SyntaxHighlighter.defaults['toolbar'] = false;
-        SyntaxHighlighter.all();
-    </script>
+    <link href="../prism.css"rel="stylesheet">
 </head>
-<body>
+<body class="line-numbers">
 <main>
     <h1>PostgreSQL workshop</h1>
     <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="PostgreSQL logo">
@@ -31,13 +24,13 @@
     <h2>Starte og koble til databasen</h2>
     <p>
         Du kan kjøre opp databasen i docker med:
-    <pre class="cli">
+    <pre class="language-bash command-line" data-continuation-str="\"><code>
 docker run \
 --name sql_workshop -p 5432:5432 \
 --env POSTGRES_USER=postgres \
 --env POSTGRES_PASSWORD=123456 \
 -d skaar/postgres-pagila
-        </pre>
+</code></pre>
     </p>
     <p>
         Når den er startet og initiert (det kan ta noen sekunder),
@@ -90,7 +83,7 @@ docker run \
         </li>
         <li>
             Skriv
-            <pre class="brush: sql">SELECT 'Hello world!';</pre>
+            <pre class="language-sql"><code>SELECT 'Hello world!';</code></pre>
             og klikk <strong>▶︎ Execute</strong> (⌘↲)
         </li>
     </ol>
@@ -114,12 +107,12 @@ docker run \
         </p>
         <details>
             <summary>Løsningsforslag</summary>
-            <pre class="brush: sql">
+            <pre><code class="language-sql">
 SELECT * FROM staff;
 
 -- * henter alle kolonner fra tabellen.
 -- "public" er default schema, så det er valgfritt å ta med.
-    </pre>
+    </code></pre>
         </details>
 
         <h3>Hent enkelte kolonner fra en tabell.</h3>
@@ -154,7 +147,7 @@ SELECT * FROM staff;
 
         <details>
             <summary>Løsningsforslag</summary>
-            <pre class="brush: sql">
+            <pre class="language-sql"><code>
 SELECT
     first_name AS fornavn,
     last_name AS etternavn,
@@ -162,7 +155,7 @@ SELECT
 FROM customer
 ORDER BY last_update DESC
 LIMIT 10;
-    </pre>
+            </code></pre>
             <p>
                 I stedet for <span class="sql-keyword">LIMIT 10</span> kan man bruke
                 <span class="sql-keyword">OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY</span>.
@@ -180,11 +173,11 @@ LIMIT 10;
         </p>
         <details>
             <summary>Løsningsforslag</summary>
-            <pre class="brush: sql">
+            <pre class="language-sql"><code>
 SELECT *
 FROM customer
 WHERE last_name LIKE 'P%';
-    </pre>
+</code> </pre>
         </details>
         <p class="assignment">
             Finn alle filmtitler med beskrivelse
@@ -196,12 +189,12 @@ WHERE last_name LIKE 'P%';
         </p>
         <details>
             <summary>Løsningsforslag</summary>
-            <pre class="brush: sql">
+            <pre class="language-sql"><code>
 SELECT title, description
 FROM film
 WHERE length > 100 AND rating = 'R'
 ORDER BY rental_rate;
-    </pre>
+</code></pre>
         </details>
         <p class="assignment">
             Finn alle filmer som har «Behind the Scenes» i "<span class="variable-name">special_features</span>".
@@ -212,11 +205,11 @@ ORDER BY rental_rate;
         </p>
         <details>
             <summary>Løsningsforslag</summary>
-            <pre class="brush: sql">
+            <pre class="language-sql"><code>
 SELECT *
 FROM film
 WHERE 'Behind the Scenes' = ANY(special_features);
-    </pre>
+</code> </pre>
         </details>
     </section>
     <section>
@@ -246,7 +239,7 @@ WHERE 'Behind the Scenes' = ANY(special_features);
         </p>
         <details>
             <summary>Løsningsforslag</summary>
-            <pre class="brush: sql">
+            <pre class="language-sql line-numbers"><code>
 SELECT
     s2.email,
     c.city,
@@ -258,7 +251,7 @@ JOIN country c2 ON c.country_id = c2.country_id
 JOIN staff s2 ON s.manager_staff_id = s2.staff_id;
 
 -- Man kan gi tabellene kortere alias for å forenkle utttrykkene.
-    </pre>
+</code> </pre>
         </details>
     </section>
     <section>
@@ -275,7 +268,7 @@ JOIN staff s2 ON s.manager_staff_id = s2.staff_id;
         </p>
         <details>
             <summary>Løsningsforslag</summary>
-            <pre class="brush: sql">
+            <pre class="language-sql"><code>
 SELECT
     category.name AS kategori, COUNT(film.*) AS "antall filmer"
 FROM film
@@ -283,7 +276,7 @@ JOIN film_category on film.film_id = film_category.film_id
 JOIN category on film_category.category_id = category.category_id
 GROUP BY category.name
 ORDER BY COUNT(film.*) DESC;
-    </pre>
+</code> </pre>
         </details>
         <p class="assignment">
             Vis bare kategorier med mer enn 70 filmer ved å bruke
@@ -291,7 +284,7 @@ ORDER BY COUNT(film.*) DESC;
         </p>
         <details>
             <summary>Løsningsforslag</summary>
-            <pre class="brush: sql">
+            <pre class="language-sql"><code>
 SELECT
     category.name AS kategori, COUNT(film.*) AS "antall filmer"
 FROM film
@@ -300,7 +293,7 @@ JOIN category on film_category.category_id = category.category_id
 GROUP BY category.name
 HAVING COUNT(film.*) > 70
 ORDER BY COUNT(film.*) DESC;
-    </pre>
+</code> </pre>
         </details>
         <p class="assignment">
             Finn total omsetning per butikk/by per film.
@@ -308,7 +301,7 @@ ORDER BY COUNT(film.*) DESC;
         </p>
         <details>
             <summary>Løsningsforslag</summary>
-            <pre class="brush: sql">
+            <pre class="language-sql"><code>
 SELECT
     f.title, c.city, SUM(p.amount)
 FROM film f
@@ -320,7 +313,7 @@ JOIN address a ON s.address_id = a.address_id
 JOIN city c ON a.city_id = c.city_id
 GROUP BY f.title, c.city
 ORDER BY c.city, SUM(p.amount);
-    </pre>
+</code> </pre>
         </details>
         <p class="assignment">
             Finn total omsetning per måned/år per film.
@@ -331,7 +324,7 @@ ORDER BY c.city, SUM(p.amount);
         </p>
         <details>
             <summary>Løsningsforslag</summary>
-            <pre class="brush: sql">
+            <pre class="language-sql"><code>
 SELECT
     f.title AS tittel,
     DATE_PART('month', r.rental_date) AS måned,
@@ -343,7 +336,7 @@ JOIN rental r ON i.inventory_id = r.inventory_id
 JOIN payment p ON r.rental_id = p.rental_id
 GROUP BY f.title, måned, år
 ORDER BY år, måned, omsetning DESC;
-    </pre>
+</code> </pre>
         </details>
     </section>
     <section>
@@ -358,13 +351,13 @@ ORDER BY år, måned, omsetning DESC;
         </p>
         <details>
             <summary>Løsningsforslag</summary>
-            <pre class="brush: sql">
+            <pre class="language-sql"><code>
 SELECT film_id,
        title,
        rental_rate
 FROM film
 WHERE rental_rate > (SELECT AVG(rental_rate) FROM film);
-    </pre>
+</code> </pre>
         </details>
     </section>
     <section>
@@ -382,14 +375,14 @@ WHERE rental_rate > (SELECT AVG(rental_rate) FROM film);
         </p>
         <details>
             <summary>Løsningsforslag</summary>
-            <pre class="brush: sql">
+            <pre class="language-sql"><code>
 SELECT title,
        rating,
        rental_rate,
        row_number() OVER (PARTITION BY rating ORDER BY rental_rate DESC) AS "rental rate # of rating"
 FROM film
 ORDER BY title;
-    </pre>
+</code> </pre>
         </details>
     </section>
     <section>
@@ -398,17 +391,17 @@ ORDER BY title;
         <p class="assignment">Legg inn et nytt land i "<span class="variable-name">country</span>"-tabellen.</p>
         <details>
             <summary>Løsningsforslag</summary>
-            <pre class="brush: sql">
+            <pre class="language-sql"><code>
 INSERT INTO country (country, last_update)
 VALUES('Utopia', NOW());
 
 SELECT * FROM country;
-    </pre>
+</code>  </pre>
         </details>
         <p class="assignment">Legg deg selv inn i "<span class="variable-name">staff</span>"-tabellen.</p>
         <details>
             <summary>Løsningsforslag</summary>
-            <pre class="brush: sql">
+            <pre class="language-sql"><code>
 BEGIN TRANSACTION;
 
 -- Legg inn en ny adresse og hold på resulatet i "inserted_address"
@@ -438,7 +431,7 @@ VALUES(
 
 -- SELECT * FROM staff;
 COMMIT TRANSACTION;
-    </pre>
+</code> </pre>
         </details>
     </section>
     <section>
@@ -458,7 +451,7 @@ COMMIT TRANSACTION;
         </p>
         <details>
             <summary>Løsningsforslag</summary>
-            <pre class="brush: sql">
+            <pre class="language-sql"><code>
 BEGIN TRANSACTION;
 
 UPDATE film
@@ -466,16 +459,20 @@ SET replacement_cost = replacement_cost * 1.1, last_update = NOW()
 WHERE 'Commentaries' = ANY(special_features);
 
 ROLLBACK TRANSACTION; -- <- endre denne til COMMIT TRANSACTION
-    </pre>
+</code> </pre>
         </details>
     </section>
     <h2>Stoppe databasen</h2>
     <p>
         Når du er ferdig med øvelsene kan du stoppe databasen med:
-        <pre class="cli">
+        <pre class="language-bash command-line"><code>
 docker stop sql_workshop
-        </pre>
+       </code> </pre>
     </p>
 </main>
+<script src="../prism.js"></script>
+<script>
+
+</script>
 </body>
 </html>
