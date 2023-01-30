@@ -4,6 +4,14 @@
     <meta charset="utf-8"/>
     <title>SQL workshop</title>
     <link href="oppgaver.css" rel="stylesheet">
+    <link href="../code-brush/tyrm.css" rel="stylesheet">
+    <script src="../code-brush/cbCore.js"></script>
+    <script src="../code-brush/cBrushSql.js"></script>
+    <script>
+        SyntaxHighlighter.defaults['auto-links'] = false;
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
 </head>
 <body>
 <main>
@@ -23,7 +31,7 @@
     <h2>Starte og koble til databasen</h2>
     <p>
         Du kan kjøre opp databasen i docker med:
-    <pre class="brush: cli">
+    <pre class="cli">
 docker run \
 --name sql_workshop -p 5432:5432 \
 --env POSTGRES_USER=postgres \
@@ -82,7 +90,7 @@ docker run \
         </li>
         <li>
             Skriv
-            <pre class="sql">SELECT 'Hello world!';</pre>
+            <pre class="brush: sql">SELECT 'Hello world!';</pre>
             og klikk <strong>▶︎ Execute</strong> (⌘↲)
         </li>
     </ol>
@@ -464,7 +472,7 @@ ROLLBACK TRANSACTION; -- <- endre denne til COMMIT TRANSACTION
     <h2>Stoppe databasen</h2>
     <p>
         Når du er ferdig med øvelsene kan du stoppe databasen med:
-        <pre class="brush: cli">
+        <pre class="cli">
 docker stop sql_workshop
         </pre>
     </p>
