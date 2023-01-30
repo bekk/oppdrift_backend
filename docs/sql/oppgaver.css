@@ -1,0 +1,77 @@
+pre.sql {
+    border: #d5d5d5 solid 1px;
+    padding: 1em;
+    padding-bottom: 0;
+    color: #003377;
+    font-family: sans-serif;
+}
+
+pre.result-table {
+    padding: 1em 2em;
+    background-color: #dedede;
+    border: #2891ff 2px;
+    font-family: monospace;
+}
+
+.variable-name {
+    color: #0070a3;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+.sql-keyword {
+    color: #770000;
+    font-variant: all-petite-caps;
+    font-family: sans-serif;
+}
+
+.schema-diagram {
+    max-width: 95vw;
+}
+
+.cli {
+    display: block;
+    border: #2B2B2B solid 1px;
+    background-color: #e8f1ff;
+    padding: 1em;
+    padding-bottom: 0;
+    font-family: monospace;
+    max-width: 400px;
+}
+
+.assignment{
+    border: #c7e2ff;
+    padding: .5em;
+    background-color: #efefef;
+}
+
+li .screenshot{
+    display: block;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    max-width: 800px;
+}
+
+p{
+    max-width: 60em;
+}
+
+section {
+    padding: 1em 2em;
+}
+
+dt {
+    float: left;
+    clear: left;
+    width: 110px;
+    font-weight: bold;
+}
+
+dt::after {
+    content: ": ";
+}
+
+dd {
+    margin: 0 0 0 80px;
+    padding: 0 0 0.5em 3em;
+}
