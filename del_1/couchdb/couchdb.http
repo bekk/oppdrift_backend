@@ -1,10 +1,5 @@
 # CouchDB-øvelser
 
-@host = localhost:5984
-@baseUrl = http://{{host}}
-@user = admin
-@password = password
-
 ###
 GET http://{{user}}:{{password}}@{{{{host}}}}/_all_dbs
 
