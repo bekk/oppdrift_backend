@@ -93,6 +93,7 @@ Da gjenstår det bare å opprette en database med noe data. Under er to eksempel
 ```sql
 --- V1__create_table.sql
 CREATE TABLE Users (
+    id Int unique,
     title varchar(50),
     username varchar(50)
 );
@@ -100,8 +101,8 @@ CREATE TABLE Users (
 
 ```sql
 --- V2__insert_users.sql
-insert into Users (title, username) values ('Konsulent', 'Vegard');
-insert into Users (title, username) values ('Artist', 'Donny Benet');
+insert into Users (id, title, username) values (1, 'Konsulent', 'Vegard');
+insert into Users (id, title, username) values (2, 'Artist', 'Donny Benet');
 ```
 
 ## Bruk av database i Spring boot
