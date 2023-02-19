@@ -39,15 +39,10 @@ Mye blir gjemt, så alt vi trenger for å dra inn en database i et endepunkt er:
 class MyClass(val database: Database) { }
 ```
 
-
-## Repository vs RestController
-
-Men hva er egentlig `@RestController`? ... `@Component` etc
-
-
 ## javax.sql.DataSource
 
-Eksempel på bruk av `DataSource`
+DataSource er et abstraksjonslag mot databaser, den inneholder logikk for å håndere tilkobling og kommunikasjon mot en database.
+Under er noen eksempler på hvordan vi kan bruke `DataSource` til å snakke med en database:
 
 ```kotlin
 data class User(
@@ -101,7 +96,9 @@ dataSource.connection.use { connection ->
 }
 ```
 
-# UserRepository
+# Implementasjon og oppgaver
+
+## UserRepository
 
 Lag klassen `UserRepository` og ta inn DataSource ved hjelp av dependency injection.
 
