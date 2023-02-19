@@ -154,7 +154,7 @@ class UserController(val userRepository: UserRepository) {
 Implementer funksjoner som er annotert med `@PostMapping`, `@PutMapping` og `@DeleteMapping` for å oppfylle 
 funksjonene i http-fila under (kopier koden under og legg den til som `users.http` i prosjektet):
 
-```http request
+```
 ### Get all the users
 http://localhost:8080/api/users
 
