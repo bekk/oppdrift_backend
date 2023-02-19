@@ -4,4 +4,14 @@ Testing og API-design
 
 ![Testing](../img/test.png)
 
-1. [Data-API](Data-api.md)
+## Api
+
+- [Data-API](Data-api.md)
+
+## Kode-kata
+
+- [Bowling](kata/Bowling-kalkulator.md)
+- [Romertall](kata/RomanNumeralConverter.md)
+- [Fizz buzz](kata/Fizzbuzz.md)
+- [Palindrome](kata/Palindrome.md)
+- [Tennis](https://github.com/jdgarita/TennisGame-TDD-Kata/blob/master/src/TennisGameTest.kt)

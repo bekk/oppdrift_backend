@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>SQL workshop</title>
     <link href="oppgaver.css" rel="stylesheet">
-    <link href="../prism.css"rel="stylesheet">
+    <link href="../prism.css" rel="stylesheet">
 </head>
 <body class="line-numbers">
 <main>
@@ -26,11 +26,18 @@
         Du kan kjøre opp databasen i docker med:
     <pre class="language-bash command-line" data-continuation-str="\"><code>
 docker run \
---name sql_workshop -p 5432:5432 \
+--name sql_workshop -p 5433:5432 \
 --env POSTGRES_USER=postgres \
 --env POSTGRES_PASSWORD=123456 \
 -d skaar/postgres-pagila
 </code></pre>
+    </p>
+    <p>
+        <em>
+            NB: Her bruker vi port <strong>5433</strong> i stedet for default for Postgres (5432).
+            Det er for å unngå kollisjon med en eventuell installasjon på maskinen.
+            Derfor må vi passe på å endre portnummeret når vi kobler  til dadatabasen nedenfor.
+        </em>
     </p>
     <p>
         Når den er startet og initiert (det kan ta noen sekunder),
@@ -50,7 +57,7 @@ docker run \
                 <dt>Host</dt>
                 <dd>localhost</dd>
                 <dt>Port</dt>
-                <dd>5432</dd>
+                <dd>5433</dd>
                 <dt>Authentication</dt>
                 <dd>User & Password</dd>
                 <dt>User</dt>
