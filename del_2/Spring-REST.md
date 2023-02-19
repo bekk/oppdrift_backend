@@ -133,10 +133,20 @@ class UserRepository(val dataSource: DataSource) {
 ```
 
 ```kotlin
-@RestController
-@RequestMapping("/api/users")
-class UserController(val repository: UserRepository) {
+@Repository
+class UserRepository(val dataSource: DataSource) {
 
+    fun getUsers(): List<User> =
+        dataSource.connection.use { connection ->
+            val sql = "SELECT * FROM Users"
+            val resultSet = connection.createStatement().executeQuery(sql)
+            val users = mutableListOf<User>()
+            while (resultSet.next()) {
+                users.add(resultSet.userFromResultSet())
+            }
+            users
+        }
+    ...
 }
 ```
 
