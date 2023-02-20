@@ -6,6 +6,7 @@ Testing og API-design
 
 ## Api
 
+- [gRPC](./gRPC.md)
 - [Data-API](Data-api.md)
 
 ## Kode-kata
