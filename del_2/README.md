@@ -8,6 +8,10 @@ Testing og API-design
 
 - [gRPC](./gRPC.md)
 - [Data-API](Data-api.md)
+- [Spring og REST i Kotlin](Spring-REST.md)
+
+## Testing i Kotlin
+- [Testing i Kotlin](Kotlin-test.md)
 
 ## Kode-kata
 
