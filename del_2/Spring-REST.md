@@ -42,7 +42,7 @@ Mye blir gjemt, så alt vi trenger for å dra inn en database i et endepunkt er:
 
 ```kotlin
 @RestController
-class MyClass(val database: Database) 
+class MyClass(val dataSource: DataSource) 
 ```
 
 ## javax.sql.DataSource
