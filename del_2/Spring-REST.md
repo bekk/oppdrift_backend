@@ -18,7 +18,7 @@ I Spring definerer man en avhengighet som kan bli brukt i dependency injection s
 Det kan være en f.eks tjeneste for å hente ut brukere, ett konfigurasjonsobjekt, eller en database-tilkobling. 
 Eller hva som helst annet.
 For å kunne oppdage alle `@Bean` som er tilgjengelig i applikasjonen kan man bruke `@ComponentScan` for å lete 
-igjennom kodebasen for å ting som er market som `@Bean`. 
+igjennom kodebasen for ting som er market som `@Bean`. 
 Når man ønsker å ta i bruk en avhengighet kan man bruke `@Autowired` for å få tak i avhengiehten.
 
 
@@ -32,11 +32,11 @@ Oppsumert:
 
 Vi bruker Spring boot, så en del av dette er gjemt for oss. Spring Boot vil (by default) annotere applikasjonen 
 vår med `@ComponentScan` og lage `Beans` av ting man typisk trenger.
-Dersom vi har en avhengighet til en database og satt verdier i `application.config` vil Spring Boot automatisk 
+Dersom vi har en avhengighet til en database og vi har satt verdier i `application.config` vil Spring Boot automatisk 
 opprette en `Bean` for denne database-tilkoblingen. Denne kan vi dra inn ved hjelp av Dependency Injection.
 
 Siden vi bruker Spring Boot trenger heller ikke å si at databasen skal bli `@Autowired`, 
-da Spring Boot forstår det når `MyClass` er annotert som en `@RestController`.
+da Spring Boot forstår det når `MyClass` er annotert med Spring annotasjon f.eks `@RestController`.
 
 Mye blir gjemt, så alt vi trenger for å dra inn en database i et endepunkt er:
 
