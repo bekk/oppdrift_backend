@@ -1,10 +1,19 @@
+# Deploy av Spring Boot med Fly
 
-Sjekk at applikasjonen svarer på port 8080 når du kjører opp løsningen fra forrige gang.
+Målet for i dag er å få deploya applikasjonen vår ut på internett. 
 
-Du kan også ta utgangspunkt i [eksempel prosjektet](https://github.com/veiset/kotlin-spring-flyway-rest-example).
+Det første steget er å sjekke at applikasjonen starter opp lokalt og svarer på port 8080.
+Det er også mulig å ta utgangspunkt i [eksempel prosjektet](https://github.com/veiset/kotlin-spring-flyway-rest-example) og starte derfra.
 
+Start applikasjonen og sjekk at https://localhost:8080/api/users fungerer.
 
 ## Actuator
+
+Systemet som starter opp applikasjonen trenger å vite at appen er oppe og frisk. 
+Actuator er endepunkt som sier noe om status på applikasjonen, typsik vil dette være om appen har startet opp rett,
+ressusjbruk og egendefinerte metrics.
+
+Legg til spring-boot-starter-actuator for å automatisk få disse endepunktene.
 
 ```kotlin
 dependencies {
