@@ -33,7 +33,13 @@ Kjør applikasjonen:
 dotnet run --project src/
 ```
 
-Det kan hende om du blir spurt om passord for å installere et lokalt utviklersertifikat, for å kunne kjøre https.
+Første gang den starter, vil et lokalt utviklersertifikat bli installer på maskinen for å kunne kjøre https. Det kan hende om du blir spurt om passord.
+
+For å stole på sertifikatet kan dette gjøres en gang ([Les mer om det her](https://learn.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-7.0&tabs=visual-studio%2Clinux-ubuntu#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos)):
+
+```console
+dotnet dev-certs https --trust
+```
 
 Web serveren vil starte opp og lytte på portene som er definert i default profile i `Properties/launchSettings.json`. I konsollet står det hvilke porter det lyttes på.
 
@@ -43,7 +49,7 @@ Du kan også starte applikasjonen med hot reload (at endringer blir med i den kj
 
 ## Legg til referanse
 
-Man kan legg til avhengigheter. Dette er tilgjengelig gjennom et pakkesystem som heter [Nuget](https://nuget.org).
+Man kan legge til avhengigheter. Dette er tilgjengelig gjennom et pakkesystem som heter [Nuget](https://nuget.org).
 
 For å legge til en ny nuget-pakke:
 

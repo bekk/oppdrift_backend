@@ -14,10 +14,10 @@ public class RequestHandlerFactory : IOppdriftRequestHandlerFactory
         var behaviours = new[] { "scroll", "slide", "alternate" };
         var directions = new[] { "left", "right", "up", "down" };
         
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 400; i++)
         {
             await WriteAsync(ctx.Response,
-                $"<marquee behavior='{PickValue(behaviours, rnd)}' direction='{PickValue(directions, rnd)}' scrollamount='{rnd.Next(50)}' style='color: #{rnd.Next(16777216):x6}; font-size: {rnd.Next(60)}px;'>Oppdrift!</marquee>");
+                $"<marquee behavior='{PickValue(behaviours, rnd)}' direction='{PickValue(directions, rnd)}' scrollamount='{rnd.Next(50)}' style='color: #{rnd.Next(16777216):x6}; font-size: {rnd.Next(80)}px;'>Oppdrift!</marquee>");
         }
 
         await WriteAsync(ctx.Response, "</body></html>");
