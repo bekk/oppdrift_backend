@@ -64,3 +64,41 @@ flyctl launch
 ```
 
 Gå til `https://<generert-navn>.fly.dev/api/users`
+
+
+## Github Actions (Bonus oppgave)
+
+Denne delen krever at du oppretter et github prosjekt for applikasjonen din. 
+Gå til Github og opprett et nytt prosjekt.
+
+Legg til filen `.github/workflow/fly.yml`, med følgende innhold:
+
+```yml
+name: Fly Deploy
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    name: Deploy app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+```
+
+Hent ut Fly API token ved å skrive `flyctl auth token` og legg denne til som en repository secret med navn `FLY_API_TOKEN` 
+på Github (Settings -> Secrets and Variables -> Actions -> New repository secret)
+
+Etter dette er satt opp vil appen automatisk bli bygd og deployet når ny kode blir pushet til `main`-branchen. 
+Gå til repoet på Github å følg med på hva som skjer under `Actions`-fanen.
+
+![github action](../img/github-action.png)
+
+Sjekk ut fly sin [offisielle dokumenasjon på GitHub Actions](https://fly.io/docs/app-guides/continuous-deployment-with-github-actions/)
+for mer info.
+
