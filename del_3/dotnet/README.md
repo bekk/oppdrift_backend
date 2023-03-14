@@ -25,20 +25,23 @@ I mappen `src` er det nå opprettet noen filer i et *project*:
 - `appsettings.json`: Applikasjonens konfigurasjonsfil.
 - `Program.cs`: En kodefil som definerer startpunktet for applikasjonen. Den har en minimal implementasjon for en web server.
 
+## Installer utviklersertifikat
+
+Om det er første gang du starter en asp.net applikasjon lokalt bør du installere et utviklersertikat på maskinen.
+Kjør denne med admin-rettigheter (du vil bli spurt om passord):
+
+```console
+dotnet dev-certs https --trust
+```
+
+([Les mer om dette her.](https://learn.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-7.0&tabs=visual-studio%2Clinux-ubuntu#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos))
+
 ## Start applikasjonen
 
 Kjør applikasjonen:
 
 ```console
 dotnet run --project src/
-```
-
-Første gang den starter, vil et lokalt utviklersertifikat bli installer på maskinen for å kunne kjøre https. Det kan hende om du blir spurt om passord.
-
-For å stole på sertifikatet kan dette gjøres en gang ([Les mer om det her](https://learn.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-7.0&tabs=visual-studio%2Clinux-ubuntu#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos)):
-
-```console
-dotnet dev-certs https --trust
 ```
 
 Web serveren vil starte opp og lytte på portene som er definert i default profile i `Properties/launchSettings.json`. I konsollet står det hvilke porter det lyttes på.

@@ -6,7 +6,7 @@
     <Company>Bekk</Company>
     <Authors>Øyvind Skaar</Authors>
     <AssemblyVersion>$(Version)</AssemblyVersion>
-    <VersionPrefix>1.0.1</VersionPrefix>
+    <VersionPrefix>1.0.2</VersionPrefix>
     <PackageTags>Oppdrift</PackageTags>
     <IncludeSymbols>true</IncludeSymbols>
     <IncludeSource>true</IncludeSource>

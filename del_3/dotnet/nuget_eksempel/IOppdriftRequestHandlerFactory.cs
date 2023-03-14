@@ -11,4 +11,6 @@ public interface IOppdriftRequestHandlerFactory
     /// En <seealso cref="RequestDelegate"/> som returnerer en oppdrift-respons.
     /// </summary>
     RequestDelegate Handle { get; }
+
+    Func<HttpContext, Func<Task>, Task> MiddleWare();
 }
