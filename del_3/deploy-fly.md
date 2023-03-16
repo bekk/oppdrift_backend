@@ -71,7 +71,7 @@ Gå til `https://<generert-navn>.fly.dev/api/users`
 Denne delen krever at du oppretter et GitHub repository for applikasjonen din. 
 Gå til GitHub og opprett et nytt prosjekt.
 
-Legg til filen `.github/workflow/fly.yml`, med følgende innhold:
+Legg til filen `.github/workflows/fly.yml`, med følgende innhold:
 
 ```yml
 name: Fly Deploy
