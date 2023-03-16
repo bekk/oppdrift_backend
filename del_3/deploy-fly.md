@@ -68,7 +68,7 @@ Gå til `https://<generert-navn>.fly.dev/api/users`
 
 ## GitHub Actions (Bonus oppgave)
 
-Denne delen krever at du oppretter et GitHub prosjekt for applikasjonen din. 
+Denne delen krever at du oppretter et GitHub repository for applikasjonen din. 
 Gå til GitHub og opprett et nytt prosjekt.
 
 Legg til filen `.github/workflow/fly.yml`, med følgende innhold:
