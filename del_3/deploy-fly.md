@@ -5,7 +5,7 @@ Målet for i dag er å få deploya applikasjonen vår ut på internett.
 Det første steget er å sjekke at applikasjonen starter opp lokalt og svarer på port 8080.
 Det er også mulig å ta utgangspunkt i [eksempel prosjektet](https://github.com/veiset/kotlin-spring-flyway-rest-example) og starte derfra.
 
-Start applikasjonen og sjekk at https://localhost:8080/api/users fungerer.
+Start applikasjonen og sjekk at http://localhost:8080/api/users fungerer.
 
 ## Actuator
 
