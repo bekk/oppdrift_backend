@@ -153,7 +153,7 @@ Prøv å få et navn fra query til å returneres i body. Så `http://localhost:8
 
 ### Body
 
-Om du vil se hva som ligger i request body, du kan gjøre det på denne måten:
+Om du vil se hva som ligger i request body, kan du gjøre det på denne måten:
 
 ```js
 const logRequestBody = function(request){
