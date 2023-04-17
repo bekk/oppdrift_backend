@@ -1,6 +1,6 @@
 # Del 2 av løsning fra scratch 
 
-Ta utgangspunkt i det som ble gjort i [del 1](./nytt-prosjekt.md) og jobb videre med samme kodebase.
+Ta utgangspunkt i det som ble gjort i [del 1](../del_0/nytt-prosjekt.md) og jobb videre med samme kodebase.
 
 
 <details>
