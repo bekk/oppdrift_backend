@@ -21,7 +21,6 @@ Start containeren med
 ```console
 docker run \
     --publish=7474:7474 --publish=7687:7687 \
-    --volume=$HOME/neo4j/data:/data \
     --env=NEO4J_AUTH=none \
     --name=neo4j_workshop \
     -d \
@@ -30,10 +29,13 @@ docker run \
 
 Gå til http://localhost:7474/browser/ for å jobbe med databasen.
 
-Etter at du har startet opp og «logget inn» (vi har skrudd av autentisering i denne databasen)
+![Første skjerm](../img/graph/neo4j_screen_0.png)
+
+Velg *Authentication type* "No authentication" og klikk *Connect*.
+
+Etter at du har startet opp og «logget inn»
 Kan du skrive `:guide movie-graph` og trykke enter eller klikke play-knappen til høyre.
 
-![Første skjerm](../img/graph/neo4j_screen_0.png)
 
 Det vil åpne en veiviser for å opprette en database og gjøre spørringer i den.
 

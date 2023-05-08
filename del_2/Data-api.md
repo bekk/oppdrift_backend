@@ -18,7 +18,7 @@ En sandkasse for å teste det i her https://docs.github.com/en/graphql/overview/
 
 Du får code completion i editoren, så det er mulig å utforske formatet litt.
 
-Eksemepelet for å se hvem du er:
+For eksempel å se hvem du er:
 
 ```GraphQL
 query { 
