@@ -57,13 +57,13 @@ sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
 ```
 
-### Podman (Windowss)
+### Podman (Windows)
 
 Posman er et alternativ til docker, som tilbyr et gui. Den er avhengig av at
 WSL er installert, men kan installere det for deg.
 
-[Github](https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md)
-[Webside med installer](https://podman.io/)
+- [Github](https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md)
+- [Webside med installer](https://podman.io/)
 
 ---
 
