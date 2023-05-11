@@ -56,6 +56,8 @@ vil ikke lagre noe i mellom hver gang man kjører applikasjonen. Man har mulighe
 det som er i databasen til fil mellom hver kjøring, men mer om det senere. La oss legge til avhengighetene vi trenger
 for H2 og Flyway.
 
+I `build.gradle.kt` legg til avhengihetene for Flyway og H2:
+
 ```kotlin
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
