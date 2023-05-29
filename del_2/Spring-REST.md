@@ -1,6 +1,6 @@
 # Del 3 - løsning fra scratch - endepunkt
 
-Ta utgangspunkt i det som ble gjort i [del 1 - nytt prosjekt](./../del_1/nytt-prosjekt.md) og [del 2 - database integrasjon](./../del_1/database-integrasjon.md)
+Ta utgangspunkt i det som ble gjort i [del 0 - nytt prosjekt](./../del_0/nytt-prosjekt.md) og [del 2 - database integrasjon](./../del_1/database-integrasjon.md)
 
 I dag skal vi implementere REST-endepunkt i Spring-applikasjonen vår. 
 Når vi er ferdig med denne delen vil vi ha en applikasjon med en database, 
@@ -11,7 +11,7 @@ https://github.com/veiset/kotlin-spring-flyway-rest-example
 
 ## Spring Dependency Injection
 
-Spring kommer med et rammeverk for å håndtere avhengiehter, et såkalt dependency injection rammeverk.  
+Spring kommer med et rammeverk for å håndtere avhengigheter, et såkalt *dependency injection* rammeverk.  
 De tre mest sentrale konseptene i Spring sitt dependency injection rammeverk er `@ComponentScan`, `@Bean` og `@Autowired`. 
 
 I Spring definerer man en avhengighet som kan bli brukt i dependency injection som en `@Bean`. 

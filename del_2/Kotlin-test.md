@@ -37,12 +37,15 @@ Kjør testen ved å klikke på den grønne pila.
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-internal class MinKuleGreieTest {
+internal class MinKuleGreieTests {
 
     @Test
-    fun test_skrik_er_uppercase() {
+    fun skrik_withText_returnsUppercase() {
         val expected = "HEI"
-        assertEquals(expected, MinKuleGreie().skrik("hei"))
+        
+        val result = MinKuleGreie().skrik("hei")
+        
+        assertEquals(expected, result)
     }
 }
 ```

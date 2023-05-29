@@ -1,0 +1,114 @@
+<html lang="en">
+<head>
+    <title>Push API demo</title>
+    <link rel="icon" href="/favicon.ico">
+    <script type="text/javascript">
+
+        const APP_SERVER_KEY = 'Some secret key';
+
+        const askPermission = () => {
+            return new Promise((resolve, reject) => {
+                const permissionResult = Notification.requestPermission((result) => {
+                    resolve(result)
+                })
+                if (permissionResult) {
+                    permissionResult.then(resolve, reject)
+                }
+            }).then((permissionResult) => {
+                if (permissionResult !== 'granted') {
+                    throw 'Permission denied';
+                }
+            })
+        };
+
+        const sendToServer = (subscription) => {
+            return fetch('/api/subscription', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(subscription)
+            })
+                .then((res) => {
+                    if (!res.ok) {
+                        throw 'An error occurred';
+                    }
+                    return res.json()
+                })
+                .then((resData) => {
+                    if (!(resData.data && resData.data.success)) {
+                        throw 'An error occurred';
+                    }
+                })
+        };
+
+        window.onload = () => {
+
+            if (!('serviceWorker' in navigator)) {
+                throw "Service worker is not supported";
+            }
+            if (!('PushManager' in window)) {
+                throw "Push API is not supported";
+            }
+
+            navigator.serviceWorker.register('/worker.js');
+            navigator.serviceWorker.ready
+                .then((registration) => {
+                    console.log(`Service worker registered with ${registration.scope}`)
+
+                    document.querySelector("#unregister")
+                        .addEventListener('click', _ => {
+                            registration.unregister();
+                        });
+
+                    askPermission()
+                        .then(() => fetch('/api/publickey'))
+                        .then(res => res.text())
+                        .then((key) => {
+                            const options = {
+                                userVisibleOnly: true,
+                                applicationServerKey: (key)
+                            }
+                            return registration.pushManager.subscribe(options);
+                        }).then((pushSubscription) => {
+                        sendToServer(pushSubscription);
+                    });
+                }, (err) => {
+                    console.error(`Service worker registration failed: ${err}`);
+                });
+
+            // Find elements on the page
+            const sendButton = document.querySelector("#send");
+            const nameBox = document.querySelector("#avsender");
+            const txtBox = document.querySelector("#message");
+
+            sendButton.addEventListener("click", (_) => {
+                if (txtBox.value !== "" && nameBox.value !== '') {
+                    fetch("/api/broadcast", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify( {
+                            msg: txtBox.value,
+                            sender: nameBox.value
+                        })
+                    });
+                    txtBox.value = "";
+                }
+            });
+
+        };
+
+    </script>
+</head>
+<body>
+<h1>Chat</h1>
+<div>
+    <input id="avsender" placeholder="Mitt navn" />
+    <input id="message" placeholder="Message"/>
+    <button id="send">Send</button>
+</div>
+<a id="unregister" href="#">Unregister</a>
+</body>
+</html>

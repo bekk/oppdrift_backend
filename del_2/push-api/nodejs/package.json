@@ -1,0 +1,12 @@
+{
+  "name": "server-side-events-demo",
+  "version": "1.0.0",
+  "description": "A very simple example of a server side event implementation (server/client)",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "web-push": "^3.6.1"
+  }
+}

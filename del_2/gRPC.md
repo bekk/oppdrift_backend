@@ -1,7 +1,7 @@
 gRPC Workshop
 =============
 
-![gRPC logo](https://grpc.io/img/logos/grpc-icon-color.png)
+![gRPC logo](../img/gRPC_logo.png)
 
 Gå gjennom **Quick start**: https://grpc.io/docs/languages/kotlin/quickstart/ (Hello world).
 

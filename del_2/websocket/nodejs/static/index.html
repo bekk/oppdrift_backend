@@ -1,0 +1,55 @@
+<html lang="en">
+  <head>
+    <title>Web socket demo</title>
+    <script type="text/javascript">
+      window.onload = () => {
+        const protocol = window.location.protocol === "https:" ? "wss:" : "ws:"; //Select secure protocol when possible
+        const ws = new WebSocket(`${protocol}//${window.location.host}`); // Create the websocket object
+
+        // Find elements on the page
+        const sendButton = document.querySelector("#send");
+        const txtBox = document.querySelector("#message");
+        const msgHolder = document.querySelector("#messages");
+
+        // Send
+        ws.onopen = () => {
+          sendButton.disabled = false;
+          sendButton.addEventListener("click", (_) => {
+            if (txtBox.value !== "") {
+              ws.send(txtBox.value);
+              txtBox.value = "";
+            }
+          });
+        };
+
+        // Receive
+        ws.onmessage = (msg) => {
+          if (typeof msg.data === "string") {
+            outputText(msg.data);
+          } else {
+            msg.data.text().then(outputText);
+          }
+        };
+
+        // Function to append text to div#messages
+        const outputText = (txt) => (msgHolder.innerHTML += `<li>${txt}</li>`);
+      };
+    </script>
+    <style>
+      ul {
+        list-style: none;
+      }
+      ul li::before {
+        content: "🗨 ";
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Chat</h1>
+    <div>
+      <input id="message" placeholder="Message" />
+      <button id="send" disabled="disabled">Send</button>
+    </div>
+    <ul id="messages"></ul>
+  </body>
+</html>
