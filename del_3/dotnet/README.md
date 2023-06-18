@@ -1,8 +1,11 @@
 # Dyppe tærne i .NET
 
+![Dyppe tærne](../../img/Dyppe_tærne.png)
+
 ## Installere SDK
 
-For å bygge (og kjøre) dotnet-kode, trenger vi [.NET SDK](https://dotnet.microsoft.com/en-us/download) installert.
+For å bygge (og kjøre) dotnet-kode, trenger vi [.NET SDK](https://dotnet.microsoft.com/en-us/download) installert. 
+Pass på å velge versjonen som passer til din maskin.
 
 På Mac kan vi også bruke [Homebrew](https://brew.sh/) med `brew install --cask dotnet-sdk`.
 
