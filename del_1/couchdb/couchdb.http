@@ -1,10 +1,9 @@
 # CouchDB-øvelser
 
-###
-GET http://{{user}}:{{password}}@{{{{host}}}}/_all_dbs
+### GetAllDatabases
+GET http://{{user}}:{{password}}@{{host}}/_all_dbs
 
-###
-
+### LoginAndCreateSession
 POST /_session
 Host: {{host}}
 Accept: application/json
@@ -15,16 +14,14 @@ Content-Type: application/json
     "password": "{{password}}"
 }
 
-###
+### CreateDatabase
 PUT {{baseUrl}}/kardemommeby
 
-###
-
+### GetDatabase
 GET /kardemommeby/
 Host: {{host}}
 
-###
-
+### PostDocument
 POST /kardemommeby
 Host: {{host}}
 Content-Type: application/json
@@ -39,9 +36,7 @@ Content-Type: application/json
     "bosted" : "Røverhuset"
 }
 
-###
-
-
+### CreateDocumentsInBulk
 POST /kardemommeby/_bulk_docs
 Host: {{host}}
 Content-Type: application/json
@@ -106,21 +101,18 @@ Content-Type: application/json
    ]
 }
 
-###
-
+### GetAllDocuments
 GET /kardemommeby/_all_docs
 Host: {{host}}
 
-###
+### GetSpecificDocument
 
-# Erstatt verdiene med de som er generert av databasen
-@id = a3181f807fff559431e47a99bf000b9e
-@rev = 1-1c261999c283edcb75f0c4201bd67872
+# Erstatt verdiene for id og rev med de som er generert av databasen i filen http-client.env.json
 
 GET /kardemommeby/{{id}}
 Host: {{host}}
 
-###
+### UpdateDocument
 PUT /kardemommeby/{{id}}
 Host: {{host}}
 Content-Type: application/json
@@ -138,8 +130,7 @@ Content-Type: application/json
 }
 
 
-###
-
+### FindDocument
 POST /kardemommeby/_find
 Host: {{host}}
 Content-Type: application/json
@@ -152,8 +143,7 @@ Content-Type: application/json
     "fields": [ "_id", "_rev", "navn" ]
 }
 
-###
-
+### CreateIndex
 POST /kardemommeby/_index
 Host: {{host}}
 Content-Type: application/json
