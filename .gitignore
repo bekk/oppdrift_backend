@@ -4,3 +4,4 @@ node_modules/
 obj/
 bin/
 .vscode
+*.DotSettings.user
