@@ -6,4 +6,4 @@ Nettverk og arkitektur
 
 - [Node-øvelser](./node-%C3%B8velser.md)
 - [Nytt prosjekt](./nytt-prosjekt.md)
-- [Arkitektur-workshop](https://github.com/henriwi/clean-architecture)
+- [Arkitektur-workshop](https://github.com/oddsund/clean-architecture)
