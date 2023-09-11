@@ -54,6 +54,10 @@ Alternatively, the `<meta>` element can be used to configure a policy.
 - [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
 - [HTTPS](https://developer.mozilla.org/en-US/docs/Glossary/HTTPS)
 
+Her er en som bruker Accept header fra klient for å bestemme om server skal returnere rik HTML eller plain CSV, for samme lenke;
+
+- [How does it know I want csv? — An HTTP trick](https://csvbase.com/blog/2)
+
 ### TCP/IP
 
 - _UDP_: User Datagram Protocol 
