@@ -11,7 +11,13 @@ Nettverk og arkitektur
 - [Nytt prosjekt](./nytt-prosjekt.md)
 - [Arkitektur-workshop](https://github.com/oddsund/clean-architecture)
 
+![Parprogrammering anbefales](../img/Parprogrammering.png)
+
 ## Ressurser
+
+### HTTP
+
+- [Historikk](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Evolution_of_HTTP)
 
 ### Uri
 

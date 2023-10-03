@@ -8,3 +8,5 @@ Rammeverk og deployment
 - [.NET](./dotnet/README.md)
 - [Deploy med Fly.io](./deploy-fly.md)
 - [Ktor, getting started](https://ktor.io/docs/intellij-idea.html)
+
+![Parprogrammering anbefales](../img/Parprogrammering.png)

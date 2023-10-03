@@ -13,6 +13,8 @@ Databaser og patterns
 1. [SQL-workshop](https://bekk.github.io/oppdrift_backend/sql/oppgaver)
 1. [Database integrasjon](./database-integrasjon.md)
 
+![Parprogrammering anbefales](../img/Parprogrammering.png)
+
 ## Ressurser
 
 ### Docker
