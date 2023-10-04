@@ -3,7 +3,7 @@ Open Data Protocol
 
 ![Logo](../img/odata_logo.jpeg)
 
-Prøv ut stegene i https://www.odata.org/getting-started/understand-odata-in-6-steps/ ved å bruke REST-client i IntelliJ eller PostMan.
+Prøv ut stegene i https://www.odata.org/getting-started/understand-odata-in-6-steps/ ved å bruke REST-client i IntelliJ eller Curl (eller en annen klient).
 
 GraphQL
 =====

@@ -40,4 +40,6 @@ function sendToSockets(txt){
     sockets.forEach((s) => s.send(txt));
 }
 
+console.info("Listening to http://localhost:8080/");
+
 apiServer.listen(8080);

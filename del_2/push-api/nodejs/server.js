@@ -40,6 +40,8 @@ app.get('/api/publicKey', (req, res) => {
     res.send(vapidKeys.publicKey);
 })
 
+console.info("Listening to http://localhost:8080/");
+
 app.listen(8080);
 
 const subscriptions = [];

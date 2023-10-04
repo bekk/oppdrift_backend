@@ -35,7 +35,9 @@ Testing og API-design
 
 - [Dokumentasjon](https://jsonapi.org/)
 - [Eksempel på et bibliotek](https://github.com/MarkoMilos/jsonapi)
-- [Eksempel på bruk](https://api.tvmaze.com/shows/431)
+- [Eksempel på bruk](https://occapi.uni-foundation.eu/occapi/v1/)
+- [Eksempel på delvis bruk](https://api.tvmaze.com/shows/431)
+- [HAL (en elternativ standard)](https://stateless.group/hal_specification.html)
 
 ### OpenAPI (Swagger)
 
@@ -65,6 +67,7 @@ Testing og API-design
 - [Wikipedia: SOAP](https://en.wikipedia.org/wiki/SOAP)
 - [Wikpedia: WSDL](https://en.wikipedia.org/wiki/Web_Services_Description_Language)
 - [Eksempel](https://apps.learnwebservices.com/services/hello?WSDL)
+- [SoapUI er det beste verktøyet for å jobbe med SOAP](https://www.soapui.org/)
 
 ### Push
 
@@ -92,6 +95,7 @@ Testing og API-design
 - [Resource naming](https://restfulapi.net/resource-naming/)
 - [MDN: HTTP methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
 - [Method definitions](https://httpwg.org/specs/rfc9110.html#rfc.section.9.3)
+- [JSON Patch; en standard for patch-meldinger](https://jsonpatch.com/)
 
 ### Testing
 

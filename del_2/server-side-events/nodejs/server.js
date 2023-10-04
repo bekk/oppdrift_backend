@@ -35,4 +35,6 @@ const apiServer = http.createServer((request, response) => {
 
 let clients = [];
 
+console.info("Listening to http://localhost:8080/");
+
 apiServer.listen(8080);
