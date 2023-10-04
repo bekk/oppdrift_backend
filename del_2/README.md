@@ -61,6 +61,7 @@ Testing og API-design
 - [RFC9111](https://httpwg.org/specs/rfc9111.html)
 - [Caching tutorial](https://www.mnot.net/cache_docs/)
 - [Caching strategies](https://codeahoy.com/2017/08/11/caching-strategies-and-how-to-choose-the-right-one/)
+- [Et eksempel på at caching skaper økt kompleksitet, og at også det kan gå galt](https://www.kode24.no/artikkel/sann-fiksa-vg-utviklerne-valgtrobbelet-det-skar-seg-sa-voldsomt/80202419)
 
 ### SOAP
 
