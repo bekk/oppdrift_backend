@@ -15,6 +15,18 @@ Nettverk og arkitektur
 
 ## Ressurser
 
+### HTTP-klienter
+
+Noen verktøy for å teste API-er og kalle http-endepunkt.
+
+- [RapidAPI](https://paw.cloud/)
+- [Insomnia](https://app.insomnia.rest/)
+- [Curl](https://curl.se/docs/manpage.html)
+- [httpie](https://httpie.io/)
+- [IntelliJ](https://www.jetbrains.com/help/idea/http-client-in-product-code-editor.html)
+- [VsCode](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+- [Postman](https://www.postman.com/)
+
 ### HTTP
 
 - [Historikk](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Evolution_of_HTTP)

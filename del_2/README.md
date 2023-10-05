@@ -96,6 +96,10 @@ Testing og API-design
 - [Resource naming](https://restfulapi.net/resource-naming/)
 - [MDN: HTTP methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
 - [Method definitions](https://httpwg.org/specs/rfc9110.html#rfc.section.9.3)
+- [En streng definisjon (Roy T. Fielding)](https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven)
+- [Pragamatic REST](https://www.ben-morris.com/pragmatic-rest-apis-without-hypermedia-and-hateoas/)
+- [The REST of the ten commandments](https://hackernoon.com/the-rest-of-the-10-commandments?ref=hackernoon.com)
+- [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS)
 - [JSON Patch; en standard for patch-meldinger](https://jsonpatch.com/)
 
 ### Testing
