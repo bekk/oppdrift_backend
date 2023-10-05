@@ -1,40 +1,58 @@
-﻿Kodekata Bowling-kalkulator
-===========================
+﻿# Kodekata Bowling-kalkulator
+
+Denne oppgaven er hentet fra [Coding Dojo](http://codingdojo.org/kata/Bowling/). Kataen er ment som en introduksjon til TDD og parprogrammering. Husk rekkefølgen; test først, så kode, så refaktorer.
+
+## Rules:
+- Hver kamp med bowling inkluderer ti runder, eller "ruter" for bowleren.
+- I hvert rute får bowleren opptil to forsøk på å slå ned alle pinnene.
+- Hvis bowleren over to forsøk ikke klarer å slå ned alle pinnene, er poengsummen for den ruten summen av antall pinner som ble slått ned i de to forsøkene.
+- Hvis bowleren over to forsøk slår ned alle pinnene, kalles dette en "spare" og poengsummen for ruten er ti pluss antall pinner som ble slått ned på neste forsøk 
+  (i neste runde).
+- Hvis bowleren på første forsøk i ruten slår ned alle pinnene, kalles dette en "strike". 
+  Turen er over, og poengsummen for ruten er ti pluss summen av antall pinner som ble slått ned i de to neste forsøkene.
+- Hvis bowleren får en spare eller strike i siste (tiende) rute, får bowleren lov til å kaste en eller to ekstra bonuskuler. 
+  Disse bonuskastene tas som en del av samme tur. Hvis bonuskastene slår ned alle pinnene, gjentas ikke prosessen: 
+  bonuskastene brukes bare til å beregne poengsummen for den siste ruten.
+- Poengsummen for kampen er summen av alle rutesummene.
 
 
-# Rules:
-- Each game, or “line” of bowling, includes ten turns, or “frames” for the bowler.
-- In each frame, the bowler gets up to two tries to knock down all the pins.
-- If in two tries, he fails to knock them all down, his score for that frame is the total number of pins knocked down in his two tries.
-- If in two tries he knocks them all down, this is called a “spare” and his score for the frame is ten plus the number of pins knocked down on his next throw 
-  (in his next turn).
-- If on his first try in the frame he knocks down all the pins, this is called a “strike”. 
-  His turn is over, and his score for the frame is ten plus the simple total of the pins knocked down in his next two rolls.
-- If he gets a spare or strike in the last (tenth) frame, the bowler gets to throw one or two more bonus balls, respectively. 
-  These bonus throws are taken as part of the same turn. If the bonus throws knock down all the pins, the process does not repeat: 
-  the bonus throws are only used to calculate the score of the final frame.
-- The game score is the total of all frame scores.
+## Tegnforklaring
+- `X` = Strike
+- `/` = Spare
+- `-` = Miss
+- Tall = antall kjegler slått ned
 
+## Anbefalt avhengighet
 
-# Legend
-When scoring `X` indicates a strike, `/` indicates a spare, `-` indicates a miss
+Følgende avhengighet er anbefalt å legge i `build.gradle.kts`, slik at du får test runner og matchers:
 
+```kotlin
+    testImplementation(kotlin("test"))
+```
 
-#Test cases
-1. Gutter game = all zeroes, (score = 0)
-   `--------------------`
-2. One pin down in each roll, (score = 20)
-   `11111111111111111111`
-3. Spare in first roll, one pin down in each other roll, (score = 10 + 1 + 18 = 29)
-   `9/111111111111111111`
-4. Spare in last roll, one pin down in each other roll, (score = 18 + 10 + 1 = 29)
-   `1111111111111111111/1`
-5. Strike in first roll, one pin down in each other roll, (score = 10 + 1 + 1 + 18 = 30)
-   `X111111111111111111`
-6. Strike in last roll, one pin down in each other roll, (score = 18 + 10 + 1 + 1 = 30)
-   `111111111111111111X11`
-7. Golden game = all strikes (score = 300)
-   `XXXXXXXXXXXX`
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExODk3NzE0MTNdfQ==
--->
+## Test cases
+1. Gutter game = bare nuller
+
+   `--------------------` = (score = 0)
+2. En kjegle ned i hver rute 
+
+   `11111111111111111111` = (score = 20)
+3. Spare i første rute, en kjegle ned i resten
+
+   `9/111111111111111111` = (score = 10 + 1 + 18 = 29)
+4. Spare i siste rute, en kjegle ned i resten av rutene og med bonusrull
+
+   `1111111111111111111/1` = (score = 18 + 10 + 1 = 29)
+5. Strike i første rute, en kjegle ned i resten
+
+    `X111111111111111111` = (score = 10 + 1 + 1 + 18 = 30)
+6. Strike i siste rute, en kjegle ned i resten av rutene og med hver bonuskule
+   
+    `111111111111111111X11` = (score = 18 + 10 + 1 + 1 = 30)
+7. Golden game = strikes i alle ruter
+   
+    `XXXXXXXXXXXX` = (score = 300)
+
+8. Tilfeldig runde
+
+    `X7/9-X-88/-6XXX81` = (score = 167)

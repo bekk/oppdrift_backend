@@ -1,6 +1,16 @@
 # Roman numerals
 
-Skriv en test for en romertallkalkulator:
+Dette er en kata for å trene på TDD og parprogrammering. Kataen er ment som en introduksjon til TDD og parprogrammering. Husk rekkefølgen; test først, så kode, så refaktorer.
+
+Skriv en test for en romertallkalkulator. Her må reglene utledes fra spesifikasjonen lenger ned. Lykke til!
+
+## Anbefalt avhengighet
+
+Følgende avhengighet er anbefalt å legge i `build.gradle.kts`, slik at du får test runner og matchers:
+
+```kotlin
+    testImplementation(kotlin("test"))
+```
 
 ## Test
 
