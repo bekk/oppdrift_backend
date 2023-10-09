@@ -27,7 +27,7 @@ docker run --rm hello-world
 ### Programmeringsspråk
 
 - https://octoverse.github.com/2022/top-programming-languages
-- [Jetbrains: The state of developer Ecosystem 2022](https://www.jetbrains.com/lp/devecosystem-2022/?source=google&medium=cpc&campaign=19867226536&term=popular%20coding%20languages&content=651996376779&gclid=CjwKCAjw3ueiBhBmEiwA4BhspAAeBUbQBCMcaquwC9gHOQhT7vukB_9BZomSbpGXw-FMFn56MVxL2hoCkFUQAvD_BwE)
+- [Jetbrains: The state of developer Ecosystem 2022](https://www.jetbrains.com/lp/devecosystem-2022/)
 - [Kombinere funksjonell og imperativ kode](https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell)
 - [Idiomatisk](https://ordbokene.no/bm,nn/search?q=idiomatisk&scope=ei)
 
@@ -96,3 +96,4 @@ docker run --rm hello-world
 
 - [Normalformer](https://en.wikipedia.org/wiki/Database_normalization#Normal_forms)
 - [SQL](https://en.wikipedia.org/wiki/SQL)
+- [SQL-PD](https://sqlpd.com/)

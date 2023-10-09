@@ -44,6 +44,7 @@ Testing og API-design
 - [Wikipedia](https://en.wikipedia.org/wiki/OpenAPI_Specification)
 - [😻](https://catfact.ninja)
 - [Eksempel fra SVV](https://nvdbrapportapi.atlas.vegvesen.no/swagger-ui/)
+- [Barnehagefakta](987117575)
 - [Eksempel på bruk i Kotlin](https://www.baeldung.com/kotlin/swagger-spring-rest-api)
 
 ### Versjonering
@@ -78,6 +79,7 @@ Testing og API-design
 - [En forklaring på Server side events](https://www.neerajsidhaye.com/posts/sse/sse/)
 - [MDN: Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API)
 - [W3C Working draft: Push API](https://www.w3.org/TR/push-api/)
+- [ngrok](https://ngrok.com/)
 
 ### gRPC
 
