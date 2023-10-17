@@ -108,6 +108,7 @@ Testing og API-design
 
 - [Glossary](https://glossary.istqb.org/en_US/search)
 - [En oppsummering av manuell testing](https://www.simplilearn.com/manual-testing-article)
+- [Dan North: We need to talk about testing](https://dannorth.net/we-need-to-talk-about-testing/)
 - [Enhetstester men ingen integrasjonstest (⍶)](https://twitter.com/timbray/status/822470746773409794)
 - [Enhetstester men ingen integrasjonstest (β)](https://www.foobarton.com/images/twounitnointegration.gif)
 - [Enhetstester men ingen integrasjonstest (ɣ)](https://danielhall.io/what-about-unit-tests)
