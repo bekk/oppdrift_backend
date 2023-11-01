@@ -139,3 +139,49 @@ Testing og API-design
 - http://codekata.com/
 - https://codingdojo.org/kata/
 - https://github.com/gamontal/awesome-katas
+
+---
+
+```mermaid
+mindmap
+  root(Tredje økt 🧭)
+    API
+      BFF
+      Dokumentasjon
+        json:api
+        OpenAPI
+      Versjonering
+      Caching
+      Protokoller
+        RPC
+            SOAP
+            gRPC
+        Data
+            OData
+            GraphQL
+        Push
+            Web socket
+            Server Side events
+            Push-API
+        REST
+            HTTP
+            Resources
+            Verbs
+            Hypermedia
+    Testing
+      Manuell testing
+      Automatisert UI-testing
+      Integrasjonstesting
+      Ytelsestesting
+    Enhetstesting
+        Verktøy
+        Prinsipper
+        Unngå avhengigheter
+        Mocking
+        Måling
+        AAA
+    TDD
+        Driver-Navigator
+        Red-Green-Refactor
+    Kodekata
+```
