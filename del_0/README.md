@@ -19,6 +19,7 @@ Nettverk og arkitektur
 
 Noen verktøy for å teste API-er og kalle http-endepunkt.
 
+- [Bruno](https://www.usebruno.com/)
 - [RapidAPI](https://paw.cloud/)
 - [Insomnia](https://app.insomnia.rest/)
 - [Curl](https://curl.se/docs/manpage.html)

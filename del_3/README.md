@@ -15,6 +15,10 @@ Rammeverk og deployment
 
 ## Ressurser
 
+### Bygg
+
+- [Transpilering (source-to-source compiler)](https://en.wikipedia.org/wiki/Source-to-source_compiler)
+
 ### Byggsystem
 
 - [Gradle](https://gradle.org/)
@@ -39,3 +43,5 @@ Rammeverk og deployment
 ### Continous Integration, Delivery, Deployment
 
 - [Forklaring](https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment)
+
+- [The mother of all demo apps](https://codebase.show/projects/realworld)
