@@ -8,8 +8,14 @@ Rammeverk og deployment
 
 - [Bygg en JAR](./jar.md)
 - [.NET](./dotnet/README.md)
-- [Deploy med Fly.io](./deploy-fly.md)
 - [Ktor, getting started](https://ktor.io/docs/intellij-idea.html)
+
+En av disse to, eller begge!
+
+- [Deploy med Fly.io](./deploy-fly.md)
+- [GitHub Actions Workshop by GitHub](https://github.com/actions-workshop/actions-workshop)
+  
+  Hvis du kjenner til Github Actions, kan du hoppe over del 1. Del 2, 3 og 4 er verdt en titt uansett erfaring med Github Actions - om enn bare for inspirasjon til hva dere kan gjøre i deres egne byggpipelines.
 
 ![Parprogrammering anbefales](../img/Parprogrammering.png)
 
