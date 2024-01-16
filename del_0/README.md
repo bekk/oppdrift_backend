@@ -35,7 +35,7 @@ Noen verktøy for å teste API-er og kalle http-endepunkt.
 ### Uri
 
 - [Syntax](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#Syntax)
-- [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986)
+- [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986), ([Om bruk av URI foran URN og URL](https://datatracker.ietf.org/doc/html/rfc3986#page-7))
 - [URL](https://url.spec.whatwg.org/)
 - [RFC 3987 (IRI)](https://www.rfc-editor.org/rfc/rfc3987)
 
@@ -47,6 +47,7 @@ Noen verktøy for å teste API-er og kalle http-endepunkt.
 
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
 - https://httpwg.org/specs/rfc9110.html#rfc.section.9.3
+- [QUERY](https://www.w3.org/2012/ldp/wiki/Proposal_for_HTTP_QUERY_Verb)
 
 ### Response status codes
 
@@ -99,7 +100,13 @@ TCP gikk i produksjon første gang i januar 1983.
 
 ### DNS
 
-Hostfil: `/etc/hosts` `C:\Windows\System32\drivers\etc\hosts`
+Hostfil: 🍏`/etc/hosts` 🪟`C:\Windows\System32\drivers\etc\hosts`
+
+### Arkitektur
+
+- [Shearing layers](https://en.wikipedia.org/wiki/Shearing_layers)
+- [C4](https://c4model.com/)
+- [4+1 architectural view](https://en.wikipedia.org/wiki/4%2B1_architectural_view_model)
 
 ### Kompleksitet
 
