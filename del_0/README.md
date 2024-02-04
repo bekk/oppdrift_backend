@@ -74,6 +74,7 @@ Alternatively, the `<meta>` element can be used to configure a policy.
 - [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
 - [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
 - [HTTPS](https://developer.mozilla.org/en-US/docs/Glossary/HTTPS)
+- [How SSL works](https://www.tutorialsteacher.com/https/how-ssl-works)
 
 Her er en som bruker Accept header fra klient for å bestemme om server skal returnere rik HTML eller plain CSV, for samme lenke;
 
@@ -132,3 +133,50 @@ Også kalt «ikke-funksjonelle krav»
 - [N-Tier (Microsoft)](https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/n-tier)
 - [N-Tier (Wikipedia)](https://en.wikipedia.org/wiki/Multitier_architecture)
 - https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)
+
+---
+
+
+```mermaid
+mindmap
+  root(Første økt 🧭)
+    Nettverk
+        URI
+        HTTP
+            Request/Response
+            Methods
+            Status codes
+            Content type
+                Negotiation
+                MIME
+            Cookies
+            SSL
+        TCP/IP
+            Wireshark
+            DNS
+            TCP Handshake
+    Kotlin
+        Nytt prosjekt
+        Clean Architecture
+    Hva er Backend?
+        Hva er en server?
+    Arkitektur
+        Hva er arkitektur?
+        Shearing layers
+        Abstraksjonsnivåer
+        Viewpoints
+        Balansen kvalitet/kost 
+        Kvalitetskrav
+        Bærekraft
+        DDD
+        Arketypiske arkitekturer
+            N-Tier
+            Vertikal slicing
+            Microservices
+            CQRS
+            Eventdriven
+            Messaging/Actors
+            Onion
+        Clean architecture
+        
+```

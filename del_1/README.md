@@ -97,3 +97,43 @@ docker run --rm hello-world
 - [Normalformer](https://en.wikipedia.org/wiki/Database_normalization#Normal_forms)
 - [SQL](https://en.wikipedia.org/wiki/SQL)
 - [SQL-PD](https://sqlpd.com/)
+
+---
+
+
+```mermaid
+mindmap
+  root(Andre økt 🧭)
+    Docker 101
+    Språk og idiomatisk kode
+    Kodehåndtverk
+        Code smell
+        Refactoring
+        Objektorientering
+            Prosedyre vs OO
+            SOLID
+            Design patterns
+                Gang of Four
+                Facade
+                Factory
+                Singleton
+                Proxy
+                State Machine
+    Data
+        Databasetyper
+            Grafdatabaser
+            OLAP
+            Dokumentdatabaser
+            Relasjonsdatabaser
+        SQL
+            Processing order
+            Keys + Constraints
+            Join
+            Index
+            Transactions/Atomicity
+            Normalisering
+            Execution plan
+        ORM
+        Migrasjoner
+        
+```

@@ -9,8 +9,7 @@ For å starte og stoppe containere på Mac og Windows, må noe installeres.
 
 ![Docker logo](../img/docker/Docker_(container_engine)_logo.png)
 
-For de med lisens, kan [_Docker Desktop_ installeres herfra](https://www.docker.com/products/docker-desktop/).
-
+For de med betalt lisens, kan [_Docker Desktop_ installeres herfra](https://www.docker.com/products/docker-desktop/).
 
 ### Colima (for Mac)
 
@@ -57,13 +56,28 @@ sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
 ```
 
-### Podman (Windows)
+### Podman
+
+![Podman logo](../img/podman_logo.svg)
 
 Posman er et alternativ til docker, som tilbyr et gui. Den er avhengig av at
 WSL er installert, men kan installere det for deg.
 
 - [Github](https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md)
 - [Webside med installer](https://podman.io/)
+
+Også tilgjengelig med [Homebrew](https://brew.sh/):
+
+```console
+brew install podman-desktop
+```
+eller [Winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/):
+
+```console
+winget install -e --id RedHat.Podman-Desktop
+```
+
+
 
 ---
 
@@ -174,3 +188,14 @@ For å fjerne alle ubrukte image:
 ```console
 docker image prune
 ```
+
+## Platform /arkitektur
+
+Det kan hende du må legge til `--platform` som argument 
+til `create` og `run`. For eksempel for nye Mac-er spesifisereres 
+`--platform linux/amd64`.
+
+Om dette er spesifisert er avhengig av hvilken platform 
+image-et ble bygget for, og hva slags maskin det skal kjøres på.
+
+Tilgjengelige arkitekturer er [listet opp her](https://github.com/docker-library/official-images#user-content-architectures-other-than-amd64).
