@@ -133,7 +133,9 @@ Også kalt «ikke-funksjonelle krav»
 - [N-Tier (Microsoft)](https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/n-tier)
 - [N-Tier (Wikipedia)](https://en.wikipedia.org/wiki/Multitier_architecture)
 - https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)
-
+- [API-First](https://www.nginx.com/resources/glossary/api-first/)
+- [Headless](https://en.wikipedia.org/wiki/Headless_software)
+- [PBC (Packaged Business Capabilities)](https://www.elasticpath.com/blog/what-are-packaged-business-capablities)
 ---
 
 

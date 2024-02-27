@@ -85,6 +85,7 @@ Testing og API-design
 
 - [Introduksjon](https://grpc.io/docs/what-is-grpc/introduction/)
 - [Wikipedia](https://en.wikipedia.org/wiki/GRPC)
+- [gRPC web](https://grpc.io/docs/platforms/web/)
 
 ### Data API
 

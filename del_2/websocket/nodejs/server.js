@@ -1,6 +1,9 @@
 const WebSocket = require("ws");
-const serveHandler = require("serve-handler");
 const http = require("http");
+
+const port = 8080;
+
+const serveHandler = require("serve-handler");
 
 const staticFiles = { public: "./static/" };
 
@@ -33,13 +36,13 @@ socketServer.on("connection", (socket, req) => {
 
   socket.on("close", () => (sockets = sockets.filter((s) => s !== socket)));
 
-  socket.onerror = (e) => console.log(`Some error: ${e}`);
+  socket.onerror = (e) => console.error(`Some error: ${e}`);
 });
 
 function sendToSockets(txt){
     sockets.forEach((s) => s.send(txt));
 }
 
-console.info("Listening to http://localhost:8080/");
+console.info(`Listening to http://localhost:${port}/`);
 
-apiServer.listen(8080);
+apiServer.listen(port);
