@@ -145,4 +145,4 @@ Oppdater `src/main/resources/application.properties` med følgende for å lagre 
 
 ## Videre arbeid
 
-Fortsett med oppgavene fra [del 1 - nytt prosjekt](nytt-prosjekt.md) og bruk det du har lært om databaser.
+Fortsett med oppgavene fra [del 1 - nytt prosjekt](../del_0/nytt-prosjekt.md) og bruk det du har lært om databaser.

@@ -125,11 +125,11 @@ Bruk det du har lært om `DataSource` for å implementere metodene:
 ```kotlin
 @Repository
 class UserRepository(val dataSource: DataSource) {
-    fun getUsers(): List<User>  // En metode som returnerer alle brukerne
-    fun getUser(): User?        // En metode som returnerer en enkelt bruker
-    fun addUser(user: User)     // En metode som legger til en bruker
-    fun removeUser(id: Int)     // En metode som fjerner en bruker baser på id
-    fun updateUser(user: User)  // En metode som oppdaterer en bruker
+    fun getUsers(): List<User> = TODO()  // En metode som returnerer alle brukerne
+    fun getUser(): User?  = TODO()  // En metode som returnerer en enkelt bruker
+    fun addUser(user: User): Unit = TODO()  // En metode som legger til en bruker
+    fun removeUser(id: Int): Unit = TODO()  // En metode som fjerner en bruker baser på id
+    fun updateUser(user: User): Unit = TODO()  // En metode som oppdaterer en bruker
 }
 ```
 
