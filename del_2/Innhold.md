@@ -2,9 +2,9 @@
 
 Innholdet i denne økten består i hovedak av to deler; API-design og testing.
 
-[Presentasjon](https://github.com/bekk/oppdrift_backend/blob/main/del_2/Kurspresentasjon_2.pptx)
-
 ## API-design
+
+![Api](../img/tema_api.png)
 
 API (_Application Programming Interface_) er utvilsomt et sentralt begrep for
 backend-programmering. Vi bruker gjerne også «API» i sammenhenger der vi mener 
@@ -307,6 +307,8 @@ Man kan bruke query-parametre for å implementere søk/filtrering, paginering og
 
 ## Testing
 
+![Testing](../img/tema_testing.png)
+
 ### Testtyper
 
 Det finnes mange typer testing. Et forsøk på en [liste finnes her](https://glossary.istqb.org/en_US/search).
@@ -324,6 +326,371 @@ Dette er testing av løsningen som gjøres manuelt, ved å simulere brukere og f
 Utviklere er notorisk dårlige til å finne feil i egen kode, så litt av hensikten er at det er
 noen som ikke kjenner til hvordan funksjonaliteten er utviklet som kan avsløre svakheter.
 
+Manuell testing kan være satt opp slik at det innebærer en kvalitetskontroll av koden før den blir
+integrert eller produksjonsatt. Det kan bety at det sinker produksjonstakten, siden ingen kode kan
+bli ferdig før en ledig tester har sett på det.
+Noen snakker derfor om at manuell testing må skje tidligere i utviklingsløpet, tettere på selve utviklingen.
+Dette prinsippet kalles gjerne «shift left».
+
 - [En oppsummering av manuell testing](https://www.simplilearn.com/manual-testing-article)
 - [Dan North: We need to talk about testing](https://dannorth.net/we-need-to-talk-about-testing/)
 
+### Ny og gammel modell for programvareutvikling
+
+Tidligere var prosjektmodellen for programvareutvikling preget av at det var kostbart å få programvare ut til 
+brukerne. Et overordnet fokus blir derfor å redusere feil i alle ledd, så det ikke kommer feil i produksjon.
+Feilretting i produksjon vil være svært kostbart. 
+Det blir derfor naturlig med tydelige faser, der man etter hver fase overleverer dokumentasjon eller kode
+til neste fase. Vi kaller ofte en slik modell «fossefallsmodell», fordi hver fase kan ses på som ulike
+platåer, der produktet renner nedover fra fase til fase.
+
+En sentral metrikk er *bugs/line of code*.
+
+En mer moderne prosjektmodell drar fordel av at selve produksjonsettingen er blitt mye billigere.
+Det er fokus på å redusere tiden en funksjon bruker fra den er definert og prioritert til den er ute hos brukerne.
+Vi kaller dette for «ledetid». For å få denne ned, er det nørvendig å automatisere alle trinn og unngå overleveringer.
+Derfor blir det også mindre aktuelt med prosjektfaser.
+
+En sentral metrikk er *mean time to repair*.
+
+### Automatisert UI-testing
+
+Automatisert testing av web-grensesnitt har to ulike formål:
+
+#### Å kontrollere at løsningen fungerer på alle nettlesere og plattformer
+
+Til dette brukes vanligvis tjenester som kan kjøre opp løsningen i mange ulike nettlesere.
+
+- [BrowserStack](https://www.browserstack.com/)
+- [Autify](https://autify.com/)
+- [QA Wolf](https://www.qawolf.com/)
+- [TestGrid](https://testgrid.io/)
+- [Browserling](https://www.browserling.com/)
+
+#### Automatisering av nettleser
+
+Dette er typisk for å kjøre automatiserte  integrasjonstester eller ende-til-ende-tester 
+som går gjennom brukergrensesnittet (i motsetning til å bruke API-et direkte).
+
+- [Selenium](https://www.selenium.dev/)
+- [Cypress](https://www.cypress.io/)
+- [Playwright](https://playwright.dev/)
+
+### Integrasjonstester
+
+Integrasjonstester er tester som inkluderer systemer som er integrert (i motsetning til enhetstester).
+Det kan plukke opp svakheter som oppstor i samspillet mellom to moduler eller systemer som enhetstester 
+ikke plukker opp.
+
+- [Wikipedia](https://en.wikipedia.org/wiki/Integration_testing)
+- [Enhetstester men ingen integrasjonstest (⍶)](https://twitter.com/timbray/status/822470746773409794)
+- [Enhetstester men ingen integrasjonstest (β)](https://www.foobarton.com/images/twounitnointegration.gif)
+- [Enhetstester men ingen integrasjonstest (ɣ)](https://danielhall.io/what-about-unit-tests)
+
+### Ytelsestester
+
+Ytelsestester er automatiserte tester som simulerer mange brukere og høy trafikk for å 
+verifisere at systemet tåler høy last.
+
+- [Verktøy for ytelsestesting](https://www.techrepublic.com/article/load-testing-tools/)
+- [Nok en liste](https://testguild.com/load-testing-tools/)
+
+### BDD
+
+«Behaviour Driven Development» tar i bruk testrammeverk som kan beskrive et funksjonelt krav eller
+scenario som en kjørbar test.
+
+Tanken er at forretningseier og fageksperter kan definere tester som beskriver systemets oppførsel,
+ved å bruke sitt eget språk.
+
+- [Introducing BDD (Dan North)](https://dannorth.net/introducing-bdd/)
+- [Wikipedia](https://en.wikipedia.org/wiki/Behavior-driven_development)
+- [Cucumber](https://cucumber.io/)
+- [Specflow](https://specflow.org/)
+- [Reqnroll](https://github.com/reqnroll/Reqnroll)
+- [Concordion](https://concordion.org/)
+- [JBehave](https://jbehave.org/)
+- [Zephyr Enterprise](https://smartbear.com/test-management/zephyr-enterprise/?utm_medium=paid_listing&utm_source=sth&utm_campaign=best-bdd-tools-ze)
+- [Fitnesse](https://fitnesse.org/)
+
+## Enhetstester
+
+Enhetstester (unit test) er tester som verifiserer og dokumenterer koden.
+Den tester en enhet (unit) i isolasjon ved å kalle metoder med gitte parametre og
+verifisere at resultatet stemmer med forventninger. En enhetstest kan også verifisere
+at avhengige moduler har blitt kalt med gitte argumenter.
+
+### Hva er en «enhet»?
+
+Det vanligste er at en enhet (i sammenheng med enhetstester) er én klasse eller funksjon.
+Den tester kun et public api av klassen (alle public metoder), og er i minst mulig grad avhengig
+av de interne implementasjonsdetaljene.
+
+Det kan også være hensiktsmessig å definere en gruppe av klasser som en enhet, og teste 
+disse under ett.
+
+### Testverktøy
+
+De viktigste komponentene i enhetstesting er:
+
+#### Testrammeverk (test framework)
+
+Dette er et bibliotek du referer til i testprosjektet. Det har støtte for å annotere testmetoder
+og metoder for å sette opp og rive ned avhengigheter. Det har også metoder for å
+verifisere resultat (assertions).
+
+#### Test runner
+
+Dette er et program som er i stand til å finne de annoterte testmetodene, kjøre dem og vise
+resultatet. Dette kan være integrert i IDE-en, eller være frittstående program.
+
+Det er også en del av byggeservere, så man kan kjøre tester før de blir deployert.
+
+#### Enhet (unit)
+
+Dette er den delen av koden som skal testes. Det er alltid kun én enhet per test.
+Dette kalles også «System Under Test» (SUT).
+
+#### Enhetstest (unit test)
+
+Dette er metoden som tester enheten. Det er vanlig å lage en test-klasse per enhet, og 
+samle metodene som tester den der (men dette vil være avhengig av språk og rammeverk man velger).
+
+#### Mocking framework
+
+Dette er bibliotek man kan ta i bruk for å gjøre det lettere å bytte ut avhengigheter i
+enheten med testklasser (test doubles).
+
+### Testrammeverk
+
+Hvilket rammeverk man velger vil være avhengig av språk og plattform koden kjører på.
+
+- [JUnit 5](https://junit.org/junit5/)
+- [TestNG](https://testng.org/)
+- [MockK](https://mockk.io/)
+- [Mockito](https://site.mockito.org/)
+- [NUnit](https://nunit.org/)
+- [xUnit](https://xunit.net/)
+- [NCrunch](https://www.ncrunch.net/)
+- [MSTest](https://github.com/microsoft/testfx)
+- [Moq](https://github.com/devlooped/moq)
+- [NSubstitute](https://nsubstitute.github.io/)
+
+### Prinsipper for gode tester
+
+En huskeregel for enhetstester er [FIRST](https://agileinaflash.blogspot.com/2009/02/first.html):
+
+- **Fast**: Testene må være raske, slik at de blir kjørt ofte. En konsekvens er at de ikke bør ha avhengigheter på IO av noe slag.
+- **Isolated**: En test må bare kunne feile av en grunn. Det betyr at når den feiler er det åpenbart hva som forårsaket det. Navnet på testen skal også beskrive dette.
+- **Repeatable**: Testen skal gi det samme resultat hver gang. Det betyr at den ikke bør være avhengig av eksterne systemer. Den må heller ikke være avhengig av andre tester, og rekkefølgen de kjøres i. Man må også være forsiktig med å bruke tilfeldige og flyktige variabler i testen.
+- **Self-Validating**: En test enten passerer eller feiler; det er aldri behov for å vurdere utfallet av en test.
+- **Timely**: Testen skal skrives til rett tid. Dvs umiddelbart før koden den tester blir skrevet.
+
+Et sett av slike tester skal kunne kjøres ofte og gi en trygghet om at koden fungerer slik det er forventet.
+Testene kan derfor fungere sopm en dokumentasjon på produksjonskodens oppførsel.
+
+- [Pragmatic Programmers](https://medium.com/pragmatic-programmers/unit-tests-are-first-fast-isolated-repeatable-self-verifying-and-timely-a83e8070698e)
+
+### Unngå eksterne avhengigheter
+
+For at testene skal være konsistente og raske, er det essensielt å fjerne alle avhengigheter som
+kan ødelegge dette.
+
+Det er typisk ting som databaser, filsystemet (for eksempel konfigurasjonsfiler), kall til nettverket
+eller interop til andre prosesser.
+
+Dette er bare mulig om man bruker IoC.
+
+### To retninger for isolasjon
+
+Det er to hovedskoler for isolasjon i enhetstesting.
+
+Enten kan man isolere det man tester ved å mocke alle avhengigheter (London-skolen), eller så kan man
+isolere testen og kun mocke delte avhengigheter (Detroit-skolen). I det siste tilfellet tester man gjerne 
+større enheter.
+
+Fordelen med den første tilnærmingen er at det er lettere å lage raske enkle tester.
+Fordelen med den andre er at testene kan defineres på et litt høyere (ikke fullt så kodenært) nivå.
+Det gjør at det ikke blir nødvendig å gjøre så mye endringer i testene om man refaktorerer koden.
+
+- [London og Detroit](https://softwareengineering.stackexchange.com/questions/123627/what-are-the-london-and-chicago-schools-of-tdd#123672)
+
+### Mocking
+
+Mocking er prosessen der vi bytter ut avhengighetene i det vi tester med andre implementasjoner.
+Om vi har brukt interfacer eller virtuelle metoder i avhengighetene, kan et mocking-rammeverk
+generere nye instanser når vi kjører testen.
+
+Når det vi tester (SUT) opprettes for testen sender vi inn (typisk i konstruktøren) falske
+avhengigheter. Vi ønsker vanligvis ikke å teste avhengighetene, derfor byttes de ut med noe som 
+ikke påvirker testen.
+
+- [Mocking is not rocket science: Basics](https://blog.kotlin-academy.com/mocking-is-not-rocket-science-basics-ae55d0aadf2b)
+
+### Mock/Stub
+
+Det kan herske litt begrepsforvirring rundt navngivning på objektene vi generer med et
+mocking-rammeverk. Overordnet heter disse «Test doubles».
+
+En **stub** setter vi opp, så metoden under test kan kalle den og få data. Den skal aldri feile en test. Den erstatter *innkommende avhengigheter*.
+
+En **mock** setter vi opp fordi metoden under test skal kalle den. Vi kan verifisere at den er kallt. Den erstatter *utgående avhengigheter*.
+
+### Metrikk
+
+Det finnes flere ting man kan telle etter å ha kjørt testene:
+
+#### Testdekning (Test coverage)
+
+De fleste test runnere kan registrere hvilke kodelinjer som har blitt kjørt i en test.
+Ut fra dette kan man beregne andelen kodelinjer som er testet.
+
+Det viser seg at dette er uheldig å bruke som et mål for kvalitet, siden det lett
+fører til at det skrives tester som kun har som formål å skape testdekning. 
+Det skaper tester som ikke egentlig løfter kvaliteten på løsningen og som kun
+innebærer en vedlikeholdskostnad.
+
+Det kan allikevel være en nyttig indikator. Testdekningen på forretningslogikk bør være 
+høyere enn for presentasjonslogikk og dataaksessering.
+
+#### Antall tester
+
+Antall tester er en indikator på omfanget, og bør øke i takt med kodebasen ellers.
+
+#### Tiden det tar å kjøre testene
+
+Det er viktig at man holder et øye på denne. Om det tar for lang tid å kjøre testene
+vil det gjøres sjeldnere. Det påvirker også byggetiden på server og derfor ledetiden.
+
+#### Mutation testing
+
+Dette er en teknikk (relatert til [chaos enginering](https://en.wikipedia.org/wiki/Chaos_engineering))
+der man gjør tilfeldige endringer i koden som blir testet. 
+Om testene fortsatt er grønne, er det en indikator på at de ikke egentlig tester noenting.
+
+- [Wikipedia](https://en.wikipedia.org/wiki/Mutation_testing)
+
+### Navn på testene
+
+Navnekonvensjoner er avhengig av programmeringsspråk, testrammeverk og test patterns.
+I Kotlin er det [mulig å navngi testmetodene i normalt språk](https://kotlinlang.org/docs/coding-conventions.html#names-for-test-methods).
+Navnet bør uansett tydeliggjøre hvorfor en test feiler. Navnet er en dokumentasjon på 
+antagelsen eller forventningen for testen.
+
+Et mye brukt format er å dele navnet i tre (med `_` mellom delene) som beskriver
+
+1) metoden man tester
+2) argumenter eller premiss for testen
+3) forventet resultat.
+
+`CalculateRomanNumeral_WithArabicValue10_ReturnsX()`
+
+- [How to choose the right name](https://www.softwaretestingmagazine.com/knowledge/how-to-choose-the-right-name-for-unit-tests/)
+- [Conventions](https://medium.com/@stefanovskyi/unit-test-naming-conventions-dd9208eadbea)
+
+### AAA
+
+Et mye brukt format for å strukturere koden i en testmetode kalles «Triple A»:
+
+1) **Arrange**: Her er alt oppsett for å koble sammen avhengigheter og opprette variabler som trengs i testen.
+2) **Act**: Her kalles metoden som skal testes. Det er vanligvis bare en linje.
+3) **Assert**: Her valideres resultatet eller mocker. Det er her testen feiler eller passerer.
+
+### Setup/Teardown
+
+Testrammeverkene tilbyr vanligvis å skrive metoder for oppsett og opprydning før og etter testene kjøres.
+Dette kan redusere duplisert kode i testmetodene. Det kan også føre til at testene blir mindre leselige,
+om mye av konteksten flyttes ut av testen.
+
+### TDD
+
+Testdrevet utvikling (Test Driven Development) betyr at testen skrives før koden som skal testes.
+Effekten er vanligvis en bedre strukturert kode, siden man tvinges til å tenke på det 
+koden/metoden skal gjøre på et litt mer overordnet nivå.
+
+### Red – Green – Refactor
+
+Arbeidsflyten i TDD er som følger:
+
+1) **Red**: Skriv en test som feiler. For å få testen til å kompoilere og kjøre kan det være nødvendig å definere klassen og metoden man skal teste, men uten innhold. (Det er vanlig å la den kaste en exception når den kalles.)
+2) **Green**: Implementer metoden som tester så testen passerer.
+3) **Refactor**: Forbedre koden, fjern duplikater etc. Så lenge testen er grønn, er man trygg på at ingenting er ødelagt i refaktoreringen.
+4) Begynn på neste test.
+
+### Driver – Navigator
+
+Når man parprogrammerer, er dette en nyttig metodikk.
+
+Den som sitter ved tastaturet skriver koden og tar alle avgjørelser om syntaks.
+
+Den som navigerer bestemmer hva som skal kodes og har den kreative rollen.
+Navigatøren slipper å tenke på det rent kodenære og kan fokusere på det litt mer overordnede.
+
+Man bytter rolle mellom hvere test.
+
+- [Martin Fowler](https://martinfowler.com/articles/on-pair-programming.html)
+- [Mob programming](https://mobprogramming.org/)
+
+### Kodekata
+
+Kata er en teknikk fra kampsport, der man øver på spesifikke bevegelser og kombinasjoner
+for å innarbeide muskelminne.
+
+Begrepet er stjålet i programmering, og handler om å trene på å løse de samme problemene flere ganger.
+Det er en måte å lære seg kodehåndtverk, problemløsning og nye programmeringsspråk.
+
+Det er veldig egnet for å trene på TDD.
+
+- [CodeKata](http://codekata.com/)
+- [GUVI](https://www.guvi.in/code-kata/)
+- [Jeff Atwood](https://blog.codinghorror.com/the-ultimate-code-kata/)
+- [Coding dojo](https://codingdojo.org/kata/)
+- [Awesome katas](https://github.com/gamontal/awesome-katas)
+
+---
+
+```mermaid
+mindmap
+  root(Tredje økt 🧭)
+    API
+      BFF
+      Dokumentasjon
+        json:api
+        OpenAPI
+      Versjonering
+      Caching
+      Protokoller
+        RPC
+            SOAP
+            gRPC
+        Data
+            OData
+            GraphQL
+        Push
+            Web socket
+            Server Side events
+            Push-API
+        REST
+            HTTP
+            Resources
+            Verbs
+            Hypermedia
+    Testing
+      Manuell testing
+      Automatisert UI-testing
+      Integrasjonstesting
+      Ytelsestesting
+    Enhetstesting
+        Verktøy
+        Prinsipper
+        Unngå avhengigheter
+        Mocking
+        Måling
+        AAA
+    TDD
+        Driver-Navigator
+        Red-Green-Refactor
+    Kodekata
+```
+---
+[Presentasjon](https://github.com/bekk/oppdrift_backend/blob/main/del_2/Kurspresentasjon_2.pptx)
