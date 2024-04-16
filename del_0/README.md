@@ -6,7 +6,7 @@ Nettverk og arkitektur
 
 ## Øvelser
 
-1.[Node-øvelser](./node-%C3%B8velser.md)
+1. [Node-øvelser](./node-%C3%B8velser.md)
 1. [Nytt prosjekt](./nytt-prosjekt.md)
 1. [Arkitektur-workshop](https://github.com/oddsund/clean-architecture)
 
