@@ -6,10 +6,9 @@ Nettverk og arkitektur
 
 ## Øvelser
 
-- [Node-øvelser](./node-%C3%B8velser.md)
-- [couchdb](..%2Fdel_1%2Fcouchdb)
-- [Nytt prosjekt](./nytt-prosjekt.md)
-- [Arkitektur-workshop](https://github.com/oddsund/clean-architecture)
+1.[Node-øvelser](./node-%C3%B8velser.md)
+1. [Nytt prosjekt](./nytt-prosjekt.md)
+1. [Arkitektur-workshop](https://github.com/oddsund/clean-architecture)
 
 ![Parprogrammering anbefales](../img/Parprogrammering.png)
 
