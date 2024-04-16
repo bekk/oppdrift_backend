@@ -590,7 +590,10 @@ Driftskostnadene øker eksponensielt om man legger på flere nitall.
 Definisjonen på *availability* er sannsynligheten for at et system er oppe ved et gitt tidspunkt.
 Oppetid er styrt av systemets *Mean-Time-To-Failure (MTTF)* og *Mean-Time-To-Repair (MTTR)*.
 Oppetid tilsvarer da:
-$` 𝐴𝑣𝑎𝑖𝑙𝑎𝑏𝑖𝑙𝑖𝑡𝑦 =  𝑀𝑇𝑇𝐹/((𝑀𝑇𝑇𝐹+𝑀𝑇𝑇𝑅)) `$
+
+```math
+𝐴𝑣𝑎𝑖𝑙𝑎𝑏𝑖𝑙𝑖𝑡𝑦 = \frac{𝑀𝑇𝑇𝐹}{𝑀𝑇𝑇𝐹 + 𝑀𝑇𝑇𝑅}
+```
 
 - [SLA](https://en.wikipedia.org/wiki/Service-level_agreement)
 

@@ -17,6 +17,19 @@ Nettverk og arkitektur
 
 [Innhold](./Innhold.md)
 
+### HTTP-klienter
+
+Noen verktøy for å teste API-er og kalle http-endepunkt.
+
+- [Bruno](https://www.usebruno.com/)
+- [RapidAPI](https://paw.cloud/)
+- [Insomnia](https://app.insomnia.rest/)
+- [Curl](https://curl.se/docs/manpage.html)
+- [httpie](https://httpie.io/)
+- [IntelliJ](https://www.jetbrains.com/help/idea/http-client-in-product-code-editor.html)
+- [VsCode](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+- [Postman](https://www.postman.com/)
+
 ---
 
 
