@@ -693,4 +693,4 @@ mindmap
     Kodekata
 ```
 ---
-[Presentasjon](https://github.com/bekk/oppdrift_backend/blob/main/del_2/Kurspresentasjon_2.pptx)
+[Presentasjon 📽](https://github.com/bekk/oppdrift_backend/blob/main/del_2/Kurspresentasjon_2.pptx)

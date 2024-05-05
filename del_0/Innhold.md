@@ -810,4 +810,4 @@ mindmap
 
 ---
 
-[Presentasjon](https://github.com/bekk/oppdrift_backend/blob/main/del_0/Kurspresentasjon_0.pptx)
+[Presentasjon 📽](https://media.githubusercontent.com/media/bekk/oppdrift_backend/main/del_0/Kurspresentasjon_0.pptx)
