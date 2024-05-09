@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bekk.Oppdrift.SeleniumExample", "Bekk.Oppdrift.SeleniumExample\Bekk.Oppdrift.SeleniumExample.csproj", "{B4CEAAD5-D2F8-4FD8-836B-70B6847A0F77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4CEAAD5-D2F8-4FD8-836B-70B6847A0F77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4CEAAD5-D2F8-4FD8-836B-70B6847A0F77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4CEAAD5-D2F8-4FD8-836B-70B6847A0F77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4CEAAD5-D2F8-4FD8-836B-70B6847A0F77}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -375,6 +375,7 @@ som går gjennom brukergrensesnittet (i motsetning til å bruke API-et direkte).
 - [Selenium](https://www.selenium.dev/)
 - [Cypress](https://www.cypress.io/)
 - [Playwright](https://playwright.dev/)
+- [Eksempel](./ui-testing/Bekk.Oppdrift.SeleniumExample)
 
 ### Integrasjonstester
 
