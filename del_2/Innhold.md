@@ -414,6 +414,15 @@ ved å bruke sitt eget språk.
 - [Zephyr Enterprise](https://smartbear.com/test-management/zephyr-enterprise/?utm_medium=paid_listing&utm_source=sth&utm_campaign=best-bdd-tools-ze)
 - [Fitnesse](https://fitnesse.org/)
 
+### Arkitekturtester
+
+Dette er testrammeverk som lar deg skrive tester som kan sikre arkitekturens integritet.
+Den kan overholde ting som at referanser går riktig vei, og ikke hopper over et lag. Den kan også håndheve navnekonvensjoner.
+
+- [ArchUnit](https://www.archunit.org/)
+- [ArchUnitNET (en port til dotnet)](https://archunitnet.readthedocs.io/en/latest/)
+- [Konsist (Linter for Kotlin som også har lignende funksjonalitet)](https://docs.konsist.lemonappdev.com/)
+
 ## Enhetstester
 
 Enhetstester (unit test) er tester som verifiserer og dokumenterer koden.
