@@ -10,3 +10,7 @@
 - [Økt[1]](./del_1/README.md) (Databaser & patterns)
 - [Økt[2]](./del_2/README.md) (Api-design & testing)
 - [Økt[3]](./del_3/README.md) (Rammeverk & deployment)
+
+---
+
+[Avinstallering etter kurset](./avinstallering.md)
