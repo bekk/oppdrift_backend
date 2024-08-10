@@ -4,10 +4,12 @@ Avinstallering 🧹
 Om du ønsker, kan du avinstallere programvaren vi har brukt etter kurset.
 
 ## Docker
+![Docker](./img/docker/Docker_(container_engine)_logo.png)
 
 Om du vil fjerne containere vi har kjørt i kurset, se [oppskrift her](./del_1/Docker_Jukselapp.md#docker-kommandoer).
 
 ## Windows
+![Windows](./img/win_logo.png)
 
 [Generell beskrivelse.](https://support.microsoft.com/en-us/windows/uninstall-or-remove-apps-and-programs-in-windows-4b55f974-2cc6-2d2b-d092-5905080eaf98)
 
@@ -22,6 +24,7 @@ winget list
 For å avinstallere de oppføringene som har *winget* som *source*: `winget uninstall`
 
 ## Mac
+![Mac](./img/mac_logo.png)
 
 [Generell beskrivelse.](https://support.apple.com/en-us/102610)
 
@@ -40,6 +43,10 @@ og *cask* (MacOS-applikasjoner).
 For å avinstallere noe fra listen brukes `brew uninstall`.
 
 Se mer detaljer med `brew uninstall -help`.
+
+Om du brukte en [Brewfile](./installering.md#bruk-av-brewfile)
+kan du avinstallere alt med
+`brew bundle --zap  --file ` og plasseringen til BrewFile.
 
 ## Verktøy
 
