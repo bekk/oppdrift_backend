@@ -68,6 +68,23 @@ i en definert rekkefølge.
 
 Innkommende requester blir tatt i mot av første mellomvare. Om det er relevant, vil den svare med en response. Om ikke sendes den videre til neste modul.
 
+### MVC
+
+Model-View-Controller er et pattern for applikasjoner med grafisk brukergrensesnitt (GUI) som kom ut av Simula-miljøet ved
+universitet i Oslo på 70–tallet, med Trygve Reenskau i spissen.
+
+Det innebærer at en **Controller** har ansvar for å motta input fra brukeren.
+Den kaller så en **Model** som returnerer data som kan brukes yil å bygge et **View**.
+View er altså en presentasjon for brukeren. Modellen er kombinasjonen av datastruktur og forretningslogikk.
+Controlleren har ansvar for å sette dette sammen og returnere det til brukeren.
+
+Dette ble tatt opp i Java med Web Objects og Spring, og er sentrale abstraksjoner i Spring ennå.
+Vi kan finne begrepene brukt i svært mange web-rammeverk i dag. Som regel er det tilknyttet en **Router**
+som har ansvar for å knytte request til den riktige Controller.
+
+- [Wikipedia](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
+- [Trygve Reenskaug](https://en.wikipedia.org/wiki/Trygve_Reenskaug)
+
 ## HTTP
 
 Denne protokollen er grunnstenen i nesten alle webløsninger vi lager. 
@@ -495,6 +512,9 @@ flyter er virkemidler som kan reduserer total kompleksitet.
 
 De har det til felles at de ofte øker kompleksistet lokalt, men kan bidra til å reduserer den 
 i et mer overordnet perspektiv.
+
+Partisjonering kan gjøres etter tekniske prinsipper (for eksempel med presentasjonslag, datalag etc)
+eller etter domenet (ulike proseeser eller komponenter i domenet utgjør ulike deler av løsningen).
 
 ### Elementer som påvirker arkitekturen
 

@@ -1,6 +1,6 @@
 # Endepunkt
 
-Vi skal lage en løsning fra scratch! Vi kommer til å bruke Spring Boot sin wizard (Spring Initializr)
+Vi skal lage en løsning fra scratch! Vi kommer til å bruke **Spring Boot** sin wizard (Spring Initializr)
 som man finner i Intellij for å opprette et Spring Boot prosjekt.
 
 ## Oppsett
