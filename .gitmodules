@@ -1,3 +1,3 @@
 [submodule "del_0/arkitektur-workshop"]
 	path = del_0/arkitektur-workshop
-	url = git@github.com:oddsund/clean-architecture.git
+	url = git@github.com:oyms/clean-architecture.git
