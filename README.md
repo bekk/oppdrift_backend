@@ -14,3 +14,7 @@
 ---
 
 [Avinstallering etter kurset](./avinstallering.md)
+
+```console
+git clone --recurse-submodules git@github.com:bekk/oppdrift_backend.git
+```
