@@ -168,6 +168,7 @@ Det er støtte for multipleksing, komprimering av headere og streaming.
 `HTTP/3` bruker QUIC i stedet for TCP, og støtter også multi-streaming over UDP.
 
 - [Sammenligning av versjonene](https://www.baeldung.com/cs/http-versions)
+- [Video med oppsummering](https://www.youtube.com/watch?v=UMwQjFzTQXw)
 
 ### Request/Response
 

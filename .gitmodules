@@ -1,3 +1,6 @@
 [submodule "del_0/arkitektur-workshop"]
 	path = del_0/arkitektur-workshop
 	url = git@github.com:oyms/clean-architecture.git
+[submodule "del_1/petclinic"]
+	path = del_1/petclinic
+	url = https://github.com/spring-projects/spring-petclinic
