@@ -1,18 +1,21 @@
-# Debugging
+# Debugging og refactoring
 
 ![Debuggereni IntelliJ](./../img/nytt-prosjekt/debuggern.png)
 
 ## Oppgaver
 
 1. Clone prosjektet: [https://github.com/spring-projects/spring-petclinic](https://github.com/spring-projects/spring-petclinic) og prøv debuggern
-2. Debug løsningen (f.eks i **Run**-menyen.)
+2. Klikk på en funksjon og få frem refactormenyen
+   1. Endre navn på metoden
+   2. Angre (undo) for å rulle tilbake endringen
+3. Debug løsningen (f.eks i **Run**-menyen.)
 3. Sett et breakpoint i `OwnerController.java` på linje 159 (for eksempel).
 4. Kall endepunktet [/owners/3](http://localhost:8080/owners/3) (i en nettleser, i endpoints-vinduet eller på annet vis).
 5. Prøv ut funksjonaliteten som er nevnt nedenfor:
-   - Få programmet til å pause på et breakpoint
-   - Naviger med [navigasjonsknapper](#kontrollknapper)
-   - Se på [variabler i scope](#threads-and-variables)
-   - Se pa variabler med [Evaluate expression](#evaluate-expression)
+   1. Få programmet til å pause på et breakpoint
+   2. Naviger med [navigasjonsknapper](#kontrollknapper)
+   3. Se på [variabler i scope](#threads-and-variables)
+   4. Se pa variabler med [Evaluate expression](#evaluate-expression)
    
 
 
