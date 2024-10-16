@@ -1,7 +1,7 @@
 # Del 2 av løsning fra scratch 
 
 Ta utgangspunkt i det som ble gjort i [del 1](../del_0/nytt-prosjekt.md) og jobb videre med samme kodebase.
-Du kan også åpne den [her](./DatabaseIntegrasjon), om du ikke fikk gjort oppgaven sist.
+Du kan også åpne den [her](./DatabaseIntegrasjon/backend), om du ikke fikk gjort oppgaven sist.
 
 
 <details>

@@ -2,7 +2,7 @@
 
 Ta utgangspunkt i det som ble gjort i [del 0 - nytt prosjekt](./../del_0/nytt-prosjekt.md) og [del 2 - database integrasjon](./../del_1/database-integrasjon.md)
 
-(Du kan finne en ferdig løsning på oppgaven fra forrige økt [her](../del_1/DatabaseIntegrasjon/).)
+(Du kan finne en ferdig løsning på oppgaven fra forrige økt [her](./spring_rest/backend/).)
 
 I dag skal vi implementere REST-endepunkt i Spring-applikasjonen vår. 
 Når vi er ferdig med denne delen vil vi ha en applikasjon med en database, 
