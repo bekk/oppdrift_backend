@@ -1,0 +1,20 @@
+### Get all the users
+http://localhost:8080/api/users
+
+### Get one user
+http://localhost:8080/api/users/1
+
+### Remove a user
+DELETE http://localhost:8080/api/users/1
+
+### Add new user
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{ "id": 3, "title": "Manager", "username": "User" }
+
+### Update user
+PUT http://localhost:8080/api/users/3
+Content-Type: application/json
+
+{ "id": 1, "title": "Manager", "username": "Vegard" }

@@ -1,0 +1,1 @@
+I deployment-oppgaven kan du ta utgangspunkt i dette prosjektet, om du ikke har prosjektet fra forrige økt.
