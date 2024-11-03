@@ -159,7 +159,8 @@ konfigurasjon for standardmønstre.
 
 Gradle er et nyere verktøy enn Maven.
 Gradle bruker et [DSL](https://en.wikipedia.org/wiki/Domain-specific_language) for 
-konfigurasjon. Det åpner for imperativ programmering i konfigurasjonen. 
+konfigurasjon. Det åpner for imperativ programmering i konfigurasjonen.
+Konfigurasjonen kan skrives i [Groovy DSL](https://docs.gradle.org/current/dsl/index.html) eller [Kotlin DSL](https://docs.gradle.org/current/kotlin-dsl/index.html).
 
 # Rammeverk
 
