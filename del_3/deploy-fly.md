@@ -53,7 +53,7 @@ Registrer en konto med [fly.io](https://fly.io). Veldig enkel signup ved å bruk
 
 ![fly.io signup](../img/flyio/fly-signup.png)
 
-Følg guiden på fly.io for å installere Fly sitt toolkit (flyctl).
+Følg [guiden på fly.io](https://fly.io/docs/flyctl/install/) for å installere Fly sitt toolkit (flyctl).
 
 
 ## Deploy til Fly.io
