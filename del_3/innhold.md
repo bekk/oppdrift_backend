@@ -151,7 +151,7 @@ Begge håndterer byggeprosessen, og avhengigheter.
 
 ### Maven
 
-Maven bruker XMl som format i konfigurasjonsfilene. Det har en relativt rigid struktur på
+Maven bruker XML som format i konfigurasjonsfilene. Det har en relativt rigid struktur på
 konfigurasjonsfilene, men med «Convention over Configuration», kan det føre til mindre
 konfigurasjon for standardmønstre.
 

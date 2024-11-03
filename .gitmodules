@@ -4,3 +4,6 @@
 [submodule "del_1/petclinic"]
 	path = del_1/petclinic
 	url = https://github.com/spring-projects/spring-petclinic
+[submodule "ktor-samples"]
+	path = ktor-samples
+	url = git@github.com:ktorio/ktor-samples.git
