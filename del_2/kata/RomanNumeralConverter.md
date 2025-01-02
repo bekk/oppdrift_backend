@@ -46,7 +46,7 @@ object RomanNumeralConverter {
 11. 100 ➡︎ "C"
 12. 2019 ➡︎ "MMXIX"
 13. 3000 ➡︎ "MMM"
-14. 65 ➡︎ "LV"
+14. 65 ➡︎ "LXV"
 15. 1379 ➡︎ "MCCCLXXIX"
 
 Ekstra: Lag en `RomanNumeralParser`
