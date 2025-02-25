@@ -51,7 +51,7 @@
                 throw "Push API is not supported";
             }
 
-            navigator.serviceWorker.register('/worker.js');
+            navigator.serviceWorker.register('/worker.js', { updateViaCache: 'none' });
             navigator.serviceWorker.ready
                 .then((registration) => {
                     console.log(`Service worker registered with ${registration.scope}`)
@@ -59,6 +59,7 @@
                     document.querySelector("#unregister")
                         .addEventListener('click', _ => {
                             registration.unregister();
+                            console.log("Unregistered");
                         });
 
                     askPermission()

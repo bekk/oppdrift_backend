@@ -3,6 +3,6 @@ self.addEventListener('push', event => {
     event.waitUntil(self.registration.showNotification(
         `Message from ${msg.sender}`, {
             body: msg.msg,
-            icon: '/favicon.ico'
+            icon: '/notification-icon.png'
         }));
 });

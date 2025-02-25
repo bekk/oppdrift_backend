@@ -20,6 +20,7 @@ app.use(express.static('static'));
 app.use(express.json());
 
 app.post('/api/subscription', (req, res) => {
+    console.info(`Received subscription: ${req.body}`)
     subscriptions.push(req.body);
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({ data: { success: true } }));
@@ -27,6 +28,7 @@ app.post('/api/subscription', (req, res) => {
 
 app.post('/api/broadcast', (req, res) => {
     const msg = JSON.stringify(req.body);
+    console.info(`Received message: ${msg}`)
     subscriptions.forEach(subscription => {
         webpush.sendNotification(subscription, msg)
             .catch(err => {
