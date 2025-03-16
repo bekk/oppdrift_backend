@@ -2,7 +2,7 @@
 
 Denne oppgaven er hentet fra [Coding Dojo](http://codingdojo.org/kata/Bowling/). Kataen er ment som en introduksjon til TDD og parprogrammering. Husk rekkefølgen; test først, så kode, så refaktorer.
 
-## Rules:
+## Regler:
 - Hver kamp med bowling inkluderer ti runder, eller "ruter" for bowleren.
 - I hvert rute får bowleren opptil to forsøk på å slå ned alle pinnene.
 - Hvis bowleren over to forsøk ikke klarer å slå ned alle pinnene, er poengsummen for den ruten summen av antall pinner som ble slått ned i de to forsøkene.

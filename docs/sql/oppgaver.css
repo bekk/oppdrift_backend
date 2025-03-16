@@ -79,3 +79,19 @@ dd {
     margin: 0 0 0 80px;
     padding: 0 0 0.5em 3em;
 }
+
+.tip {
+    display: flex;
+    align-items: center;
+    border: 2px solid #007bff;
+    padding: 0.5em;
+    border-radius: 5px;
+    background-color: #f0f8ff;
+    max-width: 400px;
+    margin: 1em;
+}
+.tip:before {
+    content: "ℹ️";
+    font-size: 1.5em;
+    margin-right: 10px;
+}

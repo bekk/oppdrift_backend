@@ -1,5 +1,10 @@
 # Del 3 - løsning fra scratch - endepunkt
 
+> [!NOTE]
+> Hensikten med denne øvelsen er å bli bedre kjent med _dependency injection_
+> i Spring. For å lage en standard web-applikasjon brukes annotasjoner (de som beg´ynner med `@`)
+> for å knytte de ulike delene av applikasjonen sammen.
+
 Ta utgangspunkt i det som ble gjort i [del 0 - nytt prosjekt](./../del_0/nytt-prosjekt.md) og [del 2 - database integrasjon](./../del_1/database-integrasjon.md)
 
 (Du kan finne en ferdig løsning på oppgaven fra forrige økt [her](./spring_rest/backend/).)

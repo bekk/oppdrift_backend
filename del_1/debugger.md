@@ -1,5 +1,10 @@
 # Debugging og refactoring
 
+
+> [!NOTE]
+> Hensikten med denne øvelsen er å bli kjent med debuggeren og refaktoreringsverktøyene
+> i IntelliJ.
+
 ![Debuggereni IntelliJ](./../img/nytt-prosjekt/debuggern.png)
 
 ## Oppgaver

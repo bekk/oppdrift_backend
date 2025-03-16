@@ -1,7 +1,11 @@
+# JAR
+
+> [!NOTE]
+> Hensikten med denne øvelsen er å se konkret hva en JAR-fil består av.
+
 Bygg prosjektet
 
 ![build jar](../img/jar/build-project.png)
-
 
 Finn mappen `build` og se hva som ligger under der.
 

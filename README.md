@@ -11,7 +11,11 @@
 - [Økt[2]](./del_2/README.md) (Api-design & testing)
 - [Økt[3]](./del_3/README.md) (Rammeverk & deployment)
 
+![Kursplan](./img/Kursplan.png)
+
 ---
+
+Powerpoint-presentasjonene er lagret med [LFS](https://git-lfs.com/). For å åpne dem, er det enkleste å åpne dem fra [Github](https://github.com/bekk/oppdrift_backend/). 
 
 [Avinstallering etter kurset](./avinstallering.md)
 

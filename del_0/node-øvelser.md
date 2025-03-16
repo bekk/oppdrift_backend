@@ -1,5 +1,10 @@
 # En veldig enkel web-server
 
+> [!NOTE]
+> Hensikten med denne øvelsen er å se på en web server i sin enkleste form,
+> slik at vi kan se hvordan kommunikasjon mellom server og klient over http
+> egentlig fungerer.
+
 Vi kan eksperimentere med en enkel web server for å bli kjent med **HTTP**.
 Til det bruker vi [Node.js](https://nodejs.org/). Det kan installeres
 fra <https://nodejs.org/en/> eller med [Homebrew](https://brew.sh/) på Mac

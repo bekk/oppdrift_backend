@@ -1,5 +1,10 @@
 # Grafdatabaseworkshop
 
+
+> [!NOTE]
+> Hensikten med denne øvelsen er å få litt praktisk erfaring med en annen type
+> database enn relasjonsdatabaser. Da er det lettere å vurdere om du skal ta det i bruk senere.
+
 Grafdatabaser baserer seg på grafteori (i motsetning til set-teori),
 og er optimalisert for å lagre og finne informasjon om noder og 
 forbindelser mellom dem.

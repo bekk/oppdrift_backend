@@ -1,5 +1,10 @@
 # Endepunkt
 
+
+> [!NOTE]
+> Hensikten med denne øvelsen er å bli kjent med IntelliJ og Spring Boot ved å lage en enkel web-løsning.
+> Om du er kjent med IntelliJ og Spring Boot fra før, vil dette være veldig enkelt 😁.
+
 Vi skal lage en løsning fra scratch! Vi kommer til å bruke **Spring Boot** sin wizard (Spring Initializr)
 som man finner i Intellij for å opprette et Spring Boot prosjekt.
 

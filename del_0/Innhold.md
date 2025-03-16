@@ -85,6 +85,12 @@ som har ansvar for å knytte request til den riktige Controller.
 - [Wikipedia](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
 - [Trygve Reenskaug](https://en.wikipedia.org/wiki/Trygve_Reenskaug)
 
+### Server-side rendering/Client-side rendering
+
+Server side rendering var en vanlig modell for 15 år siden. Utviklinger i nettleserteknologi (særlig oppdatering av Javascript, jQuery og etterhvert React) flyttet jobben med å generere HTML til nettleseren. Det reduserer lasten på server og gjør det mulig å lage brukeropplevelser som var praktisk talt umulig å få til før. Ulempen med å flytte ansvaret til nettleseren, er at sikkerhet blir mer utfordrende.
+Server-side er på vei tilbake med blant annet [NextJs](https://nextjs.org/) og [Blazor](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor).
+
+
 ## HTTP
 
 Denne protokollen er grunnstenen i nesten alle webløsninger vi lager. 
@@ -657,6 +663,15 @@ Mye kan gjøres for å få løsningene våre til å bruke mindre strøm:
 Ved å bruke en skyleverandør får vi tilgang på selvbetjeningsverktøy og bedre mulighet for automatisering.
 Noen arkitekturer er det vansklig å tenke seg uten å bruke en skylignende infrastruktur.
 
+### No-code / Lo-code
+
+En kategori av rammeverk som lar superbrukere lage løsninger med lite ller ingen kode eller kodekunnskap.
+Det er en veldig effektiv metode for å komme i gang, og er i mange tilfeller et godt alternativ om det 
+ikke er alt for avanserte krav til applikasjonen.
+
+Det er en risiko for å falle i [10%-fella](https://www.pragmatic.page/blog/2022/12/the-last-10-trap-how-to-strangle-your-startup-project/).
+
+- [Blog](https://shibam-dipu.medium.com/is-low-code-a-trap-683ee8361e30)
 
 ### Domain Driven Design (DDD)
 Boka *Domain Driven Design* kom i 2003, og har satt rammene for mye av det vi snakker om i arkitektur siden.

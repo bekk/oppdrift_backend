@@ -60,7 +60,7 @@ sudo systemctl enable containerd.service
 
 ![Podman logo](../img/podman_logo.svg)
 
-Posman er et alternativ til docker, som tilbyr et gui. Den er avhengig av at
+Podman er et alternativ til docker, som tilbyr et gui. Den er avhengig av at
 WSL er installert, men kan installere det for deg.
 
 - [Github](https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md)
@@ -77,6 +77,15 @@ eller [Winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/
 winget install -e --id RedHat.Podman-Desktop
 ```
 
+### Rancher desktop
+
+![Rancher desktop logo](../img/rancher-desktop_logo.png)
+
+Et annet alternativ som fungerer på alle platformer.
+Fokus er mer på Kubernetes, men kan brukes til vanlig bruk av 
+containere også.
+
+- [Webside med dokuemntasjon](https://rancherdesktop.io/)
 
 
 ---

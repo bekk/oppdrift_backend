@@ -1,5 +1,8 @@
 # Testing i Kotlin
 
+> [!NOTE]
+> Hensikten med denne øvelsen er å bli i stand til å opprette enhetstester i Kotlin.
+
 Start med å lag et Kotlin-prosjekt (file -> new project). 
 
 

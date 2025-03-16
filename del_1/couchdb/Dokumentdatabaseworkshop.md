@@ -1,5 +1,10 @@
 # Dokumentdatabaseworkshop
 
+> [!NOTE]
+> Hensikten med denne øvelsen er å bli kjent med en dokumentdatabase.
+> CouchDB er en av de mest brukte. Øvelsen gir litt praktisk erfaring
+> med spørringer og opprettelse av data.
+
 En [dokumentdatabase](https://en.wikipedia.org/wiki/Document-oriented_database) er en database som kan lagre data uten en felles struktur (schema).
 
 Et dokument i denne sammenhengen kan vanligvis representeres som et Json-objekt.

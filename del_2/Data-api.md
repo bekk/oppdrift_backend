@@ -1,6 +1,11 @@
 Open Data Protocol
 =====
 
+> [!NOTE]
+> Hensikten med denne øvelsen er å stifte kjennskap med en eller begge 
+> de to data-apiene. Dette bør være nok til å vite omtrent hvordan de virker
+> og hvordan man kan spørre etter data fra dem.
+
 ![Logo](../img/odata_logo.jpeg)
 
 Prøv ut stegene i https://www.odata.org/getting-started/understand-odata-in-6-steps/ ved å bruke REST-client i IntelliJ eller Curl (eller en annen klient).

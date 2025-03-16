@@ -1,5 +1,8 @@
 # Dyppe tærne i .NET
 
+> [!NOTE]
+> Hensikten med denne øvelsen er å få en konkret erfaring med hva dotnet er og de grunnleggende delene i en web-løsning.
+
 ![Dyppe tærne](../../img/Dyppe_tærne.png)
 
 ## Installere SDK
