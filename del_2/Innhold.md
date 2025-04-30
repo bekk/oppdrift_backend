@@ -59,6 +59,10 @@ allikevel nytte som en inspirasjon.
 - [Eksempel på bruk](https://occapi.uni-foundation.eu/occapi/v1/)
 - [Eksempel på delvis bruk](https://api.tvmaze.com/shows/431)
 - [HAL (en elternativ standard)](https://stateless.group/hal_specification.html)
+- [JSON-LD (et annet alternativ)](https://json-ld.org/)
+- [Collection+JSON (nok et alternativ)](https://github.com/collection-json/spec)
+- [Siren (Nok et format som beskriver entities)](https://github.com/kevinswiber/siren)
+- [En drøfting av ulike hypermediatyper](https://sookocheff.com/post/api/on-choosing-a-hypermedia-format/)
 
 ### OpenAPI
 
@@ -71,6 +75,9 @@ for å lese, bla i og teste API-et.
 
 Den vanligste tilnærmingen er at dokumentasjonen genereres av annotasjoner på endepunktene
 inline dokumentasjon (Jdoc eller tilsvarende) og vises med Swagger-middleware.
+
+Det er også mulig å gjøre det motsatte: skrive dokumentasjonen først, 
+og generere endepunkter og modeller fra den («Api First»).
 
 - [Wikipedia](https://en.wikipedia.org/wiki/OpenAPI_Specification)
 - [😻](https://catfact.ninja)
@@ -259,6 +266,12 @@ Server svarer med `101`.
 - [Eksempel](./websocket)
 - [Wikipedia: WebSocket](https://en.wikipedia.org/wiki/WebSocket)
 - [RFC6455](https://datatracker.ietf.org/doc/html/rfc6455)
+
+### AsyncAPI
+
+En standard for å beskrive apier i distribuerte systemer og _Event-Driven-Architectures (EDA)_.
+
+- [Dokumentasjon](https://www.asyncapi.com/en)
 
 ### Data-API
 
