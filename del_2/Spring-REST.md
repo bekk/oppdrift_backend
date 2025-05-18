@@ -2,7 +2,7 @@
 
 > [!NOTE]
 > Hensikten med denne øvelsen er å bli bedre kjent med _dependency injection_
-> i Spring. For å lage en standard web-applikasjon brukes annotasjoner (de som beg´ynner med `@`)
+> i Spring. For å lage en standard web-applikasjon brukes annotasjoner (de som begynner med `@`)
 > for å knytte de ulike delene av applikasjonen sammen.
 
 Ta utgangspunkt i det som ble gjort i [del 0 - nytt prosjekt](./../del_0/nytt-prosjekt.md) og [del 2 - database integrasjon](./../del_1/database-integrasjon.md)
