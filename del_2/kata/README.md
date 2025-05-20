@@ -20,10 +20,10 @@ Refaktorer etter behov.
 
 **Bytt roller mellom hver test.**
 
-- [Bowling](kata/Bowling-kalkulator.md): Her skal dere beregne poengsum for bowlingkast. Den begynner enkelt, men blir litt mer vrien etterhvert.
-- [Romertall](kata/RomanNumeralConverter.md): Beregn fra arabiske til romerske tall. Denne er også enkel i starten. 
-- [Fizz buzz](kata/Fizzbuzz.md): En klassisk jobbintervju-oppgave. Om dere kan modulo-operatoren bør dette gå greit. 
-- [Palindrome](kata/Palindrome.md): Sjekk om et ord er det samme lest bakfra som forfra. Testene er allerede skrevet.
+- [Bowling](./Bowling-kalkulator.md): Her skal dere beregne poengsum for bowlingkast. Den begynner enkelt, men blir litt mer vrien etterhvert.
+- [Romertall](./RomanNumeralConverter.md): Beregn fra arabiske til romerske tall. Denne er også enkel i starten. 
+- [Fizz buzz](./Fizzbuzz.md): En klassisk jobbintervju-oppgave. Om dere kan modulo-operatoren bør dette gå greit. 
+- [Palindrome](./Palindrome.md): Sjekk om et ord er det samme lest bakfra som forfra. Testene er allerede skrevet.
 - [Tennis](https://github.com/jdgarita/TennisGame-TDD-Kata/blob/master/src/TennisGameTest.kt): Her skal dere implementere en klasse som simulerer en tenniskamp.
 
 ![Parprogrammering anbefales](../../img/Parprogrammering.png)
