@@ -84,6 +84,8 @@ og generere endepunkter og modeller fra den («Api First»).
 - [Eksempel fra SVV](https://nvdbrapportapi.atlas.vegvesen.no/swagger-ui/)
 - [Barnehagefakta](987117575)
 - [Eksempel på bruk i Kotlin](https://www.baeldung.com/kotlin/swagger-spring-rest-api)
+- [Andre api-beskrivende språk](https://en.wikipedia.org/wiki/Overview_of_RESTful_API_Description_Languages)
+- [Scalar – et alternativ til Swagger](https://scalar.com/)
 
 ### Endringshåndtering
 
@@ -103,6 +105,7 @@ Måter å versjonere kan være
 - Accept header: At klienene bruker content negotiation for å spesifisere hvilken versjon de vil ha
 
 - [How to](https://restfulapi.net/versioning/)
+- [Blog (Stripe) om versjonering](https://stripe.com/blog/api-versioning)
 
 ### Pact
 
@@ -303,7 +306,7 @@ Man kan beskrive det i fire nivåer:
 - **HTTP**: Et minstekrav er at HTTP brukes i kommunikasjonen.
 - **Resources**: API-et beskriver ressurser. Dette er i motsetning til et RPC-type API, der metoder eksponeres for konsumentene. En url referer til en ressurs (eller et sett av ressurser).
 - **HTTP verb**: Metodene `GET`, `POST`, `PUT`, `DELETE` og `PATCH` brukes for å indikere hvilken operasjon som skal utføres på ressursen.
-- **Hypermedia controls**: Linker mellom ressurser kan gjøre det mulig for en konsument å navigere mellom ressurser. 
+- **Hypermedia controls**: Linker mellom ressurser kan gjøre det mulig for en konsument å navigere mellom ressurser. (Se [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS))
 
 Man kan bruke query-parametre for å implementere søk/filtrering, paginering og sortering.
 
@@ -317,6 +320,7 @@ Man kan bruke query-parametre for å implementere søk/filtrering, paginering og
 - [The REST of the ten commandments](https://hackernoon.com/the-rest-of-the-10-commandments?ref=hackernoon.com)
 - [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS)
 - [JSON Patch; en standard for patch-meldinger](https://jsonpatch.com/)
+- [API description languages](https://en.wikipedia.org/wiki/Overview_of_RESTful_API_Description_Languages)
 
 ## Testing
 
@@ -513,6 +517,15 @@ Et sett av slike tester skal kunne kjøres ofte og gi en trygghet om at koden fu
 Testene kan derfor fungere sopm en dokumentasjon på produksjonskodens oppførsel.
 
 - [Pragmatic Programmers](https://medium.com/pragmatic-programmers/unit-tests-are-first-fast-isolated-repeatable-self-verifying-and-timely-a83e8070698e)
+
+### AI-genererte tester
+
+Det er (antagelig) en trend med verktøy som genererer enhetstester automatisk.
+Da går man glipp av verdien som ligger i å skrive testen først.
+Et bedre alternativ er _kanskje_ å be AI skrive testen for deg først, og implmenetere
+selv etterpå.
+
+- [Diffblue](https://www.diffblue.com/)
 
 ### Unngå eksterne avhengigheter
 
