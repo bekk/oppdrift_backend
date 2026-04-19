@@ -79,6 +79,10 @@ inline dokumentasjon (Jdoc eller tilsvarende) og vises med Swagger-middleware.
 Det er også mulig å gjøre det motsatte: skrive dokumentasjonen først, 
 og generere endepunkter og modeller fra den («Api First»).
 
+**OpenAPI 3.1** (2021) er en vesentlig oppdatering fra 3.0: den er fullt kompatibel med JSON Schema 
+og endrer blant annet hvordan `nullable` og valgfrie felter beskrives. 
+Det er verdt å sjekke hvilken versjon et bibliotek støtter.
+
 - [Wikipedia](https://en.wikipedia.org/wiki/OpenAPI_Specification)
 - [😻](https://catfact.ninja)
 - [Eksempel fra SVV](https://nvdbrapportapi.atlas.vegvesen.no/swagger-ui/)
@@ -207,9 +211,12 @@ fra HTTP/2 som brukes. Det er laget en workaround (gRPC Web) som baker inn trail
 body på meldingen. Det er avhengig av at serveren forstår dette, eller at det er satt opp en
 proxy.
 
+**Connect**-protokollen (fra Buf.build) er et nyere alternativ som er kompatibel med gRPC, men fungerer over vanlig HTTP/1.1 og HTTP/2 uten proxy – og kan dermed brukes direkte fra nettlesere.
+
 - [Introduksjon](https://grpc.io/docs/what-is-grpc/introduction/)
 - [Wikipedia](https://en.wikipedia.org/wiki/GRPC)
 - [gRPC web](https://grpc.io/docs/platforms/web/)
+- [Connect-protokollen](https://connectrpc.com/)
 
 ### Push- og duplex-protokoller
 
@@ -310,6 +317,27 @@ Man kan beskrive det i fire nivåer:
 
 Man kan bruke query-parametre for å implementere søk/filtrering, paginering og sortering.
 
+#### Feilresponser – Problem Details (RFC 9457)
+
+Et vanlig problem i REST-API-er er at feilresponser er ustrukturerte og inkonsistente.
+**Problem Details** (RFC 9457, oppfølger til RFC 7807) er en standard for feilmeldinger i HTTP API-er.
+Den definerer et JSON-format med feltene `type`, `title`, `status`, `detail` og `instance`.
+
+Spring støtter dette ut av boksen siden Spring 6 / Spring Boot 3 (se `ProblemDetail`).
+
+```json
+{
+  "type": "https://example.com/errors/not-found",
+  "title": "User not found",
+  "status": 404,
+  "detail": "No user with id 42 exists.",
+  "instance": "/api/users/42"
+}
+```
+
+- [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457)
+- [Spring Boot: Problem Details](https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-ann-rest-exceptions.html)
+
 - [Wikipedia](https://en.wikipedia.org/wiki/Representational_state_transfer)
 - [Maturity model](https://martinfowler.com/articles/richardsonMaturityModel.html)
 - [Resource naming](https://restfulapi.net/resource-naming/)
@@ -400,9 +428,11 @@ Integrasjonstester er tester som inkluderer systemer som er integrert (i motsetn
 Det kan plukke opp svakheter som oppstor i samspillet mellom to moduler eller systemer som enhetstester 
 ikke plukker opp.
 
+**Testcontainers** er i dag standardtilnærmingen for integrasjonstester i JVM-prosjekter. Det lar deg starte ekte tjenester (Postgres, MySQL, Kafka, Redis osv.) i Docker-containere direkte fra testen, slik at du ikke trenger mock-databaser. Spring Boot 3.1+ har innebygd støtte.
+
+- [Testcontainers](https://testcontainers.com/)
+- [Testcontainers med Spring Boot](https://docs.spring.io/spring-boot/reference/testing/testcontainers.html)
 - [Wikipedia](https://en.wikipedia.org/wiki/Integration_testing)
-- [Enhetstester men ingen integrasjonstest (⍶)](https://twitter.com/timbray/status/822470746773409794)
-- [Enhetstester men ingen integrasjonstest (β)](https://www.foobarton.com/images/twounitnointegration.gif)
 - [Enhetstester men ingen integrasjonstest (ɣ)](https://danielhall.io/what-about-unit-tests)
 
 ### Ytelsestester
@@ -493,6 +523,7 @@ enheten med testklasser (test doubles).
 Hvilket rammeverk man velger vil være avhengig av språk og plattform koden kjører på.
 
 - [JUnit 5](https://junit.org/junit5/)
+- [Kotest](https://kotest.io/) – Kotlin-native, anbefales for Kotlin-prosjekter
 - [TestNG](https://testng.org/)
 - [MockK](https://mockk.io/)
 - [Mockito](https://site.mockito.org/)
@@ -520,10 +551,12 @@ Testene kan derfor fungere sopm en dokumentasjon på produksjonskodens oppførse
 
 ### AI-genererte tester
 
-Det er (antagelig) en trend med verktøy som genererer enhetstester automatisk.
-Da går man glipp av verdien som ligger i å skrive testen først.
-Et bedre alternativ er _kanskje_ å be AI skrive testen for deg først, og implmenetere
-selv etterpå.
+AI-verktøy som GitHub Copilot, Cursor og lignende genererer enhetstester som en del av den ordinære arbeidsflyten. 
+Det er viktig å være bevisst på hva man faktisk får:
+
+- En AI genererer tester som beskriver koden slik den _er_, ikke slik den _burde_ være. Testen validerer ikke nødvendigvis riktig oppførsel.
+- Testene kan gi høy kodedekningsgrad uten å øke faktisk kvalitet.
+- Et bedre alternativ er å be AI skrive testen _først_ (basert på kravene), og deretter implementere selv – da beholder man verdien av TDD.
 
 - [Diffblue](https://www.diffblue.com/)
 
@@ -693,6 +726,8 @@ mindmap
       Dokumentasjon
         json:api
         OpenAPI
+            OpenAPI 3.1
+        Problem Details
       Versjonering
       Caching
       Protokoller
@@ -715,12 +750,14 @@ mindmap
       Manuell testing
       Automatisert UI-testing
       Integrasjonstesting
+            Testcontainers
       Ytelsestesting
     Enhetstesting
         Verktøy
         Prinsipper
         Unngå avhengigheter
         Mocking
+        Property-based testing
         Måling
         AAA
     TDD
