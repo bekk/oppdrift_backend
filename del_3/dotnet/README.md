@@ -26,7 +26,7 @@ dotnet new web -n bekk.oppdrift.web -o src
 
 I mappen `src` er det nå opprettet noen filer i et *project*:
 
-- `bekk.oppdrift.web.csproj`: Prosjektfilen som definerer hvilken sdk som  brukes, versjon, referanser og andre metadata og byggeinstrukser. Om det finnes flere prosjekt sammen, er de definert i en *Solution* listet opp i en `sln`-fil. Du kan lage en slik med `dotnet new solution -n bekk.oppdrift`, og legge til prosjektet med `dotnet sln add src/`.
+- `bekk.oppdrift.web.csproj`: Prosjektfilen som definerer hvilken sdk som  brukes, versjon, referanser og andre metadata og byggeinstrukser. Om det finnes flere prosjekt sammen, er de definert i en *Solution* listet opp i en `slnx`-fil. Du kan lage en slik med `dotnet new solution -n bekk.oppdrift`, og legge til prosjektet med `dotnet sln add src/`.
 - `Properties/launchSettings.json`: Profiler for å kjøre løsningen lokalt. Her er blant annet porter og miljøvariabler definert.
 - `appsettings.json`: Applikasjonens konfigurasjonsfil.
 - `Program.cs`: En kodefil som definerer startpunktet for applikasjonen. Den har en minimal implementasjon for en web server.
