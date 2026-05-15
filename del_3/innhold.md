@@ -539,6 +539,18 @@ operasjoner knyttet til oppsett av infrastrukturen blir borte.
 - [Ansible](https://en.wikipedia.org/wiki/Ansible_(software)) Provisjonering og konfigurasjon. Bruker ikke agenter.
 - [Salt](https://en.wikipedia.org/wiki/Salt_(software)) Automatiseringsverktøy
 
+## Supply chain-sikkerhet
+
+Etter hendelser som [Log4Shell](https://en.wikipedia.org/wiki/Log4Shell) (2021) har sikkerhet i bygg-pipeline fått økt oppmerksomhet.
+«Software supply chain» er kjeden fra kildekode via avhengigheter til ferdig artefakt i produksjon – og den kan angripes i alle ledd.
+
+Sentrale tiltak:
+
+- **Avhengighetsscanning**: Verktøy som [Dependabot](https://docs.github.com/en/code-security/dependabot) og [Snyk](https://snyk.io/) sjekker om avhengigheter inneholder kjente sårbarheter (CVE-er) og kan automatisk opprette pull requests med oppdateringer.
+- **SBOM** (Software Bill of Materials): En maskinlesbar liste over alle komponenter og avhengigheter i en pakke. Gjør det mulig å raskt avgjøre om en ny sårbarhet berører løsningen. Standardformater: [CycloneDX](https://cyclonedx.org/) og [SPDX](https://spdx.dev/).
+- **Artefaktsignering**: Sikrer at det som deployes er identisk med det som ble bygget. [Sigstore](https://www.sigstore.dev/) / [cosign](https://docs.sigstore.dev/) er et populært open-source-verktøy for dette.
+- **SLSA** (Supply chain Levels for Software Artifacts): Et rammeverk fra [OpenSSF](https://openssf.org/) som definerer nivåer av sikkerhet i bygg-pipeline. [slsa.dev](https://slsa.dev/)
+
 # Rammeverk i praksis
 
 - [Spring boot](https://spring.io/projects/spring-boot)
