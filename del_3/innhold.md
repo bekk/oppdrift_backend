@@ -184,7 +184,7 @@ Det er rammeverket som kaller din kode, i motsetning til biblioteker, der du kal
 - [Express](https://expressjs.com/): Webrammeverk for [Node](https://nodejs.org/en)
 - [Symfony](https://en.wikipedia.org/wiki/Symfony): Webrammeverk for [PHP](https://www.php.net/)
 - [Phoenix](https://en.wikipedia.org/wiki/Phoenix_(web_framework)): Webrammeverk skrevet i [elixir](https://elixir-lang.org/)
-- [Xamarin](https://dotnet.microsoft.com/en-us/apps/xamarin): Mobilrammeverk for [dotnet](https://dotnet.microsoft.com/en-us/)
+- [.NET MAUI](https://dotnet.microsoft.com/en-us/apps/maui): Mobilrammeverk for [dotnet](https://dotnet.microsoft.com/en-us/) (etterfølger av Xamarin)
 
 
 - [The mother of all demo apps](https://codebase.show/projects/realworld?category=backend)
@@ -394,7 +394,7 @@ koden [pushes](https://git-scm.com/docs/git-push) opp til Github.
 - [circleci](https://circleci.com/): En CI-tjeneste. Kan også kjøres på egen server (self-hosting).
 - [GitLab](https://about.gitlab.com/platform/): En platform som kan sammenlignes med GitHub,
   men med mer fokus på bygg/deploy.
-- [Travis CI](https://www.travis-ci.com/): En tjeneste for bygg og deploy.
+- [Travis CI](https://www.travis-ci.com/): En tjeneste for bygg og deploy. (Lite brukt i dag etter eierskifte i 2019.)
 - [TeamCity](https://www.jetbrains.com/teamcity/): JetBrains løsning for bygg (og deploy). 
   Kan kjøpes som en tjeneste eller kjøre på egen server.
 
@@ -535,7 +535,7 @@ operasjoner knyttet til oppsett av infrastrukturen blir borte.
 
 - [Puppet](https://en.wikipedia.org/wiki/Puppet_(software)) Oppsett av maskiner
 - [Chef](https://en.wikipedia.org/wiki/Progress_Chef) DSL for å sette opp klienter
-- [Terraform](https://en.wikipedia.org/wiki/Terraform_(software)) Verktøy for å definere og vedlikeholde infrastruktur knyttet til skydrift (og ofte K8s)
+- [Terraform](https://en.wikipedia.org/wiki/Terraform_(software)) Verktøy for å definere og vedlikeholde infrastruktur knyttet til skydrift (og ofte K8s). HashiCorp endret lisensen til BSL i 2023; [OpenTofu](https://opentofu.org/) er en open-source fork under Linux Foundation.
 - [Ansible](https://en.wikipedia.org/wiki/Ansible_(software)) Provisjonering og konfigurasjon. Bruker ikke agenter.
 - [Salt](https://en.wikipedia.org/wiki/Salt_(software)) Automatiseringsverktøy
 

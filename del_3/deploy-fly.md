@@ -3,8 +3,8 @@
 > [!NOTE]
 > Hensikten med denne øvelsen er å se et eksempel på et (relativt enkelt) verktøy for å deployere en løsning ut i produksjon.
 
-> [!NOTE]
-> fly.io krever at du legger inn et kredittkort på kontoen. Dette er et anti-fraud tiltak, for å unngå at folk misbruker tjenesten([les mer her(fly.io)](https://fly.io/blog/free-postgres/#a-note-about-credit-cards)). Så lenge du kun starter applikasjonen i denne workshopen vil du ikke bli belastet, da hvert pris-tier har en gitt mengde gratisressurser. Uansett kan det være greit å huske **å fjerne kredittkortet** når du er ferdig, for å unngå uhell. For mer info om priser og gratisressurser, [se her(fly.io)](https://fly.io/docs/about/pricing/).
+> [!WARNING]
+> fly.io krever at du legger inn et kredittkort på kontoen og har ikke lenger et gratisnivå. Du vil derfor bli belastet for ressursene du bruker. Husk å **slette appen** når du er ferdig med øvelsen for å unngå løpende kostnader. For mer info om priser, [se her (fly.io)](https://fly.io/docs/about/pricing/).
 
 > [!TIP]
 > På grunn av minnebegrensninger for gratisnivået av fly kan det heller ikke kjøres opp containere med H2. H2 og JPA avhengighetene må antagelig fjernes, og Repository-klassen bør da fikses ved hjelp av et map, eksempelvis.
