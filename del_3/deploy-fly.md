@@ -42,12 +42,12 @@ Når appen starter opp sjekk at du får svar på: http://localhost:8080/actuator
 Vi trenger en Dockerfile som beskriver hvordan applikasjonen vår skal bygges og pakkes sammen til et docker image.
 
 ```Dockerfile
-FROM gradle:7 AS build
+FROM gradle:8 AS build
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 RUN gradle build --no-daemon
 
-FROM eclipse-temurin:17
+FROM eclipse-temurin:21
 EXPOSE 8080:8080
 RUN mkdir /app
 COPY --from=build /home/gradle/src/build/libs/*.jar /app/backend.jar
@@ -95,7 +95,7 @@ jobs:
     name: Deploy app
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
         env:
