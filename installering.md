@@ -61,6 +61,19 @@ Ellers finnes det gratis alternativ.
 
 [Se detaljer om installering og bruk av docker](./del_1/Docker_Jukselapp.md)
 
+## Del[3]
+
+### Dotnet
+
+[Kan installeres herfra](https://dotnet.microsoft.com/en-us/download).
+
+![Mac](./img/mac_logo.png)
+`brew install --cask dotnet-sdk`
+
+
+Du kan bruke et ide for å redigere filer
+f.eks [Rider](https://www.jetbrains.com/rider/download/) eller [VS Code](https://code.visualstudio.com/).
+
 ## Bruk av Brewfile
 ![Mac](./img/mac_logo.png)
 
