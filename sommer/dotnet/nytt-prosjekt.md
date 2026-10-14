@@ -8,11 +8,23 @@ Vi skal lage en løsning fra scratch! Vi bruker **dotnet CLI** til å opprette e
 
 ## Oppsett
 
+Du trenger **.NET 10 SDK** (gjeldende LTS-versjon). Sjekk at den er installert:
+
+```bash
+dotnet --version   # skal vise 10.0.x
+```
+
 Opprett et nytt prosjekt med følgende kommando i terminalen:
 
 ```bash
 dotnet new webapi -n MittProsjekt --use-controllers
 cd MittProsjekt
+```
+
+Oppdater OpenAPI-pakken som følger med malen (versjonen i malen kan gi en advarsel om en kjent sårbarhet):
+
+```bash
+dotnet add package Microsoft.AspNetCore.OpenApi
 ```
 
 Start applikasjonen med hot reload (appen restartes automatisk når du lagrer endringer):
@@ -28,6 +40,10 @@ Now listening on: http://localhost:5063
 ```
 
 Bruk den URLen som vises hos deg. Det finnes allerede et eksempel-endepunkt på `/weatherforecast` – gå dit i nettleseren eller med curl for å se at det virker.
+
+> [!NOTE]
+> Ved første request logges `Failed to determine the https port for redirect`. Det skyldes `app.UseHttpsRedirection()`
+> i `Program.cs` når appen bare kjører på http, og kan trygt ignoreres i denne workshopen.
 
 > [!NOTE]
 > For endringer som å legge til nye NuGet-pakker må du stoppe og starte på nytt manuelt (`Ctrl+C` og `dotnet watch run` igjen). `dotnet watch run` håndterer vanlige kodeendringer automatisk.
@@ -73,20 +89,26 @@ public class JobService : BackgroundService
 }
 ```
 
-Registrer tjenesten i `Program.cs` før `builder.Build()`:
+Registrer tjenesten i `Program.cs` før `builder.Build()`. `JobService` ligger i namespacet `MittProsjekt`,
+så vi må også legge til en `using` øverst i fila:
 
 ```csharp
 // Program.cs
+using MittProsjekt; // legg til denne
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddOpenApi();
 builder.Services.AddHostedService<JobService>(); // legg til denne
 
 var app = builder.Build();
-// ...
+// ... resten av fila er uendret
 ```
 
 Lagre endringene og sjekk at "Hei" dukker opp i konsollen hvert andre sekund.
+Endringer i `Program.cs` krever at appen startes på nytt. `dotnet watch` sier ifra (`Restart is needed`) og
+restarter selv – eller spør deg, da svarer du ja (eller trykker `Ctrl+R`).
 
 ## Videre arbeid
 
@@ -121,10 +143,11 @@ Bruk `savedData` for å lagre og hente informasjon. Noen forslag:
   <summary>Eksempel på endepunkt med query parameter og route parameter</summary>
   <p>
 
-Legg disse metodene til i `Controllers/UserController.cs`:
+Legg disse metodene til i `Controllers/UserController.cs`. Siden kontrolleren har `[Route("[controller]")]`,
+havner endepunktene under `/user`:
 
 ```csharp
-// POST /message?key=hallo&value=verden
+// POST /user/message?key=hallo&value=verden
 [HttpPost("message")]
 public IActionResult Save([FromQuery] string key, [FromQuery] string value)
 {
@@ -132,7 +155,7 @@ public IActionResult Save([FromQuery] string key, [FromQuery] string value)
     return Ok();
 }
 
-// GET /message/hallo
+// GET /user/message/hallo
 [HttpGet("message/{key}")]
 public IActionResult GetByKey(string key)
 {
@@ -164,7 +187,8 @@ public record Pokemon(
 );
 ```
 
-Legg til et nytt endepunkt i `Controllers/UserController.cs` (eller lag en egen `PokemonController.cs`):
+Legg til et nytt endepunkt i `Controllers/UserController.cs` (eller lag en egen `PokemonController.cs`).
+Skråstreken først i `"/poke/{name}"` gjør at ruten ikke havner under `/user`:
 
 ```csharp
 // Controllers/UserController.cs

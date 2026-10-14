@@ -10,6 +10,14 @@ som man finner i Intellij for å opprette et Spring Boot prosjekt.
 
 ## Oppsett
 
+Du trenger en JDK, versjon 21 eller nyere (Spring Boot 4 krever minst Java 17). IntelliJ kan laste ned en for deg
+i prosjekt-wizarden under, eller du kan installere f.eks. [Temurin](https://adoptium.net/).
+
+> [!NOTE]
+> Spring Initializr-wizarden i IntelliJ krever lisens for IntelliJ IDEA Ultimate. Har du ikke det, gå til
+> [start.spring.io](https://start.spring.io), velg de samme innstillingene som under, trykk *Generate*,
+> pakk ut zip-fila og åpne mappa i IntelliJ.
+
 Start med å opprette et nytt prosjekt ved å velge `File -> New -> Project..`
 
 ![nytt-prosjekt](./../img/nytt-prosjekt/nytt-prosjekt.png)
@@ -17,9 +25,21 @@ Start med å opprette et nytt prosjekt ved å velge `File -> New -> Project..`
 Deretter velg Spring Initializr. Her er det viktig at du velger:
 
 ```
+Name: MittProsjekt
 Language: Kotlin
-Type: Gradle - Kotlin.
+Type: Gradle - Kotlin
+JDK / Java: samme versjon som JDK-en du har installert (21 eller nyere)
+Spring Boot: nyeste versjon som ikke er SNAPSHOT/RC/M (4.1.x i skrivende stund)
 ```
+
+> [!IMPORTANT]
+> Java-versjonen du velger havner i `build.gradle.kts` (`JavaLanguageVersion.of(...)`). Velger du en versjon du ikke har
+> installert, feiler byggingen med `Cannot find a Java installation on your machine matching: {languageVersion=...}`.
+> Da kan du enten installere den versjonen eller endre tallet i `build.gradle.kts`.
+
+Kodeeksemplene under antar at hovedklassen heter `MittProsjektApplication`. Kaller du prosjektet noe annet, bytt ut navnet.
+
+(Skjermbildene under er fra en eldre versjon av IntelliJ, så det kan se litt annerledes ut hos deg.)
 
 
 ![valg](./../img/nytt-prosjekt/valg.png)
@@ -41,18 +61,27 @@ Den gjør ingenting enda, så la oss legge til litt greier.
 ## La oss legge til ting!
 
 For at applikasjonen vår skal gjøre noe som helst må vi legge til noen avhengigheter.
-Legg til avhengigheten `spring-boot-starter-web` som gir oss mulighenten til å definere REST-endepunkt.
+Vi trenger to:
 
-For å legge til nye pakker/avhengigheter i prosjektet gå til `build.gradle.kts` og legg til starter-web pakka
+- `spring-boot-starter-webmvc` gir oss en webserver og muligheten til å definere REST-endepunkt.
+- `jackson-module-kotlin` lar Spring gjøre om JSON til Kotlin-klasser (og tilbake).
+
+For å legge til nye pakker/avhengigheter i prosjektet gå til `build.gradle.kts` og legg dem til
 under dependencies:
 
 ```kotlin
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
-    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-webmvc")
+    implementation("tools.jackson.module:jackson-module-kotlin")
     ...
 }
 ```
+
+Trykk på Gradle-ikonet (elefanten) som dukker opp øverst til høyre i editoren for at IntelliJ skal laste ned de nye pakkene.
+
+> [!TIP]
+> Velger du *Spring Web* som avhengighet i wizarden, legges begge disse til automatisk.
 
 ## Endepunkt
 
@@ -61,6 +90,9 @@ Dette gjør vi ved å legge til en klasse med en annotasjon:
 
 
 ```kotlin
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RestController
+
 ...
 fun main(args: Array<String>) {
     runApplication<MittProsjektApplication>(*args)
@@ -74,15 +106,20 @@ class UserController {
 }
 ```
 
-Standardporten til Spring-boot er 8080. Gå til http://localhost:8080/user for å nå endepunktet.
+Start applikasjonen på nytt (stopp den og trykk på den grønne pila igjen).
+Standardporten til Spring Boot er 8080. Gå til http://localhost:8080/user for å nå endepunktet.
 
 
 ## Scheduler
 
-Videre kan vi legge til en schedulerer som kjører en jobb. Vi kan fortsette i samme Kotlin-fil, 
+Videre kan vi legge til en scheduler som kjører en jobb. Vi kan fortsette i samme Kotlin-fil,
 eller lage en ny fil med koden under:
 
 ```kotlin
+import org.springframework.context.annotation.Configuration
+import org.springframework.scheduling.annotation.EnableScheduling
+import org.springframework.scheduling.annotation.Scheduled
+
 ...
 @Configuration
 @EnableScheduling
@@ -96,10 +133,12 @@ class JobConfig {
 
 ```
 
+Start applikasjonen på nytt og sjekk at "Hei" dukker opp i konsollen hvert andre sekund.
+
 ## Videre arbeid
 
 ### Send tilbake et objekt som JSON fra REST-endepunktet
-I steden for å returnere en `String` i endepunktet `user()` prøv å bruk en `data class` for å returnere JSON.
+I stedet for å returnere en `String` i endepunktet `user()` prøv å bruk en `data class` for å returnere JSON.
 
 ```kotlin
 data class User(val name: String, val age: Int)
@@ -125,9 +164,10 @@ Bruk `savedData` for å lagre informasjon mellom kall mot et endepunkt. Noen for
   <p>
 
 ```kotlin
+import org.springframework.web.bind.annotation.RequestParam
+
 // http://localhost:8080/api/foo?id=hallo
 @GetMapping("/api/foo")
-@ResponseBody
 fun getFoo(@RequestParam id: String) = "ID: $id"
 ```
 
@@ -138,7 +178,7 @@ fun getFoo(@RequestParam id: String) = "ID: $id"
 ### Lage en state-machine som scheduleren oppdaterer underveis
 
 
-Bruk kode eksempelet for `@Schedueled`, kombiner det med en global state (f.eks MutableMap) og bruk en state-machine for å holde og endre på state.
+Bruk kodeeksempelet for `@Scheduled`, kombiner det med en global state (f.eks MutableMap) og bruk en state-machine for å holde og endre på state.
 
 <details>
   <summary>Eksempel kode for en enkel state-machine</summary>
@@ -153,9 +193,9 @@ data class GameState(
 
 sealed class GhostState {
 
-    object Wander : GhostState()
-    object Chase : GhostState()
-    object Run : GhostState()
+    data object Wander : GhostState()
+    data object Chase : GhostState()
+    data object Run : GhostState()
 
     fun nextState(state: GameState): GhostState =
         when (this) {
@@ -179,10 +219,12 @@ sealed class GhostState {
         }
 }
 
-fun main() {
+// Eksempel på bruk, f.eks. fra scheduleren.
+// (Ikke kall denne funksjonen main – da finner ikke Spring Boot ut hvilken main-metode som skal startes.)
+fun ghostDemo() {
     val gameState = GameState(isSeeingEnemy = true, isEnemyStrong = true)
     val state = GhostState.Wander.nextState(gameState)
-    println(state)
+    println(state) // Run
 }
 ```
 </p>
@@ -190,20 +232,32 @@ fun main() {
 
 ### Bruk et eksternt API
 
-Vi kan også kalle på eksterne API ved hjelp av Spring. Under er et kodeeksempel på å hente ut pokemons fra pokeAPI. 
-Kombiner denne koden med det som er gjort tidligere og tilgjengeliggjør et egent endepunkt som vi kan nå på f.eks `localhost:8080/poke/{pokemon}`.
+Vi kan også kalle på eksterne API ved hjelp av Spring sin `RestClient`. Under er et kodeeksempel som henter ut
+en pokemon fra [PokéAPI](https://pokeapi.co/) og tilgjengeliggjør den på `localhost:8080/poke/{pokemon}`,
+f.eks. http://localhost:8080/poke/ditto.
 
 ```kotlin
-import org.springframework.web.client.RestTemplate
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
- 
-@JsonIgnoreProperties(ignoreUnknown = true)
-data class Pokemon(var id: Int, val height: Int, val weight: Int)
- 
-fun main (args : Array){
-    val pokemon = RestTemplate()
-        .getForObject("https://pokeapi.co/api/v2/pokemon/ditto", Pokemon::class.java)
-    
-    println(pokemon)
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.client.RestClient
+import org.springframework.web.client.body
+
+// PokéAPI returnerer mye mer enn dette. Felter vi ikke har definert blir ignorert.
+data class Pokemon(val id: Int, val height: Int, val weight: Int)
+
+@RestController
+class PokemonController {
+    private val restClient = RestClient.create("https://pokeapi.co/api/v2")
+
+    @GetMapping("/poke/{name}")
+    fun getPokemon(@PathVariable name: String): Pokemon? =
+        restClient.get()
+            .uri("/pokemon/{name}", name)
+            .retrieve()
+            .body<Pokemon>()
 }
 ```
+
+Prøv å utvide `Pokemon` med flere felter. Feltnavn med understrek i JSON (f.eks. `base_experience`) kan du
+mappe med `@JsonProperty("base_experience") val baseExperience: Int`.

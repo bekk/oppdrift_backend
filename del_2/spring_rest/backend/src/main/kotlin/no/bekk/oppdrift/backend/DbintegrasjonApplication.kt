@@ -19,10 +19,10 @@ fun main(args: Array<String>) {
 @RestController
 class UserController(val dataSource: DataSource) {
 
-    @GetMapping("hei")
-    fun hei(): List<String> {
+    @GetMapping("user")
+    fun user(): List<String> {
         val users = dataSource.connection.use { connection ->
-            val sql = "SELECT * FROM Users";
+            val sql = "SELECT * FROM Users"
             val resultSet = connection.createStatement().executeQuery(sql)
             val usernames = mutableListOf<String>()
             while (resultSet.next()) {
@@ -40,6 +40,6 @@ class JobConfig {
 
     @Scheduled(fixedDelay = 2000, initialDelay = 500)
     fun letsGo() {
-        //println("Hei")
+        println("Hei")
     }
 }

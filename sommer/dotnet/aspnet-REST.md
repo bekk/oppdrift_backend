@@ -43,8 +43,8 @@ public class UserController : ControllerBase
 - `AddScoped<T>()` – én instans per HTTP-request (vanligst for repositories)
 - `AddSingleton<T>()` – én instans for hele applikasjonens levetid
 
-Spring Boot scanner automatisk etter `@Bean`-annoteringer. ASP.NET Core gjør ingen slik skanning –
-du registrerer tjenestene eksplisitt i `Program.cs`. Til gjengjeld vet du alltid nøyaktig hva
+Spring Boot scanner automatisk kodebasen etter klasser annotert med f.eks. `@Component`, `@Service`
+eller `@Repository`. ASP.NET Core gjør ingen slik skanning – du registrerer tjenestene eksplisitt i `Program.cs`. Til gjengjeld vet du alltid nøyaktig hva
 som er registrert.
 
 > [!TIP]
@@ -54,7 +54,7 @@ som er registrert.
 ## AppDbContext
 
 `AppDbContext` er vårt abstraksjonslag mot databasen – tilsvarende `DataSource` i Spring.
-Under er eksempler på de vanligste operasjonene:
+Under er eksempler på de vanligste operasjonene (`db` er en `AppDbContext`, i klassene våre heter feltet `_db`):
 
 ```csharp
 // Hent alle brukere
@@ -65,7 +65,7 @@ var users = await db.Users.ToListAsync();
 // Hent én bruker på id
 var user = await db.Users.FindAsync(id);
 // eller med LINQ:
-var user = await db.Users.FirstOrDefaultAsync(u => u.Id == id);
+// var user = await db.Users.FirstOrDefaultAsync(u => u.Id == id);
 ```
 
 ```csharp
@@ -91,10 +91,11 @@ if (user is not null)
 ```
 
 > [!NOTE]
-> EF Core støtter også rå SQL om du trenger det:
+> EF Core støtter også rå SQL om du trenger det. `FromSql` gjør om `{id}` til en SQL-parameter,
+> så du er beskyttet mot SQL-injection:
 > ```csharp
 > var users = await db.Users
->     .FromSqlRaw("SELECT * FROM Users WHERE Id = {0}", id)
+>     .FromSql($"SELECT * FROM Users WHERE Id = {id}")
 >     .ToListAsync();
 > ```
 
@@ -128,16 +129,20 @@ using MittProsjekt;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<AppDbContext>(...);
+builder.Services.AddOpenApi();
+builder.Services.AddHostedService<JobService>();
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite("Data Source=mittprosjekt.db"));
 builder.Services.AddScoped<UserRepository>(); // legg til denne
 
 var app = builder.Build();
-// ...
+// ... resten av fila er uendret
 ```
 
 **Oppgave:**
 
-Implementer metodene i `UserRepository`:
+Implementer metodene i `UserRepository`. `RemoveUser` og `UpdateUser` returnerer `true` om brukeren fantes,
+slik at kontrolleren kan svare med `404 Not Found` ellers:
 
 ```csharp
 namespace MittProsjekt;
@@ -151,8 +156,8 @@ public class UserRepository
     public Task<List<User>> GetUsers() => throw new NotImplementedException();
     public Task<User?> GetUser(int id) => throw new NotImplementedException();
     public Task AddUser(User user) => throw new NotImplementedException();
-    public Task RemoveUser(int id) => throw new NotImplementedException();
-    public Task UpdateUser(User user) => throw new NotImplementedException();
+    public Task<bool> RemoveUser(int id) => throw new NotImplementedException();
+    public Task<bool> UpdateUser(User user) => throw new NotImplementedException();
 }
 ```
 
@@ -183,20 +188,25 @@ public class UserRepository
         await _db.SaveChangesAsync();
     }
 
-    public async Task RemoveUser(int id)
+    public async Task<bool> RemoveUser(int id)
     {
         var user = await _db.Users.FindAsync(id);
-        if (user is not null)
-        {
-            _db.Users.Remove(user);
-            await _db.SaveChangesAsync();
-        }
+        if (user is null) return false;
+
+        _db.Users.Remove(user);
+        await _db.SaveChangesAsync();
+        return true;
     }
 
-    public async Task UpdateUser(User user)
+    public async Task<bool> UpdateUser(User user)
     {
-        _db.Users.Update(user);
+        var existing = await _db.Users.FindAsync(user.Id);
+        if (existing is null) return false;
+
+        // Kopierer verdiene fra user over på brukeren som allerede er hentet fra databasen
+        _db.Entry(existing).CurrentValues.SetValues(user);
         await _db.SaveChangesAsync();
+        return true;
     }
 }
 ```
@@ -209,7 +219,8 @@ public class UserRepository
 I ASP.NET Core bruker vi `[ApiController]` og `[Route]` for å definere en kontrollerklasse,
 og `[HttpGet]`, `[HttpPost]`, `[HttpPut]` og `[HttpDelete]` for de ulike HTTP-metodene.
 
-Erstatt innholdet i `Controllers/UserController.cs` med følgende som utgangspunkt:
+Erstatt innholdet i `Controllers/UserController.cs` med følgende som utgangspunkt. Legg merke til at ruten endres
+fra `[controller]` til `api/users` – brukerne ligger nå på `/api/users`, og `/user` fra del 2 gir 404:
 
 ```csharp
 // Controllers/UserController.cs
@@ -230,37 +241,43 @@ public class UserController : ControllerBase
 }
 ```
 
-Lag en ny fil `users.http` i prosjektmappa for å teste endepunktene:
+Prosjektmalen har allerede laget en fil `MittProsjekt.http`. Erstatt innholdet med dette for å teste endepunktene,
+men behold porten fra din egen første linje (`@MittProsjekt_HostAddress = ...`) – den er riktig for ditt prosjekt.
+I Rider og VS Code (med utvidelsen *REST Client*) kan du klikke på hver request for å kjøre den.
 
 ```
+@MittProsjekt_HostAddress = http://localhost:5063
+
 ### Hent alle brukere
-GET http://localhost:{port}/api/users
+GET {{MittProsjekt_HostAddress}}/api/users
 
 ### Hent én bruker
-GET http://localhost:{port}/api/users/1
-
-### Slett en bruker
-DELETE http://localhost:{port}/api/users/1
+GET {{MittProsjekt_HostAddress}}/api/users/1
 
 ### Legg til en bruker
-POST http://localhost:{port}/api/users
+POST {{MittProsjekt_HostAddress}}/api/users
 Content-Type: application/json
 
 { "id": 3, "title": "Manager", "username": "User" }
 
 ### Oppdater en bruker
-PUT http://localhost:{port}/api/users/1
+PUT {{MittProsjekt_HostAddress}}/api/users/1
 Content-Type: application/json
 
 { "id": 1, "title": "Manager", "username": "Vegard" }
+
+### Slett en bruker
+DELETE {{MittProsjekt_HostAddress}}/api/users/1
 ```
 
 > [!NOTE]
-> Bytt ut `{port}` med den faktiske porten som vises i terminalen når du starter appen.
+> Databasen lagres i `mittprosjekt.db`, så endringene blir liggende mellom hver kjøring. Kjører du fila to ganger,
+> finnes ikke bruker 1 lenger (404), og POST av bruker 3 feiler fordi id-en allerede er i bruk.
+> Stopp appen, slett `mittprosjekt.db` og kjør `dotnet ef database update` for å starte på nytt.
 
 **Oppgave:**
 
-Implementer de resterende endepunktene i `Controllers/UserController.cs` slik at alle kallene i `users.http` virker.
+Implementer de resterende endepunktene i `Controllers/UserController.cs` slik at alle kallene i `MittProsjekt.http` virker.
 
 <details>
   <summary>Løsningsforslag</summary>
@@ -302,15 +319,13 @@ public class UserController : ControllerBase
     public async Task<IActionResult> Update(int id, User user)
     {
         if (id != user.Id) return BadRequest();
-        await _repo.UpdateUser(user);
-        return NoContent();
+        return await _repo.UpdateUser(user) ? NoContent() : NotFound();
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        await _repo.RemoveUser(id);
-        return NoContent();
+        return await _repo.RemoveUser(id) ? NoContent() : NotFound();
     }
 }
 ```
@@ -320,27 +335,25 @@ public class UserController : ControllerBase
 
 ## Oppsett av OpenAPI / Swagger
 
-Legg til Swashbuckle-pakken:
+Prosjektmalen genererer allerede en OpenAPI-beskrivelse av API-et ditt (`AddOpenApi()` og `MapOpenApi()` i `Program.cs`).
+Gå til `/openapi/v1.json` for å se den. Det som mangler er et brukergrensesnitt for å utforske og teste API-et.
+
+Legg til Swagger UI-pakken:
 
 ```bash
-dotnet add package Swashbuckle.AspNetCore
+dotnet add package Swashbuckle.AspNetCore.SwaggerUI
 ```
 
-Legg til følgende i `Program.cs`:
+Utvid `if`-blokken i `Program.cs` som allerede finnes:
 
 ```csharp
 // Program.cs
-var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddControllers();
-builder.Services.AddSwaggerGen(); // legg til denne
-
-var app = builder.Build();
-
-app.UseSwagger();    // legg til disse
-app.UseSwaggerUI(); //
-app.MapControllers();
-app.Run();
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    app.UseSwaggerUI(options =>                                // legg til denne
+        options.SwaggerEndpoint("/openapi/v1.json", "MittProsjekt"));
+}
 ```
 
-Swagger-UI er nå tilgjengelig på `/swagger` – f.eks. `http://localhost:5063/swagger`.
+Start appen på nytt (nye pakker krever restart). Swagger UI er nå tilgjengelig på `/swagger` – f.eks. `http://localhost:5063/swagger`.

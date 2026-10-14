@@ -18,8 +18,8 @@ fun main(args: Array<String>) {
 @RestController
 class UserController {
 
-    @GetMapping("hei")
-    fun hei() = "hei"
+    @GetMapping("user")
+    fun user() = "Vegard"
 }
 
 @Configuration

@@ -12,11 +12,20 @@ Ta utgangspunkt i det som ble gjort i [første del](./nytt-prosjekt.md) og jobb 
 
 ```csharp
 // Program.cs
+using MittProsjekt;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
+builder.Services.AddOpenApi();
 builder.Services.AddHostedService<JobService>();
 
 var app = builder.Build();
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+}
+app.UseHttpsRedirection();
+app.UseAuthorization();
 app.MapControllers();
 app.Run();
 
@@ -69,12 +78,19 @@ Installer også EF Core-verktøyet globalt (trengs for å kjøre migrasjoner):
 
 ```bash
 dotnet tool install --global dotnet-ef
+# Har du det fra før, oppdater til samme versjon som EF Core-pakkene:
+dotnet tool update --global dotnet-ef
 ```
+
+> [!TIP]
+> Får du `command not found: dotnet-ef` på Mac/Linux, ligger ikke `~/.dotnet/tools` i PATH.
+> Legg til `export PATH="$PATH:$HOME/.dotnet/tools"` i `~/.zshrc` og åpne en ny terminal.
 
 ## Definer en entitet
 
 > [!NOTE]
-> Har du laget `User.cs` i del 1, skal du erstatte den med klassen under.
+> Har du laget `User.cs` i del 1, skal du erstatte den med klassen under. Kode fra del 1 som gjør
+> `new User("...", 42)` vil da ikke kompilere lenger – det fikser vi når vi oppdaterer kontrolleren under.
 
 Lag en ny fil `User.cs` i prosjektmappa:
 
@@ -126,34 +142,20 @@ using MittProsjekt;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddOpenApi();
+builder.Services.AddHostedService<JobService>();
 builder.Services.AddDbContext<AppDbContext>(options =>  // legg til denne
     options.UseSqlite("Data Source=mittprosjekt.db"));
 
 var app = builder.Build();
-// ...
+// ... resten av fila er uendret
 ```
-
-## Kjør migrasjoner
-
-EF Core bruker migrasjoner for å holde styr på endringer i databaseskjemaet – tilsvarende det Flyway gjør med SQL-filer.
-
-Opprett den første migrasjonen:
-
-```bash
-dotnet ef migrations add InitialCreate
-```
-
-Dette oppretter en `Migrations/`-mappe med genererte filer som beskriver databasestrukturen. Kjør deretter migrasjonen mot databasen:
-
-```bash
-dotnet ef database update
-```
-
-Du skal nå ha en fil `mittprosjekt.db` i prosjektmappa.
 
 ## Bruk databasen i kontrolleren
 
-Oppdater `UserController.cs` til å bruke `AppDbContext`:
+Erstatt hele innholdet i `Controllers/UserController.cs` med koden under, slik at den bruker `AppDbContext`.
+Har du laget ekstra endepunkter i del 1 (meldinger, pokemon) og vil beholde dem, flytt dem til en egen kontroller først
+(f.eks. `MessageController.cs`).
 
 ```csharp
 using Microsoft.AspNetCore.Mvc;
@@ -185,7 +187,29 @@ public class UserController : ControllerBase
 }
 ```
 
-Gå til `/user` på den porten som vises i terminalen for å se brukerne fra databasen.
+
+## Kjør migrasjoner
+
+EF Core bruker migrasjoner for å holde styr på endringer i databaseskjemaet – tilsvarende det Flyway gjør med SQL-filer.
+
+> [!IMPORTANT]
+> `dotnet ef` bygger prosjektet, så koden må kompilere. Stopp `dotnet watch` (`Ctrl+C`) før du kjører kommandoene under.
+
+Opprett den første migrasjonen:
+
+```bash
+dotnet ef migrations add InitialCreate
+```
+
+Dette oppretter en `Migrations/`-mappe med genererte filer som beskriver databasestrukturen. Kjør deretter migrasjonen mot databasen:
+
+```bash
+dotnet ef database update
+```
+
+Du skal nå ha en fil `mittprosjekt.db` i prosjektmappa.
+
+Start appen igjen med `dotnet watch run` og gå til `/user` på den porten som vises i terminalen for å se brukerne fra databasen.
 
 ## In-memory database (alternativ)
 
@@ -195,14 +219,29 @@ Gå til `/user` på den porten som vises i terminalen for å se brukerne fra dat
 dotnet add package Microsoft.EntityFrameworkCore.InMemory
 ```
 
+I `Program.cs`, bytt ut `AddDbContext`-linjen som bruker Sqlite med denne:
+
 ```csharp
-// I Program.cs, bytt ut Sqlite-linjen med:
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseInMemoryDatabase("mittprosjekt"));
 ```
 
+og legg til denne blokken rett etter linjen `var app = builder.Build();` som allerede finnes:
+
+```csharp
+// Opprett databasen og legg inn testdataene fra HasData ved oppstart
+using (var scope = app.Services.CreateScope())
+{
+    scope.ServiceProvider.GetRequiredService<AppDbContext>().Database.EnsureCreated();
+}
+```
+
 > [!NOTE]
-> In-memory-databasen trenger ikke migrasjoner – EF Core oppretter skjemaet automatisk ved oppstart.
+> In-memory-databasen bruker ikke migrasjoner. Uten `EnsureCreated()` blir heller ikke testdataene fra
+> `HasData` lagt inn, og `/user` vil returnere en tom liste.
+>
+> In-memory-provideren er fin for å leke seg, men Microsoft fraråder den til tester og produksjon – den oppfører seg
+> ikke som en ekte relasjonsdatabase.
 
 ## Videre arbeid
 
