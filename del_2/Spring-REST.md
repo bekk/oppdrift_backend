@@ -296,7 +296,21 @@ class UserRepository(val dataSource: DataSource) {
 
 Implementer funksjoner som er annotert med `@PostMapping`, `@PutMapping` og `@DeleteMapping` for å oppfylle 
 funksjonene i http-fila under (kopier koden under og legg den til som `users.http` i prosjektet).
-I IntelliJ kan du trykke på den grønne pila ved siden av hver request for å kjøre den.
+Med abonnement på IntelliJ kan du trykke på den grønne pila ved siden av hver request for å kjøre den.
+I gratisversjonen er HTTP Client-en ikke tilgjengelig. Da kan du i stedet:
+
+- åpne prosjektmappa i VS Code med utvidelsen *REST Client*, som kjører den samme `.http`-fila
+- sette opp Swagger UI (se [Oppsett av OpenAPI](#oppsett-av-openapi) nederst) og teste endepunktene i nettleseren
+- bruke curl i terminalen:
+
+```bash
+curl http://localhost:8080/api/users
+curl -X POST http://localhost:8080/api/users -H "Content-Type: application/json" -d '{ "id": 3, "title": "Manager", "username": "User" }'
+curl -X PUT http://localhost:8080/api/users/1 -H "Content-Type: application/json" -d '{ "id": 1, "title": "Manager", "username": "Vegard" }'
+curl -X DELETE http://localhost:8080/api/users/1
+```
+
+Legg til `-i` (f.eks. `curl -i http://localhost:8080/api/users/1`) for å se statuskoden i svaret.
 
 > [!NOTE]
 > Databasen lagres til fil (fra del 2), så endringene blir liggende mellom hver kjøring. Kjører du fila to ganger,

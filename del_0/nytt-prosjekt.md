@@ -14,9 +14,9 @@ Du trenger en JDK, versjon 21 eller nyere (Spring Boot 4 krever minst Java 17). 
 i prosjekt-wizarden under, eller du kan installere f.eks. [Temurin](https://adoptium.net/).
 
 > [!NOTE]
-> Spring Initializr-wizarden i IntelliJ krever lisens for IntelliJ IDEA Ultimate. Har du ikke det, gå til
-> [start.spring.io](https://start.spring.io), velg de samme innstillingene som under, trykk *Generate*,
-> pakk ut zip-fila og åpne mappa i IntelliJ.
+> Spring Boot-wizarden er gratis i IntelliJ IDEA fra versjon 2025.3. Har du en eldre versjon uten wizarden, kan du gå til
+> [start.spring.io](https://start.spring.io), velge de samme innstillingene som under, trykke *Generate*,
+> pakke ut zip-fila og åpne mappa i IntelliJ.
 
 Start med å opprette et nytt prosjekt ved å velge `File -> New -> Project..`
 

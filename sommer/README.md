@@ -96,7 +96,7 @@ mindmap
 
 ## Workshop
 
-Installasjon er bseskrevet her: [installering](../installering.md)
+Installasjon er beskrevet her: [installering](../installering.md)
 
 ### Lag et rest-api i Spring Boot
 
