@@ -213,7 +213,8 @@ Start appen igjen med `dotnet watch run` og gå til `/user` på den porten som v
 
 ## In-memory database (alternativ)
 
-Ønsker du å slippe filen og alt forsvinner når appen stoppes, kan du bruke EF Cores in-memory-provider i stedet:
+Ønsker du å slippe filen og alt forsvinner når appen stoppes, kan du bruke EF Cores in-memory-provider i stedet.
+Dette er valgfritt – del 3 tar utgangspunkt i SQLite, og forklarer hvordan du bytter tilbake.
 
 ```bash
 dotnet add package Microsoft.EntityFrameworkCore.InMemory
