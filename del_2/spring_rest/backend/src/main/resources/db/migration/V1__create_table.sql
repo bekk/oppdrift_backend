@@ -1,5 +1,5 @@
 CREATE TABLE Users (
-    id INT PRIMARY KEY,
-    title VARCHAR(50),
-    username VARCHAR(50)
+   id Int unique,
+   title varchar(50),
+   username varchar(50)
 );

@@ -5,3 +5,7 @@ obj/
 bin/
 .vscode
 *.DotSettings.user
+
+# H2-databasefiler fra Spring-oppgavene
+*.mv.db
+*.trace.db

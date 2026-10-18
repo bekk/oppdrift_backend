@@ -119,7 +119,8 @@ dataSource.connection.use { connection ->
 > Vi bruker `?` i SQL-en og `setInt`/`setString` i stedet for å lime verdiene rett inn i strengen.
 > Det beskytter mot SQL-injection.
 >
-> Spring har også `JdbcClient`, som fjerner mye av denne koden. Prøv den gjerne når du har fått det til å virke med `DataSource`:
+> Spring har også `JdbcClient`, som fjerner mye av denne koden. Prøv den gjerne når du har fått det til å virke med `DataSource`,
+> ved å bytte ut innholdet i `UserRepository` (ikke lag en klasse til med samme navn):
 > ```kotlin
 > @Repository
 > class UserRepository(val jdbcClient: JdbcClient) {
@@ -171,22 +172,11 @@ class UserRepository(val dataSource: DataSource) {
   <summary>Løsningsforslag</summary>
   <p>
 
+`User` og `ResultSet.toUser()` er definert i eksemplene over, og er ikke tatt med her.
+
 ```kotlin
 import org.springframework.stereotype.Repository
-import java.sql.ResultSet
 import javax.sql.DataSource
-
-data class User(
-    val id: Int,
-    val title: String,
-    val username: String,
-)
-
-fun ResultSet.toUser() = User(
-    id = getInt("id"),
-    title = getString("title"),
-    username = getString("username"),
-)
 
 @Repository
 class UserRepository(val dataSource: DataSource) {
@@ -311,6 +301,10 @@ curl -X DELETE http://localhost:8080/api/users/1
 ```
 
 Legg til `-i` (f.eks. `curl -i http://localhost:8080/api/users/1`) for å se statuskoden i svaret.
+
+> [!NOTE]
+> På Windows virker ikke JSON-en i enkeltfnutter (`'...'`) i cmd eller Windows PowerShell – POST og PUT får da `400 Bad Request`.
+> Bruk Git Bash eller WSL for curl-kommandoene, eller test POST og PUT i Swagger UI.
 
 > [!NOTE]
 > Databasen lagres til fil (fra del 2), så endringene blir liggende mellom hver kjøring. Kjører du fila to ganger,
